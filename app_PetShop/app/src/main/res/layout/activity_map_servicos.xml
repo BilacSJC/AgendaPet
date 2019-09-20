@@ -21,7 +21,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="322dp"
-            android:src="@drawable/map_estatico"/>
+            android:src="@drawable/mapa_estatico"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

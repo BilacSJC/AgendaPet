@@ -27,7 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LoginClienteActivity extends AppCompatActivity {
@@ -137,7 +139,11 @@ public class LoginClienteActivity extends AppCompatActivity {
                     ClienteModel cliente = objSnapshot.getValue(ClienteModel.class);
 
                     idUsuario = cliente.getCli_id();
-                    if(idUsuario != null){
+
+
+                    boolean booSenhaVencida = verificaSeSenhaEstaVencida(cliente.getCli_data_ultima_alteracao_senha());
+
+                    if(idUsuario != null && booSenhaVencida == false){
                         Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
                         i.putExtra("ID_USUARIO", idUsuario);
                         startActivity(i);
@@ -153,6 +159,26 @@ public class LoginClienteActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+    }
+
+    private boolean verificaSeSenhaEstaVencida(String strDataUltimaAlteracao) {
+
+        SimpleDateFormat formatData = new SimpleDateFormat("dd-MM-yyyy");
+        Date data = new Date();
+        String strDataAtual = formatData.format(data);
+
+        if(!strDataUltimaAlteracao.trim().equals("")){
+            long lngDataAlteracao = Long.valueOf(strDataUltimaAlteracao.trim().replace("-", ""));
+            long lngDataAtual = Long.valueOf(strDataAtual.trim().replace("-",""));
+
+            long lngDias = lngDataAtual - lngDataAlteracao;
+            if(lngDias > 60){
+                alertDialog("ATENÇÃO!", "Renove sua senha para acessar o sistema!");
+            }
+            return false;
+        }
+
+        return false;
     }
 
     private void  alertDialog(String strTitle, String strMsg){

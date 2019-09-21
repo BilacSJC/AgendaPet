@@ -7,7 +7,7 @@ public class PetModel {
     private String pet_raca;
     private String pet_idade;
     private String pet_porte;
-//    private String pet_cli_id;
+    private String pet_cli_id;
 
 
     public String getPet_id() {
@@ -58,11 +58,11 @@ public class PetModel {
         this.pet_porte = pet_porte;
     }
 
-//    public String getPet_cli_id() {
-//        return pet_cli_id;
-//    }
-//
-//    public void setPet_cli_id(String pet_cli_id) {
-//        this.pet_cli_id = pet_cli_id;
-//    }
+    public String getPet_cli_id() {
+        return pet_cli_id;
+    }
+
+    public void setPet_cli_id(String pet_cli_id) {
+        this.pet_cli_id = pet_cli_id;
+    }
 }

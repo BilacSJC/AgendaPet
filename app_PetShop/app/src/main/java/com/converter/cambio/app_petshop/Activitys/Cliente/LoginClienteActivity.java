@@ -21,7 +21,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,15 +32,15 @@ import java.util.List;
 
 public class LoginClienteActivity extends AppCompatActivity {
 
-    private EditText txtEmail, txtSenha;
-    private TextView txtEsqueceuSenha;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth auth;
+    private EditText txtEmail, txtSenha;
+    private TextView txtEsqueceuSenha;
     private MaterialButton btnCadastrar, btnLogin;
     private ClienteModel cliente = new ClienteModel();
     private List<ClienteModel> lstCliente = new ArrayList<ClienteModel>();
-    private FirebaseAuth auth;
-    private String strIdCliente;
+    private String idUsuario;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -116,34 +115,38 @@ public class LoginClienteActivity extends AppCompatActivity {
 
     private void loginFirebase(final String strEmail, final String strSenha) {
         auth.signInWithEmailAndPassword(strEmail, strSenha)
-                .addOnCompleteListener(LoginClienteActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
-//                            getClienteId(strEmail);
-                            i.putExtra("ID_USUARIO", strEmail);
-                            startActivity(i);
-                        }else{
-                            altertToast("E-mail ou senha inválidos!");
-                        }
-                    }
-                });
+            .addOnCompleteListener(LoginClienteActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    iniciaSessaoCliente(strEmail);
+                }else{
+                    altertToast("E-mail ou senha inválidos!");
+                }
+            }
+        });
     }
 
-    private void getClienteId(String strEmail) {
-
-        databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail).addValueEventListener(new ValueEventListener() {
+    private void iniciaSessaoCliente(String strEmail) {
+        databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail)
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     ClienteModel cliente = objSnapshot.getValue(ClienteModel.class);
 
-
-                    strIdCliente = cliente.getCli_id();
+                    idUsuario = cliente.getCli_id();
+                    if(idUsuario != null){
+                        Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
+                        i.putExtra("ID_USUARIO", idUsuario);
+                        startActivity(i);
+                        finish();
+                    }
+                    else {
+                        alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
+                    }
                     break;
-
                 }
             }
 

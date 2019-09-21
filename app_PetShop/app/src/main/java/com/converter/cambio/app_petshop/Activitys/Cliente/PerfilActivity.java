@@ -18,6 +18,7 @@ public class PerfilActivity extends AppCompatActivity {
     private EditText edtNome, edtEmail;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    private String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         inicializaComponentes();
         configuraNavBar();
+        getExtraIdUsuario();
         eventosClick();
 
     }
@@ -85,5 +87,9 @@ public class PerfilActivity extends AppCompatActivity {
             default:break;
         }
         return true;
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

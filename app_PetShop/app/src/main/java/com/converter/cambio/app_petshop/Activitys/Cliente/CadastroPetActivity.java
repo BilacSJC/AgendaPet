@@ -38,6 +38,7 @@ public class CadastroPetActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FireBaseQuery fireBaseQuery;
+    private String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,9 @@ public class CadastroPetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_pet);
         inicializarCampos();
         inicializarFirebase();
-        btnCadastrarClick();
-
+        getExtraIdUsuario();
         configuraNavBar();
+        btnCadastrarClick();
     }
 
     private void btnCadastrarClick() {
@@ -125,6 +126,7 @@ public class CadastroPetActivity extends AppCompatActivity {
         pet.setPet_raca(edtRaca.getText().toString().trim());
         pet.setPet_porte(spnPorte.getSelectedItem().toString().trim());
         pet.setPet_sexo(spnSexo.getSelectedItem().toString().trim());
+        pet.setPet_cli_id(idUsuario.trim());
 
         return pet;
     }
@@ -177,6 +179,7 @@ public class CadastroPetActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(CadastroPetActivity.this, PaginaPrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;
@@ -195,5 +198,9 @@ public class CadastroPetActivity extends AppCompatActivity {
 
                     }
                 }).show();
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

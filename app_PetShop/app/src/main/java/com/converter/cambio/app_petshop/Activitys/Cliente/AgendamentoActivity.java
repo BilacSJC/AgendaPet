@@ -21,6 +21,7 @@ public class AgendamentoActivity extends AppCompatActivity {
     private TextView txtCusto;
     private TextView txtNomeEmpresa;
     private Spinner spnPortePet;
+    private String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class AgendamentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agendamento);
         inicializaCampos();
         configuraNavBar();
+        getExtraIdUsuario();
         eventosClick();
     }
 
@@ -46,6 +48,7 @@ public class AgendamentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AgendamentoActivity.this, PaginaPrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
             }
@@ -75,6 +78,7 @@ public class AgendamentoActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(AgendamentoActivity.this, LocalizaPetSopActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;
@@ -93,5 +97,9 @@ public class AgendamentoActivity extends AppCompatActivity {
         edTelefone = findViewById(R.id.age_txt_telefone);
         txtCusto = findViewById(R.id.age_txt_custo);
         txtNomeEmpresa = findViewById(R.id.age_txt_nome_empresa);
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

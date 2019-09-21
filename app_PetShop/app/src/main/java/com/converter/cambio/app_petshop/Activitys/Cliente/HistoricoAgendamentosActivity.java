@@ -11,12 +11,14 @@ import android.view.MenuItem;
 import com.converter.cambio.app_petshop.R;
 
 public class HistoricoAgendamentosActivity extends AppCompatActivity {
+    private String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico);
         configuraNavBar();
+        getExtraIdUsuario();
     }
 
     private void configuraNavBar() {
@@ -42,11 +44,16 @@ public class HistoricoAgendamentosActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(HistoricoAgendamentosActivity.this, PaginaPrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;
             default:break;
         }
         return true;
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

@@ -15,11 +15,13 @@ public class LocalizaPetSopActivity extends AppCompatActivity {
 
     private Spinner spnServicos;
     private MaterialButton btnAgendar;
+    private String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_servicos);
+        getExtraIdUsuario();
 
         btnAgendar = findViewById(R.id.map_btn_agendar);
 
@@ -28,6 +30,7 @@ public class LocalizaPetSopActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LocalizaPetSopActivity.this, AgendamentoActivity.class);
                 startActivity(intent);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 finish();
             }
         });
@@ -42,6 +45,10 @@ public class LocalizaPetSopActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     } }).show();
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 
 }

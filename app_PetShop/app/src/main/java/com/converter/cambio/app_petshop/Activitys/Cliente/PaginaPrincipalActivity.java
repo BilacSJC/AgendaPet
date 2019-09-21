@@ -46,6 +46,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetSopActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
             }
         });

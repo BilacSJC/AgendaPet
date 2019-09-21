@@ -11,12 +11,15 @@ import com.converter.cambio.app_petshop.R;
 
 public class SobreActivity extends AppCompatActivity {
     private Button btnAgendamento;
+    private String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sobre);
+        getExtraIdUsuario();
+
         btnAgendamento = findViewById(R.id.sob_btn_agendamento);
 
         btnAgendamento.setOnClickListener(new View.OnClickListener() {
@@ -26,5 +29,9 @@ public class SobreActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

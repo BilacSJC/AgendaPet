@@ -1,7 +1,5 @@
 package com.converter.cambio.app_petshop.Controller;
 
-import android.text.Editable;
-
 public class ValidaCampos {
 
 
@@ -10,7 +8,7 @@ public class ValidaCampos {
             return "O campo nome é obrigatório";
         }
         else if(strCampo.trim().length() < 3){
-            return "Digite um nome e sobrenome";
+            return "No mínimo 3 caracteres";
         }
 
         return "ok";
@@ -31,7 +29,7 @@ public class ValidaCampos {
         if(strSenha.trim().equals("")){
             return "O campo senha é obrigatório!";
         }
-        else if(strSenha.trim().length() >= 8){
+        else if(strSenha.trim().length() < 8){
             return "A senha deve conter no mínimo 8 caracteres!";
         }
         return "ok";
@@ -44,8 +42,10 @@ public class ValidaCampos {
         else if(strEndereco.trim().length() < 8){
             return "formato de endereço: Rua, Endereço, Cidade - Estado";
         }
-
-        return "ok";
+        if(strEndereco.trim().length() >= 8) {
+            return "ok";
+        }
+        return "Digite o endereço corretamente : Rua, Numero, Bairro, Cidade, Estado";
     }
 
     public String vStringTelefone(String strTelefone) {
@@ -55,10 +55,14 @@ public class ValidaCampos {
         else if(strTelefone.trim().length() < 8){
             return "Digite um telefone válido";
         }
-        return "ok";
+        if(strTelefone.trim().length() >= 8) {
+            return "ok";
+        }
+        return "formato de telefone inválido";
     }
 
     public String vStringCpf(String strCpf) {
+
         if(strCpf.trim().equals("")){
             return "O cmapo Cpf é obrigatório";
         }
@@ -69,5 +73,20 @@ public class ValidaCampos {
             return  "Digite somente os números!";
         }
         return "ok";
+    }
+
+    public String vStringSpn(String strTexto) {
+        if(strTexto.trim().toUpperCase().contains("SELECIONE")){
+            return "Selecione um item.";
+        }
+        return "ok";
+    }
+
+    public String vInt(String strNum) {
+        if(strNum.trim().equals("")){
+            return "Digite a idade do Pet.";
+        }
+        return "ok";
+
     }
 }

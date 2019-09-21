@@ -28,6 +28,7 @@ public class LocalizaPetSopActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LocalizaPetSopActivity.this, AgendamentoActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

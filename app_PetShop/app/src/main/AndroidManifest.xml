@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Activitys.TipoLoginActivity"></activity>
+        <activity android:name=".Activitys.Cliente.LoginClienteActivity"></activity>
         <activity android:name=".Activitys.Cliente.CadastroPetActivity" />
         <activity android:name=".Activitys.ResetSenhaActivity" />
         <activity android:name=".Activitys.Cliente.HistoricoAgendamentosActivity" />

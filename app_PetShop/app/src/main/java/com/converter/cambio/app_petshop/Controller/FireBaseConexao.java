@@ -42,7 +42,7 @@ public class FireBaseConexao {
     {
         return  firebaseUser;
     }
-    
+
     public static void logout(){
         firebaseAuth.signOut();
     }

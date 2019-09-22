@@ -19,10 +19,30 @@ public class FireBaseQuery {
         databaseReference.child(tableName).child(idObj).setValue(obj);
     }
 
+<<<<<<< HEAD
     public void UpdateObjetcDb(Object obj, String tableName, String idObj, DatabaseReference databaseReference){
 
         databaseReference.child(tableName).child(idObj).setValue(obj);
     }
+=======
+//    public void UpdateObjetcDb(Object obj, String tableName, String idObj, DatabaseReference databaseReference){
+//        Map<String, Object> map = new HashMap<>();
+//
+//        databaseReference.child(tableName).child(idObj).updateChildren(map, new DatabaseReference.CompletionListener() {
+//            @Override
+//            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//
+//            }
+//        });
+//    }
+//
+//    private Map<String, Object> setMap() {
+//        Map<String, Object> map = new HashMap<>();
+//
+//        map.put("", )
+//
+//    }
+>>>>>>> master
 
     public void DeleteObjectDb(Object obj, String tableName, String idObj, DatabaseReference databaseReference){
         databaseReference.child(tableName).child(idObj).removeValue();

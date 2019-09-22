@@ -48,6 +48,11 @@ public class LoginClienteActivity extends AppCompatActivity {
     private List<ClienteModel> lstCliente = new ArrayList<ClienteModel>();
     private Date data = new Date();
     private String idUsuario;
+<<<<<<< HEAD
+=======
+    private ValidaCampos validaCampos = new ValidaCampos();
+    private FireBaseQuery firebaseQuery;
+>>>>>>> master
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -126,6 +131,7 @@ public class LoginClienteActivity extends AppCompatActivity {
             .addOnCompleteListener(LoginClienteActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+<<<<<<< HEAD
 
                 if(task.isSuccessful()){
                     //Get Cliente no banco e valida se senha foi alterada a menos de 60 dias
@@ -156,10 +162,57 @@ public class LoginClienteActivity extends AppCompatActivity {
                                 public void onCancelled(DatabaseError databaseError) {}
                             });
                 }else{ altertToast("E-mail ou senha inválidos!"); }
+=======
+                if(task.isSuccessful())
+                {
+                    databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail)
+                            .addValueEventListener(new ValueEventListener()
+                            {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot)
+                                {
+
+                                    for(DataSnapshot objSnapshot:dataSnapshot.getChildren())
+                                    {
+                                        ClienteModel cliente = objSnapshot.getValue(ClienteModel.class);
+
+                                        idUsuario = cliente.getCli_id();
+
+                                        cliente = verificaSeSenhaFoiAlterada(cliente);
+
+                                        boolean booSenhaIsValida =  validaCampos.senhaIsValida(cliente.getCli_data_ultima_alteracao_senha());
+
+                                        if(!booSenhaIsValida){
+                                            alertDialogRecSenha("ATENÇÃO!", "Renove sua senha para acessar o aplicativo!");
+                                            return;
+                                        }
+
+                                        if(idUsuario != null && booSenhaIsValida){
+                                            Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
+                                            i.putExtra("ID_USUARIO", idUsuario);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                        else {
+                                            alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
+                                        }
+                                        break;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {}
+                            });
+
+                }else{
+                    altertToast("E-mail ou senha inválidos!");
+                }
+>>>>>>> master
             }
         });
     }
 
+<<<<<<< HEAD
     private void validaPrazoAlteracaoSenha(ClienteModel c) {
         boolean booSenhaIsValida =  validaCampos.senhaIsValida(c.getCli_data_ultima_alteracao_senha());
 
@@ -192,6 +245,20 @@ public class LoginClienteActivity extends AppCompatActivity {
             firebaseQuery.UpdateObjetcDb(c, "Cliente", c.getCli_id(), databaseReference);
         }
         return c;
+=======
+    private ClienteModel verificaSeSenhaFoiAlterada(ClienteModel cliente) {
+        if(!cliente.getCli_senha().trim().equals(cliente.getCli_senha_antiga())){
+
+            SimpleDateFormat formatData = new SimpleDateFormat("dd-MM-yyyy");
+            Date data = new Date();
+            String strDataAtual = formatData.format(data);
+
+            cliente.setCli_data_ultima_alteracao_senha(strDataAtual.trim());
+
+//            firebaseQuery.UpdateObjetcDb();
+        }
+        return cliente;
+>>>>>>> master
     }
 
     private void  alertDialog(String strTitle, String strMsg){

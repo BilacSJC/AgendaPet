@@ -39,7 +39,6 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private String idUsuario;
-    private ClienteModel cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,44 +72,12 @@ public class PaginaPrincipalActivity extends AppCompatActivity
 
         getExtraIdUsuario();
         inicializarFirebase();
-        getUsuario();
-        verificaSeSenhaFoiAlterada(cliente);
-    }
-
-    private void verificaSeSenhaFoiAlterada(ClienteModel c) {
-        if(!cliente.getCli_senha().trim().equals(cliente.getCli_senha_antiga())){
-
-            SimpleDateFormat formatData = new SimpleDateFormat("dd-MM-yyyy");
-            Date data = new Date();
-            String strDataAtual = formatData.format(data);
-
-            cliente.setCli_data_ultima_alteracao_senha(strDataAtual.trim());
-        }
     }
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(PaginaPrincipalActivity.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-    }
-
-    private void getUsuario() {
-
-        databaseReference.child("Cliente").orderByChild("cli_id").equalTo(idUsuario)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                            cliente = objSnapshot.getValue(ClienteModel.class);
-                            break;
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {}
-                });
-
     }
 
     private void getExtraIdUsuario() {
@@ -195,8 +162,6 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             finish();
         }else if (id == R.id.nav_sair) {
             FireBaseConexao.logout();
-            Intent intent = new Intent(PaginaPrincipalActivity.this, LoginClienteActivity.class);
-            startActivity(intent);
             finish();
         }
 

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Activitys.ResetSenhaActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
+import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
 import com.converter.cambio.app_petshop.R;
@@ -28,21 +29,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LoginClienteActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
+    private FireBaseQuery firebaseQuery = new FireBaseQuery();
     private FirebaseAuth auth;
     private EditText txtEmail, txtSenha;
     private TextView txtEsqueceuSenha;
     private MaterialButton btnCadastrar, btnLogin;
     private ClienteModel cliente = new ClienteModel();
-    private List<ClienteModel> lstCliente = new ArrayList<ClienteModel>();
-    private String idUsuario;
     private ValidaCampos validaCampos = new ValidaCampos();
+    private List<ClienteModel> lstCliente = new ArrayList<ClienteModel>();
+    private Date data = new Date();
+    private String idUsuario;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -72,7 +77,7 @@ public class LoginClienteActivity extends AppCompatActivity {
                 String strEmail = txtEmail.getText().toString().trim();
                 String strSenha = txtSenha.getText().toString().trim();
 
-                if (validaInputUsuario(strEmail, strSenha)) return;
+                if (validaInputUsuario(strEmail, strSenha)) { return; }
 
                 loginFirebase(strEmail, strSenha);
             }
@@ -116,54 +121,77 @@ public class LoginClienteActivity extends AppCompatActivity {
     }
 
     private void loginFirebase(final String strEmail, final String strSenha) {
+
         auth.signInWithEmailAndPassword(strEmail, strSenha)
             .addOnCompleteListener(LoginClienteActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if(task.isSuccessful()){
-                    getIdAndIniciaSessaoCliente(strEmail);
+                    //Get Cliente no banco e valida se senha foi alterada a menos de 60 dias
+                    databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail)
+                            .addValueEventListener(new ValueEventListener(){
+                                @Override
+                                public void onDataChange(DataSnapshot dSnp)
+                                {
+                                    for(DataSnapshot objSnp : dSnp.getChildren())
+                                    {
+                                        ClienteModel c = objSnp.getValue(ClienteModel.class);
+                                        idUsuario = c.getCli_id();
 
-                    boolean booSenhaIsValida =  validaCampos.senhaIsValida(cliente.getCli_data_ultima_alteracao_senha());
+                                        if(!strEmail.trim().equals(c.getCli_email()) || !strSenha.trim().equals(strSenha)){
 
-                    if(!booSenhaIsValida){
-                        alertDialogRecSenha("ATENÇÃO!", "Renove sua senha para acessar o aplicativo!");
-                        return;
-                    }
+                                            altertToast("E-mail ou senha inválidos!");
+                                            return;
+                                        }
+                                        //VERIFICA SE O USUÁRIO ALTEROU A SENHA
+                                        c = verificaSeSenhaFoiAlterada(c, strSenha);
 
-                    if(idUsuario != null && booSenhaIsValida){
-                        Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
-                        i.putExtra("ID_USUARIO", idUsuario);
-                        startActivity(i);
-                        finish();
-                    }
-                    else {
-                        alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
-                    }
-
-                }else{
-                    altertToast("E-mail ou senha inválidos!");
-                }
+                                        //VERIFICA SE O PRAZO DE ALTERAÇÃO DE SENHA ESTÁ EM DIA
+                                        validaPrazoAlteracaoSenha(c);
+                                        break;
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {}
+                            });
+                }else{ altertToast("E-mail ou senha inválidos!"); }
             }
         });
     }
 
-    private void getIdAndIniciaSessaoCliente(String strEmail) {
-        databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail)
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+    private void validaPrazoAlteracaoSenha(ClienteModel c) {
+        boolean booSenhaIsValida =  validaCampos.senhaIsValida(c.getCli_data_ultima_alteracao_senha());
 
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    ClienteModel cliente = objSnapshot.getValue(ClienteModel.class);
+        if(!booSenhaIsValida){//Senha inválida
+            alertDialogRecSenha("ATENÇÃO!", "Renove sua senha para acessar o aplicativo!");
+            return;
+        }
 
-                    idUsuario = cliente.getCli_id();
-                    break;
-                }
-            }
+        if(idUsuario != null && booSenhaIsValida){//Loga e inicia Sessão
+            Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
+            i.putExtra("ID_USUARIO", idUsuario);
+            startActivity(i);
+            finish();
+        }
+        else {
+            alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
+        }
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
+    private ClienteModel verificaSeSenhaFoiAlterada(ClienteModel c, String strSenha) {
+        if(!c.getCli_senha().trim().equals(strSenha)){
+            //Get data Atual
+            SimpleDateFormat formatData = new SimpleDateFormat("dd-MM-yyyy");
+            String strDataAtual = formatData.format(data);
+
+            c.setCli_senha(strSenha);
+            c.setCli_senha_antiga(strSenha);
+            c.setCli_data_ultima_alteracao_senha(strDataAtual.trim());
+
+            firebaseQuery.UpdateObjetcDb(c, "Cliente", c.getCli_id(), databaseReference);
+        }
+        return c;
     }
 
     private void  alertDialog(String strTitle, String strMsg){
@@ -197,7 +225,6 @@ public class LoginClienteActivity extends AppCompatActivity {
     private void inicializaComponentes() {
         txtEmail = findViewById(R.id.login_txt_email);
         txtSenha = findViewById(R.id.login_txt_senha);
-
         btnCadastrar = findViewById(R.id.login_btn_cadastrar);
         btnLogin = findViewById(R.id.login_btn_login);
         txtEsqueceuSenha = findViewById(R.id.txt_esqueceu_senha);

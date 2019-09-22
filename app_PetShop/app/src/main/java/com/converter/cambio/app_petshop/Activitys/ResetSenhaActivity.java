@@ -1,6 +1,7 @@
 package com.converter.cambio.app_petshop.Activitys;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.LoginClienteActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,13 +51,26 @@ public class ResetSenhaActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         String strEmailDigitado = edtEmail.getText().toString().trim();
                         if(task.isSuccessful()){
-                            alertDialog("ENVIADO!","Foi enviado um link de redefinição de senha para "+
+                            alertDialogBackToLogin("ENVIADO!","Foi enviado um link de redefinição de senha para "+
                                     strEmailDigitado);
                         }else{
                             alertDialog("ATENÇÃO!","O e-mail "+strEmailDigitado+" não está cadastrado no aplicativo.");
                         }
                     }
                 });
+    }
+
+    private void alertDialogBackToLogin(String strTitle, String strMsg) {
+        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(strTitle)
+                .setMessage(strMsg)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(ResetSenhaActivity.this, LoginClienteActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } }).show();
     }
 
     private void alert(String s) {

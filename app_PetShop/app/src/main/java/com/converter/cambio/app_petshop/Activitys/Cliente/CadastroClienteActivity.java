@@ -130,6 +130,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         c.setCli_cpf(edtCpf.getText().toString().trim());
         c.setCli_email(edtEmail.getText().toString().trim());
         c.setCli_senha(edtSenha.getText().toString().trim());
+        c.setCli_senha_antiga(edtSenha.getText().toString().trim());
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         Date data = new Date();
@@ -156,13 +157,26 @@ public class CadastroClienteActivity extends AppCompatActivity {
                                 // task retorna o status da autenticação
                                 if(task.isSuccessful()){
                                     limparCampos();
-                                    alertToast("Usuário cadastrado com sucesso!");
+                                    alertDialogBackToLogin("Sucesso!","Usuário cadastrado com sucesso!");
                                 }else{
                                     alertToast("Erro ao cadastrar. Tente novamente.");
                                 }
                             }
                         }
                 );
+    }
+
+    private void alertDialogBackToLogin(String strTitle, String strMsg) {
+        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(strTitle)
+                .setMessage(strMsg)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(CadastroClienteActivity.this, LoginClienteActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } }).show();
     }
 
     private void limparCampos() {

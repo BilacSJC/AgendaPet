@@ -19,14 +19,27 @@ import android.view.Menu;
 
 import com.converter.cambio.app_petshop.Activitys.SobreActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
+import com.converter.cambio.app_petshop.Model.ClienteModel;
 import com.converter.cambio.app_petshop.R;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PaginaPrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
     private FloatingActionButton fab;
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
     private String idUsuario;
+    private ClienteModel cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +72,45 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getExtraIdUsuario();
+        inicializarFirebase();
+        getUsuario();
+        verificaSeSenhaFoiAlterada(cliente);
+    }
+
+    private void verificaSeSenhaFoiAlterada(ClienteModel c) {
+        if(!cliente.getCli_senha().trim().equals(cliente.getCli_senha_antiga())){
+
+            SimpleDateFormat formatData = new SimpleDateFormat("dd-MM-yyyy");
+            Date data = new Date();
+            String strDataAtual = formatData.format(data);
+
+            cliente.setCli_data_ultima_alteracao_senha(strDataAtual.trim());
+        }
+    }
+
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(PaginaPrincipalActivity.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }
+
+    private void getUsuario() {
+
+        databaseReference.child("Cliente").orderByChild("cli_id").equalTo(idUsuario)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                            cliente = objSnapshot.getValue(ClienteModel.class);
+                            break;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+
     }
 
     private void getExtraIdUsuario() {

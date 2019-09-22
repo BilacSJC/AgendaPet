@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Activitys.ResetSenhaActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
+import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,9 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class LoginClienteActivity extends AppCompatActivity {
@@ -43,6 +42,7 @@ public class LoginClienteActivity extends AppCompatActivity {
     private ClienteModel cliente = new ClienteModel();
     private List<ClienteModel> lstCliente = new ArrayList<ClienteModel>();
     private String idUsuario;
+    private ValidaCampos validaCampos = new ValidaCampos();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -121,7 +121,25 @@ public class LoginClienteActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    iniciaSessaoCliente(strEmail);
+                    getIdAndIniciaSessaoCliente(strEmail);
+
+                    boolean booSenhaIsValida =  validaCampos.senhaIsValida(cliente.getCli_data_ultima_alteracao_senha());
+
+                    if(!booSenhaIsValida){
+                        alertDialogRecSenha("ATENÇÃO!", "Renove sua senha para acessar o aplicativo!");
+                        return;
+                    }
+
+                    if(idUsuario != null && booSenhaIsValida){
+                        Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
+                        i.putExtra("ID_USUARIO", idUsuario);
+                        startActivity(i);
+                        finish();
+                    }
+                    else {
+                        alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
+                    }
+
                 }else{
                     altertToast("E-mail ou senha inválidos!");
                 }
@@ -129,7 +147,7 @@ public class LoginClienteActivity extends AppCompatActivity {
         });
     }
 
-    private void iniciaSessaoCliente(String strEmail) {
+    private void getIdAndIniciaSessaoCliente(String strEmail) {
         databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail)
                 .addValueEventListener(new ValueEventListener() {
             @Override
@@ -139,19 +157,6 @@ public class LoginClienteActivity extends AppCompatActivity {
                     ClienteModel cliente = objSnapshot.getValue(ClienteModel.class);
 
                     idUsuario = cliente.getCli_id();
-
-
-                    boolean booSenhaVencida = verificaSeSenhaEstaVencida(cliente.getCli_data_ultima_alteracao_senha());
-
-                    if(idUsuario != null && booSenhaVencida == false){
-                        Intent i = new Intent(LoginClienteActivity.this, PaginaPrincipalActivity.class);
-                        i.putExtra("ID_USUARIO", idUsuario);
-                        startActivity(i);
-                        finish();
-                    }
-                    else {
-                        alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
-                    }
                     break;
                 }
             }
@@ -159,26 +164,6 @@ public class LoginClienteActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-    }
-
-    private boolean verificaSeSenhaEstaVencida(String strDataUltimaAlteracao) {
-
-        SimpleDateFormat formatData = new SimpleDateFormat("dd-MM-yyyy");
-        Date data = new Date();
-        String strDataAtual = formatData.format(data);
-
-        if(!strDataUltimaAlteracao.trim().equals("")){
-            long lngDataAlteracao = Long.valueOf(strDataUltimaAlteracao.trim().replace("-", ""));
-            long lngDataAtual = Long.valueOf(strDataAtual.trim().replace("-",""));
-
-            long lngDias = lngDataAtual - lngDataAlteracao;
-            if(lngDias > 60){
-                alertDialog("ATENÇÃO!", "Renove sua senha para acessar o sistema!");
-            }
-            return false;
-        }
-
-        return false;
     }
 
     private void  alertDialog(String strTitle, String strMsg){
@@ -189,6 +174,19 @@ public class LoginClienteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
+                    } }).show();
+    }
+
+    private void  alertDialogRecSenha(String strTitle, String strMsg){
+        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(strTitle)
+                .setMessage(strMsg)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(LoginClienteActivity.this, ResetSenhaActivity.class);
+                        startActivity(intent);
+                        finish();
                     } }).show();
     }
 

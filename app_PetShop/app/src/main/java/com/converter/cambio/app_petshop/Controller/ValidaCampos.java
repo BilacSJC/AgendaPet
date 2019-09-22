@@ -1,5 +1,8 @@
 package com.converter.cambio.app_petshop.Controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ValidaCampos {
 
 
@@ -88,5 +91,32 @@ public class ValidaCampos {
         }
         return "ok";
 
+    }
+
+    public boolean senhaIsValida(String strDataUltimaAlteracao){
+
+        SimpleDateFormat formatDataMes = new SimpleDateFormat("MM");
+        SimpleDateFormat formatDataAno = new SimpleDateFormat("yyyy");
+        Date data = new Date();
+
+        int mesAtual = Integer.valueOf(formatDataMes.format(data));
+        int anoAtual = Integer.valueOf(formatDataAno.format(data));
+        int mesModificacao = 0;
+        int anoModificacao = 0;
+
+        if(strDataUltimaAlteracao.trim().length() > 0){
+            mesModificacao = Integer.valueOf(strDataUltimaAlteracao.substring(3,5));
+            anoModificacao = Integer.valueOf(strDataUltimaAlteracao.substring(6,10));
+        }
+
+        if(anoModificacao < anoAtual){
+            return false;
+        }
+
+        if(mesAtual - mesModificacao >= 2){//60 dias
+            return  false;
+        }
+
+        return true;
     }
 }

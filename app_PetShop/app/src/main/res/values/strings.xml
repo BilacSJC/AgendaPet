@@ -7,36 +7,42 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-        // Tela de entrada
-        <string name="splash_screen">Logo entrada da tela</string>
-        <string name="app_name">Agenda Pet</string>
-        <string name="menu_home">Home</string>
-        <string name="menu_historico">Histórico</string>
-        <string name="menu_perfil">Perfil</string>
-        <string name="menu_sobre">Sobre</string>
-        <string name="menu_sair">Sair</string>
+    // Tela de entrada
+    <string name="btnCliente">Sou Cliente</string>
+    <string name="btnEmpresa">Sou PetShop</string>
+    <string name="app_name">Agenda Pet</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_historico">Histórico</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_sobre">Sobre</string>
+    <string name="menu_sair">Sair</string>
 
-        //strings tela - Cadastro Usuario
-        <string name="email">E-mail</string>
-        <string name="senha">Senha</string>
-        <string name="cadastrar">Cadastrar</string>
-        <string name="login">Login</string>
-        <string name="telefone">Telefone</string>
-        <string name="nome">Nome</string>
-        <string name="alterar">Alterar</string>
-        <string name="agendar">Agendar</string>
-        <string name="limpar">Limpar</string>
-        <string name="cpf">CPF</string>
+    //strings tela - Cadastro Usuario
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="esqueceu_senha">Esqueceu / Renovar Senha</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="login">Login</string>
+    <string name="telefone">Telefone</string>
+    <string name="endereco">Endereço</string>
+    <string name="nome">Nome</string>
+    <string name="nome_fantasia">Nome Fantasia</string>
+    <string name="alterar">Alterar</string>
+    <string name="agendar">Agendar</string>
+    <string name="limpar">Limpar</string>
+    <string name="cpf">CPF</string>
+    <string name="cnpj">CNPJ</string>
+    <string name="ver_solicitacao">Visualizar Solicitação</string>
 
 
-        //Tabelas do Banco de Dados
-        <string name="cliente">Cliente</string>
-        <string name="pet">Pet</string>
-        <string name="agendamento">Agendamento</string>
-        <string name="empresa">Empresa</string>
-        <string name="servico">Servico</string>
-        <string name="log">Log</string>
-        <string name="meu_pet">Meu Pet</string>
-        <string name="raca">Raça</string>
-        <string name="idade">Idade</string>
+    //Tabelas do Banco de Dados
+    <string name="cliente">Cliente</string>
+    <string name="pet">Pet</string>
+    <string name="agendamento">Agendamento</string>
+    <string name="empresa">Empresa</string>
+    <string name="servico">Servico</string>
+    <string name="log">Log</string>
+    <string name="meu_pet">Meu Pet</string>
+    <string name="raca">Raça</string>
+    <string name="idade">Idade</string>
 </resources>

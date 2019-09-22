@@ -4,83 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activitys.Cliente.CadastroClienteActivity">
+    tools:context=".Activitys.Empresa.ServicosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="178dp"
-            android:layout_marginBottom="16dp"
-            android:src="@mipmap/ic_launcher_add_person" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:textSize="24dp"
+            android:text="Serviços"/>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
+            android:layout_margin="8dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_usu_txt_nome"
+                android:id="@+id/ser_emp_tipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/nome" />
+                android:inputType="text"
+                android:hint="Tipo Serviço" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
+            android:layout_margin="8dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_usu_txt_email"
+                android:id="@+id/ser_emp_porte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="@string/email" />
+                android:inputType="text"
+                android:hint="Porte" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
+            android:layout_margin="8dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_usu_txt_senha"
+                android:id="@+id/ser_emp_preco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="@string/senha" />
+                android:inputType="numberDecimal"
+                android:hint="Preco" />
         </android.support.design.widget.TextInputLayout>
 
-        <RelativeLayout
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btn_alt_servico"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.button.MaterialButton
-                android:id="@+id/per_btn_cadastrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/alterar"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:textSize="18dp"
-                style="@style/Widget.MaterialComponents.Button"/>
-
-        </RelativeLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:text="@string/alterar" />
 
     </LinearLayout>
 
 </ScrollView>
-
-

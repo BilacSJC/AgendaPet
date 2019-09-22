@@ -67,8 +67,8 @@ public class ResetSenhaActivity extends AppCompatActivity {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                        Intent intent = new Intent(ResetSenhaActivity.this, LoginClienteActivity.class);
-//                        startActivity(intent);
+                        Intent intent = new Intent(ResetSenhaActivity.this, LoginClienteActivity.class);
+                        startActivity(intent);
                         finish();
                     } }).show();
     }

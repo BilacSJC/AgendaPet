@@ -15,7 +15,6 @@ public class FireBaseQuery {
     }
 
     public void UpdateObjetcDb(Object obj, String tableName, String idObj, DatabaseReference databaseReference){
-
         databaseReference.child(tableName).child(idObj).setValue(obj);
     }
 

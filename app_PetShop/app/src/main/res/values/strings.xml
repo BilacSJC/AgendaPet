@@ -30,6 +30,7 @@
     <string name="alterar">Alterar</string>
     <string name="agendar">Agendar</string>
     <string name="limpar">Limpar</string>
+    <string name="excluir">Excluir</string>
     <string name="cpf">CPF</string>
     <string name="cnpj">CNPJ</string>
     <string name="ver_solicitacao">Visualizar Solicitação</string>

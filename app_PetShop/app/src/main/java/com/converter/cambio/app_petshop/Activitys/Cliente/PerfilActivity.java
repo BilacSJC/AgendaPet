@@ -23,7 +23,7 @@ public class PerfilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_perfil_cliente);
         inicializaComponentes();
         configuraNavBar();
         getExtraIdUsuario();
@@ -36,8 +36,8 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
-        edtEmail = (EditText) findViewById(R.id.per_usu_txt_email);
-        edtNome = (EditText) findViewById(R.id.per_usu_txt_nome);
+        edtEmail = (EditText) findViewById(R.id.per_usu_edt_email);
+        edtNome = (EditText) findViewById(R.id.per_usu_edt_nome);
     }
 
     @Override

@@ -80,6 +80,20 @@ public class ValidaCampos {
         return "ok";
     }
 
+    public String vStringCnpj(String strCnpj) {
+
+        if(strCnpj.trim().equals("")){
+            return "O cmapo CNPJ é obrigatório";
+        }
+        else if(strCnpj.trim().length() < 11){
+            return "Digite um CNPJ válido!";
+        }
+        else if(strCnpj.trim().length() > 14){
+            return  "Digite somente os números!";
+        }
+        return "ok";
+    }
+
     public String vStringSpn(String strTexto) {
         if(strTexto.trim().toUpperCase().contains("SELECIONE")){
             return "Selecione um item.";

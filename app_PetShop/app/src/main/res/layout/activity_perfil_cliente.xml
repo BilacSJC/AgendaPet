@@ -25,7 +25,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_usu_ed_nome"
+                android:id="@+id/per_usu_edt_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
@@ -40,7 +40,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_usu_ed_email"
+                android:id="@+id/per_usu_edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"

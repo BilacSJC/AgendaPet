@@ -11,80 +11,33 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btn_alt_servico"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:text="Serviços"
-            android:textSize="24dp" />
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/alterar" />
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/ser_emp_nome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nome Serviço"
-                android:inputType="text" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btn_del_servico"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/ser_emp_porte"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Porte"
-                android:inputType="text" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/ser_emp_preco"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Preco"
-                android:inputType="numberDecimal" />
-        </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <android.support.design.button.MaterialButton
-                android:id="@+id/btn_alt_servico"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/alterar" />
-
-            <android.support.design.button.MaterialButton
-                android:id="@+id/btn_del_servico"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/excluir" />
-
-        </LinearLayout>
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/excluir" />
 
     </LinearLayout>
 

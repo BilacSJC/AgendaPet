@@ -25,6 +25,12 @@
     <string name="login">Login</string>
     <string name="telefone">Telefone</string>
     <string name="endereco">Endereço</string>
+    <string name="logradouro">Logradouro</string>
+    <string name="num_residencia">Número</string>
+    <string name="bairro">Bairro</string>
+    <string name="cep">CEP</string>
+    <string name="cidade">Cidade</string>
+    <string name="estado">Estado</string>
     <string name="nome">Nome</string>
     <string name="nome_empresa">Nome Empresa</string>
     <string name="alterar">Alterar</string>

@@ -32,19 +32,11 @@
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <Spinner
+            android:id="@+id/add_ser_spn_porte"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/ser_emp_porte"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Porte"
-                android:inputType="text" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="34dp"
+            android:layout_margin="20dp" />
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -56,14 +48,14 @@
                 android:id="@+id/ser_emp_preco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Preco"
+                android:hint="Preço"
                 android:inputType="numberDecimal" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_alt_servico"
@@ -71,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
                 android:text="@string/cadastrar" />
 
         </LinearLayout>

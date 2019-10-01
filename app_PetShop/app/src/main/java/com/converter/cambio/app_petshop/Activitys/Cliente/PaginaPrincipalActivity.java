@@ -17,19 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-import com.converter.cambio.app_petshop.Activitys.SobreActivity;
-import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
-import com.converter.cambio.app_petshop.Model.ClienteModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class PaginaPrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

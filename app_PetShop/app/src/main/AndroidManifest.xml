@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activitys.Empresa.ServicosActivity"></activity>
+        <activity android:name=".Activitys.Empresa.SobreActivity"></activity>
+        <activity android:name=".Activitys.Empresa.ServicosActivity" />
         <activity android:name=".Activitys.Empresa.PerfilActivity" />
         <activity android:name=".Activitys.Empresa.PaginaPrincipalActivity" />
         <activity android:name=".Activitys.Empresa.LoginEmpresaActivity" />
@@ -25,7 +26,7 @@
         <activity android:name=".Activitys.Cliente.HistoricoAgendamentosActivity" />
         <activity android:name=".Activitys.Cliente.PerfilActivity" />
         <activity android:name=".Activitys.Cliente.LocalizaPetSopActivity" />
-        <activity android:name=".Activitys.SobreActivity" />
+        <activity android:name=".Activitys.Cliente.SobreActivity" />
         <activity android:name=".Activitys.Cliente.CadastroClienteActivity" />
         <activity android:name=".Activitys.Cliente.AgendamentoActivity" />
         <activity

@@ -8,6 +8,7 @@ public class EmpresaModel {
     private String emp_email;
     private String emp_senha;
     private String emp_endereco;
+    private String emp_logradouro;
 
 
     public String getEmp_id() {
@@ -64,5 +65,13 @@ public class EmpresaModel {
 
     public void setEmp_endereco(String emp_endereco) {
         this.emp_endereco = emp_endereco;
+    }
+
+    public String getEmp_logradouro() {
+        return emp_logradouro;
+    }
+
+    public void setEmp_logradouro(String emp_logradouro) {
+        this.emp_logradouro = emp_logradouro;
     }
 }

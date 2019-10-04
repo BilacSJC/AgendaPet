@@ -4,6 +4,7 @@ public class ServicoEmpresaModel {
     private int ser_id;
     private String ser_nome;
     private double ser_preco;
+    private String ser_descricao;
     private int ser_emp_id;
 
 
@@ -37,5 +38,13 @@ public class ServicoEmpresaModel {
 
     public void setSer_emp_id(int ser_emp_id) {
         this.ser_emp_id = ser_emp_id;
+    }
+
+    public String getSer_descricao() {
+        return ser_descricao;
+    }
+
+    public void setSer_descricao(String ser_descricao) {
+        this.ser_descricao = ser_descricao;
     }
 }

@@ -3,10 +3,13 @@ package com.converter.cambio.app_petshop.Activitys.Empresa;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
+import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.R;
@@ -15,18 +18,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
 import java.util.UUID;
 
 public class CadastroEmpresaActivity extends AppCompatActivity {
 
     private EditText edtNome, edtEmail, edtCnpj, edtTelefone, edtSenha, edtEndereco;
     private Button btnCadastrar;
+    private Spinner spnEstado;
 
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private FirebaseApp firebaseApp;
     private FireBaseQuery fireBaseQuery;
     private DatabaseReference databaseReference;
+    private GeradorListSpinnerController geradorListSpinnerController = new GeradorListSpinnerController();
 
     private ValidaCampos validaCampos;
 
@@ -37,6 +43,10 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
 
         inicializarComponentes();
         inicializarFirebase();
+
+        List<String> lsEstados = geradorListSpinnerController.getLstEstados();
+        ArrayAdapter<String> estado = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, lsEstados);
+        spnEstado.setAdapter(estado);
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +128,7 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         edtEndereco = findViewById(R.id.cad_emp_edt_endereco);
         edtSenha = findViewById(R.id.cad_emp_edt_senha);
         edtTelefone = findViewById(R.id.cad_emp_edt_telefone);
+        spnEstado = findViewById(R.id.cad_emp_spn_estado);
         btnCadastrar = findViewById(R.id.cad_emp_btn_cadastrar);
     }
 }

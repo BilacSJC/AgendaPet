@@ -52,4 +52,18 @@
     <string name="meu_pet">Meu Pet</string>
     <string name="raca">Raça</string>
     <string name="idade">Idade</string>
+
+
+    <string-array name="lista_pet_sexo">
+        <item>Macho</item>
+        <item>Fêmea</item>
+    </string-array>
+
+    <string-array name="lista_pet_porte">
+        <item>Pequeno</item>
+        <item>Médio</item>
+        <item>Grande</item>
+    </string-array>
+
+
 </resources>

@@ -1,5 +1,6 @@
 package com.converter.cambio.app_petshop.Activitys.Cliente;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
+import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
 import com.converter.cambio.app_petshop.R;
@@ -37,6 +39,8 @@ public class CadastroClienteActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FireBaseQuery fireBaseQuery;
+    private MetodosPadraoController m = new MetodosPadraoController();
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +73,10 @@ public class CadastroClienteActivity extends AppCompatActivity {
                 ClienteModel clienteModel = validaCampos();
 
                 if(clienteModel.getCli_id() == null){
-                    alertDialog("ATENCÃO", "Preencha todos os campos.");
+                    m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
                     return;
                 }
-                else{
-                    //Fazer busca no banco para ver se usuario ja é cadastrado
-                }
+
                 cadastrarUsuario(clienteModel);
             }
         });
@@ -126,7 +128,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         c.setCli_id(UUID.randomUUID().toString());
         c.setCli_nome(edtNome.getText().toString().trim());
         c.setCli_telefone(edtTelefone.getText().toString().trim());
-        c.setCli_endereco(edtEndereco.getText().toString().trim());
         c.setCli_cpf(edtCpf.getText().toString().trim());
         c.setCli_email(edtEmail.getText().toString().trim());
         c.setCli_senha(edtSenha.getText().toString().trim());
@@ -137,6 +138,9 @@ public class CadastroClienteActivity extends AppCompatActivity {
         String dataFormatada = formataData.format(data);
 
         c.setCli_data_ultima_alteracao_senha(dataFormatada);
+
+        //Inserir validação dos campos de endereço e inserir no banco de dados o endereço
+        //Verificar campos em EnderecoModel
 
         return c;
     }
@@ -159,7 +163,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
                                     limparCampos();
                                     alertDialogBackToLogin("Sucesso!","Usuário cadastrado com sucesso!");
                                 }else{
-                                    alertToast("Erro ao cadastrar. Tente novamente.");
+                                    m.alertToast(context,"Erro ao cadastrar. Tente novamente.");
                                 }
                             }
                         }
@@ -186,22 +190,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         edtCpf.setText("");
         edtTelefone.setText("");
         edtEndereco.setText("");
-    }
-
-    private void  alertToast(String strMsg){
-        Toast toast = Toast.makeText(CadastroClienteActivity.this, strMsg, Toast.LENGTH_LONG);
-        toast.show();
-    }
-
-    private void  alertDialog(String strTitle, String strMsg){
-        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
-                .setTitle(strTitle)
-                .setMessage(strMsg)
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    } }).show();
     }
 
     private void configuraNavBar() {
@@ -233,5 +221,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         edtEndereco = findViewById(R.id.cad_usu_ed_endereco);
         edtTelefone = findViewById(R.id.cad_usu_ed_telefone);
         fireBaseQuery  = new FireBaseQuery();
+        context = CadastroClienteActivity.this;
     }
 }

@@ -27,7 +27,7 @@ public class TipoLoginActivity extends AppCompatActivity {
         btnCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginClienteActivity.class);
+                Intent intent = new Intent(TipoLoginActivity.this, LoginClienteActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,7 +35,7 @@ public class TipoLoginActivity extends AppCompatActivity {
         btnEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginEmpresaActivity.class);
+                Intent intent = new Intent(TipoLoginActivity.this, LoginEmpresaActivity.class);
                 startActivity(intent);
             }
         });

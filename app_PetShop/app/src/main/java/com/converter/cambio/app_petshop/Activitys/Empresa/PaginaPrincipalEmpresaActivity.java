@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.converter.cambio.app_petshop.R;
 
-public class PaginaPrincipalActivity extends AppCompatActivity {
+public class PaginaPrincipalEmpresaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,9 +7,8 @@ public class EmpresaModel {
     private String emp_cnpj;
     private String emp_email;
     private String emp_senha;
-    private String emp_endereco;
-    private String emp_logradouro;
-
+    private String emp_senha_antiga;
+    private String emp_data_ultima_alteracao_senha;
 
     public String getEmp_id() {
         return emp_id;
@@ -59,19 +58,19 @@ public class EmpresaModel {
         this.emp_senha = emp_senha;
     }
 
-    public String getEmp_endereco() {
-        return emp_endereco;
+    public String getEmp_senha_antiga() {
+        return emp_senha_antiga;
     }
 
-    public void setEmp_endereco(String emp_endereco) {
-        this.emp_endereco = emp_endereco;
+    public void setEmp_senha_antiga(String emp_senha_antiga) {
+        this.emp_senha_antiga = emp_senha_antiga;
     }
 
-    public String getEmp_logradouro() {
-        return emp_logradouro;
+    public String getEmp_data_ultima_alteracao_senha() {
+        return emp_data_ultima_alteracao_senha;
     }
 
-    public void setEmp_logradouro(String emp_logradouro) {
-        this.emp_logradouro = emp_logradouro;
+    public void setEmp_data_ultima_alteracao_senha(String emp_data_ultima_alteracao_senha) {
+        this.emp_data_ultima_alteracao_senha = emp_data_ultima_alteracao_senha;
     }
 }

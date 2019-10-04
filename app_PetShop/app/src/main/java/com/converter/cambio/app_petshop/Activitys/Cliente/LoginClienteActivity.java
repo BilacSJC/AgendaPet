@@ -45,7 +45,6 @@ public class LoginClienteActivity extends AppCompatActivity {
     private MaterialButton btnCadastrar, btnLogin;
     private ClienteModel cliente = new ClienteModel();
     private ValidaCampos validaCampos = new ValidaCampos();
-    private List<ClienteModel> lstCliente = new ArrayList<ClienteModel>();
     private Date data = new Date();
     private String idUsuario;
 
@@ -123,39 +122,39 @@ public class LoginClienteActivity extends AppCompatActivity {
     private void loginFirebase(final String strEmail, final String strSenha) {
 
         auth.signInWithEmailAndPassword(strEmail, strSenha)
-            .addOnCompleteListener(LoginClienteActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+                .addOnCompleteListener(LoginClienteActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(task.isSuccessful()){
-                    //Get Cliente no banco e valida se senha foi alterada a menos de 60 dias
-                    databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail)
-                            .addValueEventListener(new ValueEventListener(){
-                                @Override
-                                public void onDataChange(DataSnapshot dSnp)
-                                {
-                                    for(DataSnapshot objSnp : dSnp.getChildren())
-                                    {
-                                        ClienteModel c = objSnp.getValue(ClienteModel.class);
-                                        idUsuario = c.getCli_id();
+                        if(task.isSuccessful()){
+                            //Get Cliente no banco e valida se senha foi alterada a menos de 60 dias
+                            databaseReference.child("Cliente").orderByChild("cli_email").equalTo(strEmail)
+                                    .addValueEventListener(new ValueEventListener(){
+                                        @Override
+                                        public void onDataChange(DataSnapshot dSnp)
+                                        {
+                                            for(DataSnapshot objSnp : dSnp.getChildren())
+                                            {
+                                                ClienteModel c = objSnp.getValue(ClienteModel.class);
+                                                idUsuario = c.getCli_id();
 
-                                        if(!strEmail.trim().equals(c.getCli_email()) || !strSenha.trim().equals(strSenha)){
+                                                if(!strEmail.trim().equals(c.getCli_email()) || !strSenha.trim().equals(strSenha)){
 
-                                            altertToast("E-mail ou senha inválidos!");
-                                            return;
+                                                    altertToast("E-mail ou senha inválidos!");
+                                                    return;
+                                                }
+                                                //VERIFICA SE O USUÁRIO ALTEROU A SENHA
+                                                verificaSeSenhaFoiAlterada(c, strSenha);
+
+                                                break;
+                                            }
                                         }
-                                        //VERIFICA SE O USUÁRIO ALTEROU A SENHA
-                                        verificaSeSenhaFoiAlterada(c, strSenha);
-
-                                        break;
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {}
-                            });
-                }else{ altertToast("E-mail ou senha inválidos!"); }
-            }
-        });
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {}
+                                    });
+                        }else{ altertToast("E-mail ou senha inválidos!"); }
+                    }
+                });
     }
 
     private void validaPrazoAlteracaoSenha(ClienteModel c) {

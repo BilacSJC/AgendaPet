@@ -9,7 +9,6 @@ public class ClienteModel extends PetModel{
     private String cli_senha;
     private String cli_senha_antiga;
     private String cli_data_ultima_alteracao_senha;
-    private String cli_endereco;
 
     public String getCli_id() {
         return cli_id;
@@ -57,14 +56,6 @@ public class ClienteModel extends PetModel{
 
     public void setCli_senha(String cli_senha) {
         this.cli_senha = cli_senha;
-    }
-
-    public String getCli_endereco() {
-        return cli_endereco;
-    }
-
-    public void setCli_endereco(String cli_endereco) {
-        this.cli_endereco = cli_endereco;
     }
 
     public String getCli_data_ultima_alteracao_senha() {

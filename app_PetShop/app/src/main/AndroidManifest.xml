@@ -17,7 +17,6 @@
         <activity android:name=".Activitys.Empresa.SobreActivity" />
         <activity android:name=".Activitys.Empresa.ServicosActivity" />
         <activity android:name=".Activitys.Empresa.PerfilActivity" />
-        <activity android:name=".Activitys.Empresa.PaginaPrincipalActivity" />
         <activity android:name=".Activitys.Empresa.LoginEmpresaActivity" />
         <activity android:name=".Activitys.Empresa.CadastroEmpresaActivity" />
         <activity android:name=".Activitys.TipoLoginActivity" />

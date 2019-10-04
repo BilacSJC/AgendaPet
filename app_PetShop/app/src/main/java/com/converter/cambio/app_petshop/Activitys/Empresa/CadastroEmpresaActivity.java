@@ -3,17 +3,16 @@ package com.converter.cambio.app_petshop.Activitys.Empresa;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.converter.cambio.app_petshop.Activitys.Cliente.LoginClienteActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
@@ -29,12 +28,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class CadastroEmpresaActivity extends AppCompatActivity {
 
-    private EditText edtNome, edtEmail, edtCnpj, edtTelefone, edtSenha, edtEndereco;
+    private EditText edtNome, edtEmail, edtCnpj, edtTelefone, edtSenha;
     private Button btnCadastrar;
     private Spinner spnEstado;
 
@@ -56,16 +57,8 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
 
         inicializarComponentes();
         inicializarFirebase();
-
         preencheSpinnerEstados();
-
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validacaoInputUsuario();
-            }
-        });
-
+        eventosClick();
     }
 
     private void preencheSpinnerEstados() {
@@ -98,15 +91,15 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
     }
 
     private void cadastrarUsuario(EmpresaModel empresaModel){
-        fireBaseQuery.InsertObjectDb(empresaModel, "Cliente", empresaModel.getEmp_id(), databaseReference);
+        fireBaseQuery.InsertObjectDb(empresaModel, "Empresa", empresaModel.getEmp_id(), databaseReference);
 
         if(databaseReference.getDatabase() != null){
             cadastrarLoginUsuario(empresaModel);
         }
     }
 
-    private void cadastrarLoginUsuario(final EmpresaModel clienteModel){
-        auth.createUserWithEmailAndPassword(clienteModel.getEmp_email(), clienteModel.getEmp_senha())
+    private void cadastrarLoginUsuario(final EmpresaModel empresaModel){
+        auth.createUserWithEmailAndPassword(empresaModel.getEmp_email(), empresaModel.getEmp_senha())
                 .addOnCompleteListener(CadastroEmpresaActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -130,7 +123,6 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         String strMsgTelefone = validaCampos.vStringTelefone(edtTelefone.getText().toString().trim());
         String strMsgEmail = validaCampos.vStringEmail(edtEmail.getText().toString().trim());
         String strMsgSenha = validaCampos.vStringSenha(edtSenha.getText().toString().trim());
-        String strMsgEndereco = validaCampos.vStringEndereco(edtEndereco.getText().toString().trim());
 
         int contMsg = 0;
 
@@ -159,11 +151,6 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
             contMsg=+1;
         }
 
-        if (!strMsgEndereco.equals("ok")) {
-            edtEndereco.setError(strMsgEndereco);
-            contMsg=+1;
-        }
-
         if (contMsg > 0) {
             return new EmpresaModel();
         }
@@ -174,6 +161,13 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         e.setEmp_email(edtEmail.getText().toString());
         e.setEmp_senha(edtSenha.getText().toString());
         e.setEmp_telefone(edtTelefone.getText().toString());
+        e.setEmp_senha_antiga(edtSenha.getText().toString().trim());
+
+        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
+        Date data = new Date();
+        String dataFormatada = formataData.format(data);
+
+        e.setEmp_data_ultima_alteracao_senha(dataFormatada);
 
         //Inserir validação dos campos de endereço e inserir no banco de dados o endereço
         //Verificar campos em EnderecoModel
@@ -192,7 +186,6 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         edtNome.setText("");
         edtCnpj.setText("");
         edtEmail.setText("");
-        edtEndereco.setText("");
         edtSenha.setText("");
         edtTelefone.setText("");
         btnCadastrar.setText("");
@@ -202,10 +195,10 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         edtNome = findViewById(R.id.cad_emp_edt_nome);
         edtCnpj = findViewById(R.id.cad_emp_edt_cnpj);
         edtEmail = findViewById(R.id.cad_emp_edt_email);
-        edtEndereco = findViewById(R.id.cad_emp_edt_endereco);
         edtSenha = findViewById(R.id.cad_emp_edt_senha);
         edtTelefone = findViewById(R.id.cad_emp_edt_telefone);
         btnCadastrar = findViewById(R.id.cad_emp_btn_cadastrar);
+        spnEstado = findViewById(R.id.cad_emp_spn_estado);
 
         context = CadastroEmpresaActivity.this;
         validaCampos = new ValidaCampos();
@@ -219,7 +212,7 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(CadastroEmpresaActivity.this, LoginClienteActivity.class);
+                        Intent intent = new Intent(CadastroEmpresaActivity.this, LoginEmpresaActivity.class);
                         startActivity(intent);
                         finish();
                     } }).show();

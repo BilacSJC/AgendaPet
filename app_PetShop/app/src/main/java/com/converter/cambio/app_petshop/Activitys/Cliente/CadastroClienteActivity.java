@@ -34,7 +34,7 @@ import java.util.UUID;
 
 public class CadastroClienteActivity extends AppCompatActivity {
     private MaterialButton btnCadastrar;
-    private EditText edtEmail, edtNome, edtSenha, edtCpf, edtTelefone, edtEndereco;
+    private EditText edtEmail, edtNome, edtSenha, edtCpf, edtTelefone;
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -88,7 +88,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         ValidaCampos v = new ValidaCampos();
 
         String strMensagemNome = v.vString(edtNome.getText().toString());
-        String strMensagemEndereco = v.vStringEndereco(edtEndereco.getText().toString());
         String strMensagemTelefone = v.vStringTelefone(edtTelefone.getText().toString());
         String strMensagemCpf = v.vStringCpf(edtCpf.getText().toString());
         String strMensagemSenha = v.vStringSenha(edtSenha.getText().toString());
@@ -102,10 +101,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         }
         if(!strMensagemCpf.equals("ok")){
             edtCpf.setError(strMensagemNome);
-            contMsg += 1;
-        }
-        if(!strMensagemEndereco.equals("ok")){
-            edtEndereco.setError(strMensagemNome);
             contMsg += 1;
         }
         if(!strMensagemTelefone.equals("ok")){
@@ -189,7 +184,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         edtSenha.setText("");
         edtCpf.setText("");
         edtTelefone.setText("");
-        edtEndereco.setText("");
     }
 
     private void configuraNavBar() {
@@ -218,7 +212,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         edtNome = findViewById(R.id.cad_usu_ed_nome);
         edtSenha = findViewById(R.id.cad_usu_ed_senha);
         edtCpf = findViewById(R.id.cad_usu_ed_cpf);
-        edtEndereco = findViewById(R.id.cad_usu_ed_endereco);
         edtTelefone = findViewById(R.id.cad_usu_ed_telefone);
         fireBaseQuery  = new FireBaseQuery();
         context = CadastroClienteActivity.this;

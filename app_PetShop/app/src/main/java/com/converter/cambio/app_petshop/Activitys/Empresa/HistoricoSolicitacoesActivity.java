@@ -10,6 +10,6 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historico_solicitacoes);
+        setContentView(R.layout.activity_emp_historico_solicitacoes);
     }
 }

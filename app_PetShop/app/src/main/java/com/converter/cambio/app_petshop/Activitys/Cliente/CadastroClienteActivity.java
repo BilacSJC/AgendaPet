@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
@@ -45,7 +44,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_cliente);
+        setContentView(R.layout.activity_cli_cadastro);
         inicializaComponentes();
         configuraNavBar();
 
@@ -133,9 +132,19 @@ public class CadastroClienteActivity extends AppCompatActivity {
         String dataFormatada = formataData.format(data);
 
         c.setCli_data_ultima_alteracao_senha(dataFormatada);
+        //QUANDO O LAYOUT TIVER OS CAMPOS DE ENDEREÇO DESCOMENTE ESTAS LINHAS
+        //E DESCOMENTAR A LINHA DOMÉTODO ABAIXO (CADASTRAR USUARIO)
 
-        //Inserir validação dos campos de endereço e inserir no banco de dados o endereço
-        //Verificar campos em EnderecoModel
+//        c.setCli_endereco(new EnderecoModel());
+//        c.getCli_endereco().setId_endereco(UUID.randomUUID().toString().trim());
+//        c.getCli_endereco().setId_usuario(c.getCli_id());
+//        c.getCli_endereco().setEstado(spnEstado.getSelectedItem().toString().trim());
+//        c.getCli_endereco().setCidade(edtCidade.getText().toString().trim());
+//        c.getCli_endereco().setBairro(edtBairro.getText().toString().trim());
+//        c.getCli_endereco().setLogradouro(edtLogradouro.getText().toString().trim());
+//        c.getCli_endereco().setNumero(edtNumero.getText().toString().trim());
+//        c.getCli_endereco().setCep(edtCep.getText().toString().trim());
+//        c.setCli_endereco(c.getCli_endereco());
 
         return c;
     }
@@ -144,6 +153,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         fireBaseQuery.InsertObjectDb(clienteModel, "Cliente", clienteModel.getCli_id(), databaseReference);
 
         if(databaseReference.getDatabase() != null){
+//            fireBaseQuery.InsertObjectDb(clienteModel.getCli_endereco(), "Endereco", clienteModel.getCli_endereco().getId_endereco(), databaseReference);
             cadastrarLoginUsuario(clienteModel);
         }
     }

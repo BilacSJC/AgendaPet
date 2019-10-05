@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.converter.cambio.app_petshop.Activitys.ResetSenhaActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.ResetSenhaActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
@@ -49,7 +49,7 @@ public class LoginEmpresaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_empresa);
+        setContentView(R.layout.activity_emp_login);
         inicializaComponentes();
         inicializarFirebase();
         eventosClick();
@@ -193,7 +193,7 @@ public class LoginEmpresaActivity extends AppCompatActivity {
     }
 
     private void usuarioLogadoStartSession() {
-        Intent i = new Intent(LoginEmpresaActivity.this, PaginaPrincipalEmpresaActivity.class);
+        Intent i = new Intent(LoginEmpresaActivity.this, HomeEmpresaActivity.class);
         i.putExtra("ID_USUARIO", idUsuario);
         startActivity(i);
         finish();

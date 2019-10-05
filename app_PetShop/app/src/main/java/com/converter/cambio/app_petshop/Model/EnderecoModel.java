@@ -1,6 +1,7 @@
 package com.converter.cambio.app_petshop.Model;
 
 public class EnderecoModel {
+    private String id_endereco;
     private String id_usuario;
     private String estado;
     private String cidade;
@@ -63,5 +64,13 @@ public class EnderecoModel {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public String getId_endereco() {
+        return id_endereco;
+    }
+
+    public void setId_endereco(String id_endereco) {
+        this.id_endereco = id_endereco;
     }
 }

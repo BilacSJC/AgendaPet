@@ -20,7 +20,7 @@ public class LocalizaPetSopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_servicos);
+        setContentView(R.layout.activity_cli_map_servicos);
         getExtraIdUsuario();
 
         btnAgendar = findViewById(R.id.map_btn_agendar);

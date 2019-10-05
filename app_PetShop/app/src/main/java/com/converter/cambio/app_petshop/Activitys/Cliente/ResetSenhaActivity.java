@@ -1,7 +1,6 @@
-package com.converter.cambio.app_petshop.Activitys;
+package com.converter.cambio.app_petshop.Activitys.Cliente;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.AlertDialog;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.converter.cambio.app_petshop.Activitys.Cliente.LoginClienteActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +26,7 @@ public class ResetSenhaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_senha);
+        setContentView(R.layout.activity_cli_reset_senha);
 
         inicalizaComponentes();
         eventosClick();

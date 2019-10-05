@@ -40,19 +40,6 @@ public class ValidaCampos {
         return "ok";
     }
 
-    public String vStringEndereco(String strEndereco) {
-        if(strEndereco.trim().equals("")){
-            return "O campo endereço deve ser preenchido!";
-        }
-        else if(strEndereco.trim().length() < 8){
-            return "formato de endereço: Rua, Endereço, Cidade - Estado";
-        }
-        if(strEndereco.trim().length() >= 8) {
-            return "ok";
-        }
-        return "Digite o endereço corretamente : Rua, Numero, Bairro, Cidade, Estado";
-    }
-
     public String vStringTelefone(String strTelefone) {
         if(strTelefone.trim().equals("")){
             return "O campo Telefone deve ser preenchido!";
@@ -133,6 +120,14 @@ public class ValidaCampos {
             return  false;
         }
 
+        return true;
+    }
+
+    public boolean validacaoBasicaStr(String str){
+
+        if(str.trim().equals("")){
+            return false;
+        }
         return true;
     }
 }

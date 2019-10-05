@@ -1,10 +1,11 @@
 package com.converter.cambio.app_petshop.Model;
 
-public class ClienteModel extends PetModel{
+public class ClienteModel extends EnderecoModel{
     private  String cli_id;
     private String cli_cpf;
     private String cli_nome;
     private String cli_telefone;
+    private EnderecoModel cli_endereco;
     private String cli_email;
     private String cli_senha;
     private String cli_senha_antiga;
@@ -72,5 +73,13 @@ public class ClienteModel extends PetModel{
 
     public void setCli_senha_antiga(String cli_senha_antiga) {
         this.cli_senha_antiga = cli_senha_antiga;
+    }
+
+    public EnderecoModel getCli_endereco() {
+        return cli_endereco;
+    }
+
+    public void setCli_endereco(EnderecoModel cli_endereco) {
+        this.cli_endereco = cli_endereco;
     }
 }

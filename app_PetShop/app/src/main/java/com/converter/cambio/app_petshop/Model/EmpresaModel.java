@@ -1,9 +1,10 @@
 package com.converter.cambio.app_petshop.Model;
 
-public class EmpresaModel {
+public class EmpresaModel extends EnderecoModel{
     private String emp_id;
     private String emp_nome;
     private String emp_telefone;
+    private EnderecoModel emp_endereco;
     private String emp_cnpj;
     private String emp_email;
     private String emp_senha;
@@ -72,5 +73,13 @@ public class EmpresaModel {
 
     public void setEmp_data_ultima_alteracao_senha(String emp_data_ultima_alteracao_senha) {
         this.emp_data_ultima_alteracao_senha = emp_data_ultima_alteracao_senha;
+    }
+
+    public EnderecoModel getEmp_endereco() {
+        return emp_endereco;
+    }
+
+    public void setEmp_endereco(EnderecoModel emp_endereco) {
+        this.emp_endereco = emp_endereco;
     }
 }

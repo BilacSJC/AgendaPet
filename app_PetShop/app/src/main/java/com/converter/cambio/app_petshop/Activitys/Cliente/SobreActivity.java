@@ -16,7 +16,7 @@ public class SobreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sobre_cliente);
+        setContentView(R.layout.activity_cli_sobre);
         getExtraIdUsuario();
 
         btnAgendamento = findViewById(R.id.sob_btn_agendamento);

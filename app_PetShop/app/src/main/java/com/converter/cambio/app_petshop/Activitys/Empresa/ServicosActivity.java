@@ -10,6 +10,6 @@ public class ServicosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_servicos_empresa);
+        setContentView(R.layout.activity_emp_lst_servicos_empresa);
     }
 }

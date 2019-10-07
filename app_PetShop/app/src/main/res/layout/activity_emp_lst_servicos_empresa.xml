@@ -7,7 +7,7 @@
     tools:context=".Activitys.Empresa.ServicosActivity">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_add_servico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -15,6 +15,7 @@
         app:srcCompat="@mipmap/ic_launcher_add"/>
 
     <ListView
+        android:id="@+id/lstSolicitacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </ListView>

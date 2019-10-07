@@ -18,6 +18,8 @@ import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
+import com.converter.cambio.app_petshop.Model.EmpresaModel;
+import com.converter.cambio.app_petshop.Model.EnderecoModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -75,8 +77,8 @@ public class CadastroClienteActivity extends AppCompatActivity {
                     m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
                     return;
                 }
-
-                cadastrarUsuario(clienteModel);
+                EnderecoModel enderecoModel = setEnderecoModel(clienteModel);
+                cadastrarUsuario(clienteModel, enderecoModel);
             }
         });
     }
@@ -132,28 +134,31 @@ public class CadastroClienteActivity extends AppCompatActivity {
         String dataFormatada = formataData.format(data);
 
         c.setCli_data_ultima_alteracao_senha(dataFormatada);
-        //QUANDO O LAYOUT TIVER OS CAMPOS DE ENDEREÇO DESCOMENTE ESTAS LINHAS
-        //E DESCOMENTAR A LINHA DOMÉTODO ABAIXO (CADASTRAR USUARIO)
-
-//        c.setCli_endereco(new EnderecoModel());
-//        c.getCli_endereco().setId_endereco(UUID.randomUUID().toString().trim());
-//        c.getCli_endereco().setId_usuario(c.getCli_id());
-//        c.getCli_endereco().setEstado(spnEstado.getSelectedItem().toString().trim());
-//        c.getCli_endereco().setCidade(edtCidade.getText().toString().trim());
-//        c.getCli_endereco().setBairro(edtBairro.getText().toString().trim());
-//        c.getCli_endereco().setLogradouro(edtLogradouro.getText().toString().trim());
-//        c.getCli_endereco().setNumero(edtNumero.getText().toString().trim());
-//        c.getCli_endereco().setCep(edtCep.getText().toString().trim());
-//        c.setCli_endereco(c.getCli_endereco());
+        c.setCli_id_endereco(UUID.randomUUID().toString().trim());
 
         return c;
     }
 
-    private void cadastrarUsuario(ClienteModel clienteModel){
+    private EnderecoModel setEnderecoModel(ClienteModel clienteModel) {
+        EnderecoModel e = new EnderecoModel();
+
+        e.setId_usuario(clienteModel.getCli_id());
+        e.setId_endereco(clienteModel.getCli_id_endereco());
+//        e.setEstado(spnEstado.getSelectedItem().toString().trim());
+//        e.setCidade(edtCidade.getText().toString().trim());
+//        e.setBairro(edtBairro.getText().toString().trim());
+//        e.setLogradouro(edtLogradouro.getText().toString().trim());
+//        e.setNumero(edtNumero.getText().toString().trim());
+//        e.setCep(edtCep.getText().toString().trim());
+
+        return e;
+    }
+
+    private void cadastrarUsuario(ClienteModel clienteModel, EnderecoModel enderecoModel){
         fireBaseQuery.InsertObjectDb(clienteModel, "Cliente", clienteModel.getCli_id(), databaseReference);
 
         if(databaseReference.getDatabase() != null){
-//            fireBaseQuery.InsertObjectDb(clienteModel.getCli_endereco(), "Endereco", clienteModel.getCli_endereco().getId_endereco(), databaseReference);
+            fireBaseQuery.InsertObjectDb(enderecoModel, "Endereco", enderecoModel.getId_endereco(), databaseReference);
             cadastrarLoginUsuario(clienteModel);
         }
     }

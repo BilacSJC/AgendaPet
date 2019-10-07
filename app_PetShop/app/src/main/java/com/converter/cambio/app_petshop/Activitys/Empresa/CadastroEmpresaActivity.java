@@ -83,15 +83,17 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
                     m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
                     return;
                 }
-                cadastrarUsuario(empresaModel);
+                EnderecoModel enderecoModel = setEnderecoModel(empresaModel);
+
+                cadastrarUsuario(empresaModel, enderecoModel);
             }
         });
     }
 
-    private void cadastrarUsuario(EmpresaModel empresaModel){
+    private void cadastrarUsuario(EmpresaModel empresaModel, EnderecoModel enderecoModel){
         fireBaseQuery.InsertObjectDb(empresaModel, "Empresa", empresaModel.getEmp_id(), databaseReference);
         if(databaseReference.getDatabase() != null){
-            fireBaseQuery.InsertObjectDb(empresaModel.getEmp_endereco(), "Endereco", empresaModel.getEmp_endereco().getId_endereco(), databaseReference);
+            fireBaseQuery.InsertObjectDb(enderecoModel, "Endereco", enderecoModel.getId_endereco(), databaseReference);
             cadastrarLoginUsuario(empresaModel);
         }
     }
@@ -151,22 +153,28 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         e.setEmp_senha(edtSenha.getText().toString());
         e.setEmp_telefone(edtTelefone.getText().toString());
         e.setEmp_senha_antiga(edtSenha.getText().toString().trim());
+        e.setEmp_id_endereco(UUID.randomUUID().toString().trim());
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
         e.setEmp_data_ultima_alteracao_senha(dataFormatada);
-        e.setEmp_endereco(new EnderecoModel());
-        e.getEmp_endereco().setId_endereco(UUID.randomUUID().toString().trim());
-        e.getEmp_endereco().setId_usuario(e.getEmp_id());
-        e.getEmp_endereco().setEstado(spnEstado.getSelectedItem().toString().trim());
-        e.getEmp_endereco().setCidade(edtCidade.getText().toString().trim());
-        e.getEmp_endereco().setBairro(edtBairro.getText().toString().trim());
-        e.getEmp_endereco().setLogradouro(edtLogradouro.getText().toString().trim());
-        e.getEmp_endereco().setNumero(edtNumero.getText().toString().trim());
-        e.getEmp_endereco().setCep(edtCep.getText().toString().trim());
-        e.setEmp_endereco(e.getEmp_endereco());
+
+        return e;
+    }
+
+    private EnderecoModel setEnderecoModel(EmpresaModel empresaModel) {
+        EnderecoModel e = new EnderecoModel();
+
+        e.setId_usuario(empresaModel.getEmp_id());
+        e.setId_endereco(empresaModel.getEmp_id_endereco());
+        e.setEstado(spnEstado.getSelectedItem().toString().trim());
+        e.setCidade(edtCidade.getText().toString().trim());
+        e.setBairro(edtBairro.getText().toString().trim());
+        e.setLogradouro(edtLogradouro.getText().toString().trim());
+        e.setNumero(edtNumero.getText().toString().trim());
+        e.setCep(edtCep.getText().toString().trim());
 
         return e;
     }

@@ -11,10 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activitys.Empresa.ServicosAdd"></activity>
         <activity
             android:name=".Activitys.Empresa.HomeEmpresaActivity"
             android:label="@string/title_activity_home_empresa"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activitys.Empresa.HistoricoSolicitacoesActivity" />
         <activity android:name=".Activitys.Empresa.SobreActivity" />
         <activity android:name=".Activitys.Empresa.ServicosActivity" />

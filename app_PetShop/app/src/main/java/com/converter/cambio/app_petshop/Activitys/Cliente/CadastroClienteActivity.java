@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
@@ -35,7 +36,8 @@ import java.util.UUID;
 
 public class CadastroClienteActivity extends AppCompatActivity {
     private MaterialButton btnCadastrar;
-    private EditText edtEmail, edtNome, edtSenha, edtCpf, edtTelefone;
+    private EditText edtEmail, edtNome, edtSenha, edtCpf, edtTelefone, edtLogradouro, edtNumero, edtBairro, edtCep, edtCidade;
+    private Spinner spnEstado;
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -144,12 +146,12 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
         e.setId_usuario(clienteModel.getCli_id());
         e.setId_endereco(clienteModel.getCli_id_endereco());
-//        e.setEstado(spnEstado.getSelectedItem().toString().trim());
-//        e.setCidade(edtCidade.getText().toString().trim());
-//        e.setBairro(edtBairro.getText().toString().trim());
-//        e.setLogradouro(edtLogradouro.getText().toString().trim());
-//        e.setNumero(edtNumero.getText().toString().trim());
-//        e.setCep(edtCep.getText().toString().trim());
+        e.setEstado(spnEstado.getSelectedItem().toString().trim());
+        e.setCidade(edtCidade.getText().toString().trim());
+        e.setBairro(edtBairro.getText().toString().trim());
+        e.setLogradouro(edtLogradouro.getText().toString().trim());
+        e.setNumero(edtNumero.getText().toString().trim());
+        e.setCep(edtCep.getText().toString().trim());
 
         return e;
     }
@@ -228,6 +230,12 @@ public class CadastroClienteActivity extends AppCompatActivity {
         edtSenha = findViewById(R.id.cad_usu_ed_senha);
         edtCpf = findViewById(R.id.cad_usu_ed_cpf);
         edtTelefone = findViewById(R.id.cad_usu_ed_telefone);
+        edtLogradouro = findViewById(R.id.per_usu_edt_logradouro);
+        edtNumero = findViewById(R.id.per_usu_edt_numero);
+        edtBairro = findViewById(R.id.per_usu_edt_bairro);
+        edtCep = findViewById(R.id.per_usu_edt_cep);
+        edtCidade = findViewById(R.id.per_usu_edt_cidade);
+        spnEstado = findViewById(R.id.cad_usu_spn_estado);
         fireBaseQuery  = new FireBaseQuery();
         context = CadastroClienteActivity.this;
     }

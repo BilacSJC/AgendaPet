@@ -202,11 +202,11 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         edtTelefone = findViewById(R.id.cad_emp_edt_telefone);
         btnCadastrar = findViewById(R.id.cad_emp_btn_cadastrar);
 
-        edtCidade = findViewById(R.id.cad_emp_edt_cidade);
-        edtBairro = findViewById(R.id.cad_emp_edt_bairro);
-        edtLogradouro = findViewById(R.id.cad_emp_edt_logradouro);
-        edtNumero = findViewById(R.id.cad_emp_edt_num_residencia);
-        edtCep = findViewById(R.id.cad_emp_edt_cep);
+        edtCidade = findViewById(R.id.per_emp_edt_cidade);
+        edtBairro = findViewById(R.id.per_emp_edt_bairro);
+        edtLogradouro = findViewById(R.id.per_emp_edt_logradouro);
+        edtNumero = findViewById(R.id.per_emp_edt_numero);
+        edtCep = findViewById(R.id.per_emp_edt_cep);
         spnEstado = findViewById(R.id.cad_emp_spn_estado);
 
         context = CadastroEmpresaActivity.this;

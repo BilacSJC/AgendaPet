@@ -24,171 +24,184 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/cad_emp_edt_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/nome_empresa" />
+                android:hint="@string/nome_empresa"
+                android:inputType="textCapWords" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/cad_emp_edt_cnpj"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/cnpj" />
+                android:hint="@string/cnpj"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/cad_emp_edt_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:hint="@string/telefone" />
+                android:hint="@string/telefone"
+                android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/cad_emp_edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="@string/email" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
             app:passwordToggleEnabled="true">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/cad_emp_edt_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="@string/senha" />
+                android:hint="@string/senha"
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="22dp"
-            android:hint="@string/endereco"/>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/cad_emp_edt_logradouro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/logradouro" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/cad_emp_edt_num_residencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/num_residencia" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/cad_emp_edt_bairro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/bairro" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/cad_emp_edt_cep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/cep" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/cad_emp_edt_cidade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/cidade" />
-        </android.support.design.widget.TextInputLayout>
+            android:hint="@string/endereco"
+            android:textSize="22dp" />
 
         <Spinner
             android:id="@+id/cad_emp_spn_estado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:layout_marginHorizontal="12dp"
-            android:inputType="text"
             android:hint="@string/estado"
-            android:layout_margin="20dp">
-        </Spinner>
+            android:inputType="text"></Spinner>
 
-        <android.support.design.button.MaterialButton
-            android:id="@+id/cad_emp_btn_cadastrar"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:text="@string/cadastrar" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/per_emp_edt_cep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cep"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/per_emp_edt_logradouro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/logradouro"
+                android:inputType="textCapWords" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/per_emp_edt_numero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/num_residencia"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/per_emp_edt_bairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/bairro"
+                android:inputType="textCapWords" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/per_emp_edt_cidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cidade"
+                android:inputType="textCapWords" />
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/cad_emp_btn_cadastrar"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="20dp"
+                android:text="@string/cadastrar" />
+        </RelativeLayout>
 
     </LinearLayout>
 </ScrollView>

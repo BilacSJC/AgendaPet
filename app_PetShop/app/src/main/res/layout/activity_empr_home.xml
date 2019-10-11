@@ -14,11 +14,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_emp_home"
-        app:menu="@menu/activity_home_empresa_drawer" />
+        app:headerLayout="@layout/nav_header_home_emp"
+        app:menu="@menu/activity_empr_home_drawer" />
 
     <include
-        layout="@layout/app_bar_emp_home"
+        layout="@layout/app_bar_home_emp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

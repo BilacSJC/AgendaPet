@@ -193,7 +193,7 @@ public class LoginEmpresaActivity extends AppCompatActivity {
     }
 
     private void usuarioLogadoStartSession() {
-        Intent i = new Intent(LoginEmpresaActivity.this, HomeEmpresaActivity.class);
+        Intent i = new Intent(LoginEmpresaActivity.this, HomeEmpActivity.class);
         i.putExtra("ID_USUARIO", idUsuario);
         startActivity(i);
         finish();

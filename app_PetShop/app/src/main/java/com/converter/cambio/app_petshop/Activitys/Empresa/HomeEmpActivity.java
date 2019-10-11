@@ -1,28 +1,33 @@
-package com.converter.cambio.app_petshop.Activitys.Cliente;
+package com.converter.cambio.app_petshop.Activitys.Empresa;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.CadastroPetActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.HistoricoAgendamentosActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.LocalizaPetSopActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.PerfilActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.SobreActivity;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PaginaPrincipalActivity extends AppCompatActivity
+public class HomeEmpActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -48,7 +53,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetSopActivity.class);
+                Intent intent = new Intent(HomeEmpActivity.this, LocalizaPetSopActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
             }
@@ -66,7 +71,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     }
 
     private void inicializarFirebase() {
-        FirebaseApp.initializeApp(PaginaPrincipalActivity.this);
+        FirebaseApp.initializeApp(HomeEmpActivity.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
@@ -75,7 +80,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 
-    private void  alertDialog(String strTitle, String strMsg){
+    private void alertDialog(String strTitle, String strMsg) {
         new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
                 .setTitle(strTitle)
                 .setMessage(strMsg)
@@ -83,7 +88,8 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                    } }).show();
+                    }
+                }).show();
     }
 
     @Override
@@ -127,27 +133,27 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_agendamento) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetSopActivity.class);
+            Intent intent = new Intent(HomeEmpActivity.this, ServicosAdd.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_historico) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, HistoricoAgendamentosActivity.class);
+            Intent intent = new Intent(HomeEmpActivity.this, HistoricoAgendamentosActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_perfil) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, PerfilActivity.class);
+            Intent intent = new Intent(HomeEmpActivity.this, PerfilActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_sobre) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, SobreActivity.class);
+            Intent intent = new Intent(HomeEmpActivity.this, SobreActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
         }else if (id == R.id.nav_pet) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, CadastroPetActivity.class);
+            Intent intent = new Intent(HomeEmpActivity.this, CadastroPetActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();

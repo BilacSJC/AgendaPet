@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activitys.Empresa.ServicosActivity">
+    tools:context=".Activitys.Empresa.ServicosAdd">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Spinner
-            android:id="@+id/add_ser_spn_porte"
+            android:id="@+id/ser_spn_porte"
             android:layout_width="match_parent"
             android:layout_height="34dp"
             android:layout_margin="20dp" />
@@ -49,7 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Preço"
-                android:inputType="numberDecimal" />
+                android:text="R$ "
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout

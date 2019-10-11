@@ -16,11 +16,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ListView;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.Adapter.ListaAdapter;
+import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaginaPrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,11 +39,15 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private String idUsuario;
+    private List<AgendamentoModel> lstAgendamentoModel = new ArrayList<>();
+    private ListView lstAgendamentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cli_home);
+        lstAgendamentos = findViewById(R.id.cli_home_lst_age);
+        getExtraIdUsuario();
         DrawerLayout drawer;
 
         toolbar = findViewById(R.id.toolbar);
@@ -48,7 +61,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetSopActivity.class);
+                Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetShopActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
             }
@@ -63,6 +76,58 @@ public class PaginaPrincipalActivity extends AppCompatActivity
 
         getExtraIdUsuario();
         inicializarFirebase();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        List<AgendamentoModel> lstAgendamento = new ArrayList<>();
+        getLstAgendamentoModel();
+
+        if(lstAgendamentoModel.size() <= 0){
+            alertDialog("Atenção", "Você não possui nenhum agendamento");
+        }else{
+            atualizaLista(lstAgendamentoModel);
+        }
+
+    }
+
+    private void getLstAgendamentoModel() {
+
+        databaseReference.child("Agendamento").orderByChild("age_cli_id").equalTo(idUsuario)
+                .addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp)
+                    {
+                        for(DataSnapshot objSnp : dSnp.getChildren())
+                        {
+                            AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
+                            lstAgendamentoModel.add(a);
+                            break;
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+    }
+
+    private void atualizaLista(final List<AgendamentoModel> listAgendamentos) {
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                try{
+                    ListaAdapter filaAdapter = new ListaAdapter(listAgendamentos, PaginaPrincipalActivity.this);
+                    lstAgendamentos.setAdapter(filaAdapter);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private void inicializarFirebase() {
@@ -127,7 +192,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_agendamento) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetSopActivity.class);
+            Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetShopActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();

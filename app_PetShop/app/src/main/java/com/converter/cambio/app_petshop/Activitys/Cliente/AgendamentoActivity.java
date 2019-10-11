@@ -1,5 +1,6 @@
 package com.converter.cambio.app_petshop.Activitys.Cliente;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +14,34 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
+import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
+import com.converter.cambio.app_petshop.Controller.ValidaCampos;
+import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.R;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 public class AgendamentoActivity extends AppCompatActivity {
     private MaterialButton btnSolicitar, btnLimpar;
-    private EditText edNomePet, edRacaPet, edNomeUsuario, edTelefone;
+    private EditText edtNomePet, edtRacaPet, edtNomeUsuario, edtTelefone;
     private TextView txtCusto;
     private TextView txtNomeEmpresa;
     private Spinner spnPortePet;
     private String idUsuario;
+
+    private Context context;
+
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private FireBaseQuery fireBaseQuery;
+
+    private MetodosPadraoController m = new MetodosPadraoController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +53,110 @@ public class AgendamentoActivity extends AppCompatActivity {
         eventosClick();
     }
 
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(context);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }
+
     private void eventosClick() {
         btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edRacaPet.setText("");
-                edNomeUsuario.setText("");
-                edTelefone.setText("");
-                edNomePet.setText("");
+                edtRacaPet.setText("");
+                edtNomeUsuario.setText("");
+                edtTelefone.setText("");
+                edtNomePet.setText("");
             }
         });
 
         btnSolicitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                AgendamentoModel agendamentoModel = validaCampos();
+
+                if(agendamentoModel.getAge_id() == null){
+                    m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
+                    return;
+                }
+                cadastrarAgendamento(agendamentoModel);
+                
                 Intent intent = new Intent(AgendamentoActivity.this, PaginaPrincipalActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    private void cadastrarAgendamento(AgendamentoModel agendamentoModel) {
+        fireBaseQuery.InsertObjectDb(agendamentoModel, "Agendamento", agendamentoModel.getAge_id(), databaseReference);
+    }
+
+    private AgendamentoModel validaCampos() {
+        AgendamentoModel a = new AgendamentoModel();
+        ValidaCampos v = new ValidaCampos();
+
+        String strMensagemNome = v.vString(edtNomePet.getText().toString());
+        String strMensagemTelefone = v.vStringTelefone(edtTelefone.getText().toString());
+        String strMensagemCpf = v.vStringCpf(edtNomeUsuario.getText().toString());
+        String strMensagemSenha = v.vStringSenha(edtRacaPet.getText().toString());
+
+        int contMsg = 0;
+
+        if(!strMensagemNome.equals("ok")){
+            edtNomePet.setError(strMensagemNome);
+            contMsg += 1;
+        }
+        if(!strMensagemCpf.equals("ok")){
+            edtTelefone.setError(strMensagemNome);
+            contMsg += 1;
+        }
+        if(!strMensagemTelefone.equals("ok")){
+            edtNomeUsuario.setError(strMensagemNome);
+            contMsg += 1;
+        }
+        if(!strMensagemSenha.equals("ok")){
+            edtRacaPet.setError(strMensagemNome);
+            contMsg += 1;
+        }
+
+        if(contMsg > 0){
+            return new AgendamentoModel();
+        }
+
+        a.setAge_id(UUID.randomUUID().toString());
+        a.setAge_cli_id(idUsuario);
+        a.setAge_data(edtTelefone.getText().toString().trim());
+        a.setAge_empresa_id(getEmpresaId());
+        a.setAge_pet_id(getPetId());
+        a.setAge_status("Aguardando Atendimeto");
+
+        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
+        Date data = new Date();
+        String dataFormatada = formataData.format(data);
+
+        a.setAge_data(dataFormatada);
+        a.setAge_hora("15:00");
+
+        return a;
+    }
+
+    private String getPetId() {
+        String idPet = "";
+
+        //Fazer Select e preencher os pets do usuario...para pegar o ID
+
+        return idPet;
+    }
+
+    private String getEmpresaId() {
+        String idEmp = "";
+
+        //Fazer Select e preencher as empresas...para pegar o ID
+
+        return idEmp;
     }
 
     private void configuraNavBar() {
@@ -77,7 +181,7 @@ public class AgendamentoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(AgendamentoActivity.this, LocalizaPetSopActivity.class);
+                Intent intent = new Intent(AgendamentoActivity.this, LocalizaPetShopActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
@@ -90,13 +194,15 @@ public class AgendamentoActivity extends AppCompatActivity {
     private void inicializaCampos() {
         btnSolicitar = findViewById(R.id.age_btn_solicitar);
         btnLimpar = findViewById(R.id.age_btn_limpar);
-        edNomePet = findViewById(R.id.age_nome_pet);
+        edtNomePet = findViewById(R.id.age_nome_pet);
         spnPortePet = findViewById(R.id.age_porte_pet);
-        edRacaPet = findViewById(R.id.age_raca_pet);
-        edNomeUsuario = findViewById(R.id.age_txt_nome_usuario);
-        edTelefone = findViewById(R.id.age_txt_telefone);
+        edtRacaPet = findViewById(R.id.age_raca_pet);
+        edtNomeUsuario = findViewById(R.id.age_txt_nome_usuario);
+        edtTelefone = findViewById(R.id.age_txt_telefone);
         txtCusto = findViewById(R.id.age_txt_custo);
         txtNomeEmpresa = findViewById(R.id.age_txt_nome_empresa);
+
+        context = AgendamentoActivity.this;
     }
 
     private void getExtraIdUsuario() {

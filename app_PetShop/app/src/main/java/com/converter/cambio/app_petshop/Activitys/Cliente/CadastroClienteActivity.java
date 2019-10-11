@@ -11,11 +11,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
+import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
@@ -32,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class CadastroClienteActivity extends AppCompatActivity {
@@ -44,6 +47,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
     private FireBaseQuery fireBaseQuery;
     private MetodosPadraoController m = new MetodosPadraoController();
     private Context context;
+    private GeradorListSpinnerController geradorListSpinnerController = new GeradorListSpinnerController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cli_cadastro);
         inicializaComponentes();
         configuraNavBar();
+        preencheSpinnerEstados();
 
         inicializarFirebase();
         eventoClicks();
@@ -193,6 +198,12 @@ public class CadastroClienteActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } }).show();
+    }
+
+    private void preencheSpinnerEstados() {
+        List<String> lsEstados = geradorListSpinnerController.getLstEstados();
+        ArrayAdapter<String> estado = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, lsEstados);
+        spnEstado.setAdapter(estado);
     }
 
     private void limparCampos() {

@@ -58,6 +58,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
 
     private void inicializaCampos() {
         lstAgendamentos = (ListView) findViewById(R.id.lstSolicitacoes);
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 
     private void configuraNavBar() {

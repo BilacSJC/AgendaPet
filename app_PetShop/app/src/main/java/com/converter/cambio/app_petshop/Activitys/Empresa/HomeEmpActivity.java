@@ -16,12 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.converter.cambio.app_petshop.Activitys.Cliente.CadastroPetActivity;
-import com.converter.cambio.app_petshop.Activitys.Cliente.HistoricoAgendamentosActivity;
-import com.converter.cambio.app_petshop.Activitys.Cliente.LocalizaPetSopActivity;
-import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
-import com.converter.cambio.app_petshop.Activitys.Cliente.PerfilActivity;
-import com.converter.cambio.app_petshop.Activitys.Cliente.SobreActivity;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +33,7 @@ public class HomeEmpActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cli_home);
+        setContentView(R.layout.activity_emp_home);
         DrawerLayout drawer;
 
         toolbar = findViewById(R.id.toolbar);
@@ -53,7 +47,7 @@ public class HomeEmpActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent intent = new Intent(HomeEmpActivity.this, LocalizaPetSopActivity.class);
+                Intent intent = new Intent(HomeEmpActivity.this, ServicosAdd.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
             }
@@ -105,7 +99,7 @@ public class HomeEmpActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_cli, menu);
+        getMenuInflater().inflate(R.menu.home_emp, menu);
         return true;
     }
 
@@ -132,28 +126,23 @@ public class HomeEmpActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_agendamento) {
-            Intent intent = new Intent(HomeEmpActivity.this, ServicosAdd.class);
+        } else if (id == R.id.nav_emp_home) {
+            Intent intent = new Intent(HomeEmpActivity.this, HomeEmpActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_historico) {
-            Intent intent = new Intent(HomeEmpActivity.this, HistoricoAgendamentosActivity.class);
+        } else if (id == R.id.nav_emp_lst_servicos) {
+            Intent intent = new Intent(HomeEmpActivity.this, ServicosActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_perfil) {
-            Intent intent = new Intent(HomeEmpActivity.this, PerfilActivity.class);
-            intent.putExtra("ID_USUARIO", idUsuario);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_sobre) {
+        } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(HomeEmpActivity.this, SobreActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        }else if (id == R.id.nav_pet) {
-            Intent intent = new Intent(HomeEmpActivity.this, CadastroPetActivity.class);
+        }else if (id == R.id.nav_emp_add_servicos) {
+            Intent intent = new Intent(HomeEmpActivity.this, ServicosAdd.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();

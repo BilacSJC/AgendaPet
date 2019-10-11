@@ -27,7 +27,7 @@
         <activity android:name=".Activitys.Cliente.ResetSenhaActivity" />
         <activity android:name=".Activitys.Cliente.HistoricoAgendamentosActivity" />
         <activity android:name=".Activitys.Cliente.PerfilActivity" />
-        <activity android:name=".Activitys.Cliente.LocalizaPetSopActivity" />
+        <activity android:name=".Activitys.Cliente.LocalizaPetShopActivity" />
         <activity android:name=".Activitys.Cliente.SobreActivity" />
         <activity android:name=".Activitys.Cliente.CadastroClienteActivity" />
         <activity android:name=".Activitys.Cliente.AgendamentoActivity" />

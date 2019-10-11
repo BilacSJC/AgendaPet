@@ -5,10 +5,13 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.converter.cambio.app_petshop.Activitys.Cliente.CadastroClienteActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
+import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
@@ -18,16 +21,20 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ServicosAdd extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private FireBaseQuery fireBaseQuery;
+    private FireBaseQuery fireBaseQuery = new FireBaseQuery();
     private ValidaCampos v = new ValidaCampos();
     private MetodosPadraoController m = new MetodosPadraoController();
+    private GeradorListSpinnerController geraSpinner = new GeradorListSpinnerController();
 
+    private Spinner spnPorte;
     private EditText edtNome, edtPreco;
     private MaterialButton btnCadastrar;
     private String idUsuario;
@@ -89,7 +96,7 @@ public class ServicosAdd extends AppCompatActivity {
             servicoModel.setSer_id(UUID.randomUUID().toString().trim());
             servicoModel.setSer_emp_id(idUsuario);
             servicoModel.setSer_nome(edtNome.getText().toString().trim());
-            servicoModel.setSer_preco(edtPreco.getText().toString().trim());
+            servicoModel.setSer_preco("R$ " + edtPreco.getText().toString().trim() + ",00");
 
             return servicoModel;
         }
@@ -97,8 +104,17 @@ public class ServicosAdd extends AppCompatActivity {
     }
 
     private void inicializaCampos() {
-        edtNome = findViewById(R.id.ser_emp_preco);
+        edtNome = findViewById(R.id.ser_emp_nome);
         edtPreco = findViewById(R.id.ser_emp_preco);
         btnCadastrar = findViewById(R.id.btn_add_servico);
+        spnPorte = findViewById(R.id.ser_spn_porte);
+
+
+        List<String> lstEstados = new ArrayList<>();
+        lstEstados = geraSpinner.getLstPorte();
+        ArrayAdapter<String> estados = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, lstEstados);
+        spnPorte.setAdapter(estados);
+
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

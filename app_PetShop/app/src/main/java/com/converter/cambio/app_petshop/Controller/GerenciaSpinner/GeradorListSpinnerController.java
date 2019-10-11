@@ -8,7 +8,7 @@ public class GeradorListSpinnerController {
     public List<String> getLstEstados() {
         List<String> lstEstados = new ArrayList<>();
 
-        lstEstados.add("Selecione Estado");
+        lstEstados.add("Selecione um estado");
         lstEstados.add("AC - Acre");
         lstEstados.add("AL - Alagoas");
         lstEstados.add("AP - Amapá");
@@ -43,7 +43,7 @@ public class GeradorListSpinnerController {
     public List<String> getLstSexo() {
         List<String> lstSexo = new ArrayList<>();
 
-        lstSexo.add("Selecione sexo");
+        lstSexo.add("Selecione o sexo");
         lstSexo.add("Macho");
         lstSexo.add("Fêmea");
 
@@ -54,7 +54,7 @@ public class GeradorListSpinnerController {
     public List<String> getLstPorte() {
         List<String> lstPorte = new ArrayList<>();
 
-        lstPorte.add("Selecione porte");
+        lstPorte.add("Selecione um porte");
         lstPorte.add("Pequeno");
         lstPorte.add("Médio");
         lstPorte.add("Grande");

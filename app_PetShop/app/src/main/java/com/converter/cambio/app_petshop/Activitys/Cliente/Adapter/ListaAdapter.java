@@ -19,7 +19,7 @@ public class ListaAdapter extends BaseAdapter {
     private Context context;
 
     ImageView imgFotoLista;
-    TextView txtNome, txtDocumento, txtQuadraLote, txtEndereco, txtQualificadorUsuarioLista;
+    TextView txt_age_emp_nome, txt_age_ser_preco, txt_age_ser_nome_pet, txt_age_data, txt_age_hora, txt_age_status;
 
     public ListaAdapter(List<AgendamentoModel> lista, Context context)
     {
@@ -54,23 +54,25 @@ public class ListaAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.lst_agendamento, null);
 
-        txtNome = (TextView) view.findViewById(R.id.txtNomeLista);
-        txtDocumento = (TextView) view.findViewById(R.id.txtDocumentoLista);
-        txtQuadraLote = (TextView) view.findViewById(R.id.txtQuadraLoteLista);
-        txtEndereco = (TextView) view.findViewById(R.id.txtEnderecoLista);
-        txtQualificadorUsuarioLista = (TextView) view.findViewById(R.id.txtQualificadorUsuarioLista);
+        txt_age_emp_nome = (TextView) view.findViewById(R.id.txt_age_emp_nome);
+        txt_age_ser_preco = (TextView) view.findViewById(R.id.txt_age_ser_preco);
+        txt_age_ser_nome_pet = (TextView) view.findViewById(R.id.txt_age_ser_nome_pet);
+        txt_age_data = (TextView) view.findViewById(R.id.txt_age_data);
+        txt_age_hora = (TextView) view.findViewById(R.id.txt_age_hora);
+        txt_age_status = (TextView) view.findViewById(R.id.txt_age_status);
 
         setaCampos(usuarioModelLista);
 
         return view;
     }
 
-    private void setaCampos(AgendamentoModel usuario){
+    private void setaCampos(AgendamentoModel agendamentoModel){
 
-//        txtQualificadorUsuarioLista.setText(usuario.getStrQualificador1().trim());
-//        txtNome.setText("Nome: " + usuario.getStrNome().trim());
-//        txtDocumento.setText("RG.: " + usuario.getStrDocumento().trim());
-//        txtQuadraLote.setText("Quara/Lote: " + usuario.getStrQuadra().trim() +  "/" + usuario.getStrLote().trim());
-//        txtEndereco.setText("Endereço: " + usuario.getStrMatricula().trim());
+        txt_age_emp_nome.setText("Empresa: " + agendamentoModel.getAge_empresa_id().trim());
+        txt_age_ser_preco.setText("Serviço: " + agendamentoModel.getAge_empresa_id().trim());
+        txt_age_ser_nome_pet.setText("Pet: " + agendamentoModel.getAge_pet_id().trim());
+        txt_age_data.setText("Data: " + agendamentoModel.getAge_data().trim());
+        txt_age_hora.setText("Hora: " + agendamentoModel.getAge_hora().trim());
+        txt_age_status.setText("Status: " + agendamentoModel.getAge_status().trim());
     }
 }

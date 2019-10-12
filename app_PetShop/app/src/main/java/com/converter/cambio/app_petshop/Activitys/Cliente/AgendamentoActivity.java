@@ -34,12 +34,14 @@ public class AgendamentoActivity extends AppCompatActivity {
     private TextView txtNomeEmpresa;
     private Spinner spnPortePet;
     private String idUsuario;
+    private String idEmpresa;
+    private  String servico;
 
     private Context context;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private FireBaseQuery fireBaseQuery;
+    private FireBaseQuery fireBaseQuery = new FireBaseQuery();
 
     private MetodosPadraoController m = new MetodosPadraoController();
 
@@ -48,8 +50,9 @@ public class AgendamentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cli_agendamento);
         inicializaCampos();
-        configuraNavBar();
         getExtraIdUsuario();
+        inicializarFirebase();
+        configuraNavBar();
         eventosClick();
     }
 
@@ -100,8 +103,8 @@ public class AgendamentoActivity extends AppCompatActivity {
 
         String strMensagemNome = v.vString(edtNomePet.getText().toString());
         String strMensagemTelefone = v.vStringTelefone(edtTelefone.getText().toString());
-        String strMensagemCpf = v.vStringCpf(edtNomeUsuario.getText().toString());
-        String strMensagemSenha = v.vStringSenha(edtRacaPet.getText().toString());
+        String strMensagemCpf = v.vString(edtNomeUsuario.getText().toString());
+        String strMensagemSenha = v.vString(edtRacaPet.getText().toString());
 
         int contMsg = 0;
 
@@ -129,9 +132,9 @@ public class AgendamentoActivity extends AppCompatActivity {
         a.setAge_id(UUID.randomUUID().toString());
         a.setAge_cli_id(idUsuario);
         a.setAge_data(edtTelefone.getText().toString().trim());
-        a.setAge_empresa_id(getEmpresaId());
+        a.setAge_empresa_id(idEmpresa);
         a.setAge_pet_id(getPetId());
-        a.setAge_status("Aguardando Atendimeto");
+        a.setAge_status("Aguardando Atendimento");
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         Date data = new Date();
@@ -149,14 +152,6 @@ public class AgendamentoActivity extends AppCompatActivity {
         //Fazer Select e preencher os pets do usuario...para pegar o ID
 
         return idPet;
-    }
-
-    private String getEmpresaId() {
-        String idEmp = "";
-
-        //Fazer Select e preencher as empresas...para pegar o ID
-
-        return idEmp;
     }
 
     private void configuraNavBar() {
@@ -207,5 +202,7 @@ public class AgendamentoActivity extends AppCompatActivity {
 
     private void getExtraIdUsuario() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
+        idEmpresa = getIntent().getStringExtra("ID_EMPRESA");
+        servico = getIntent().getStringExtra("SERVICO");
     }
 }

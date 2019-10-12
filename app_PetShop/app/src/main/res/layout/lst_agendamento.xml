@@ -7,7 +7,7 @@
     android:layout_margin="15dp"
     card_view:cardCornerRadius="10dp"
     card_view:cardElevation="1dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,36 +26,49 @@
                 android:textColor="@color/cinzaClaro"/>
 
 
-                <TextView
-                    android:id="@+id/txtNomeLista"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Nome:"
-                    android:textAlignment="textStart" />
+            <TextView
+                android:id="@+id/txt_age_emp_nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Empresa: "
+                android:textAlignment="textStart" />
 
                 <TextView
-                    android:id="@+id/txtDocumentoLista"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RG::"
-                    android:textAlignment="textStart" />
+            android:id="@+id/txt_age_ser_preco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Serviço: "
+            android:textAlignment="textStart" />
+            <TextView
+                android:id="@+id/txt_age_ser_nome_pet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pet: "
+                android:textAlignment="textStart" />
 
                 <TextView
-                    android:id="@+id/txtQuadraLoteLista"
+                    android:id="@+id/txt_age_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Quadra/Lote:"
+                    android:text="Data: "
                     android:textAlignment="textStart" />
-
                 <TextView
-                    android:id="@+id/txtEnderecoLista"
+                    android:id="@+id/txt_age_hora"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Endereço:"
+                    android:text="Hora: "
+                    android:textAlignment="textStart" />
+                <TextView
+                    android:id="@+id/txt_age_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Status: "
                     android:textAlignment="textStart" />
 
 

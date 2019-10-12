@@ -76,21 +76,17 @@ public class PaginaPrincipalActivity extends AppCompatActivity
 
         getExtraIdUsuario();
         inicializarFirebase();
+
+        List<AgendamentoModel> lstAgendamento = new ArrayList<>();
+        getLstAgendamentoModel();
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        List<AgendamentoModel> lstAgendamento = new ArrayList<>();
-        getLstAgendamentoModel();
-
-        if(lstAgendamentoModel.size() <= 0){
-            alertDialog("Atenção", "Você não possui nenhum agendamento");
-        }else{
-            atualizaLista(lstAgendamentoModel);
-        }
-
+        
     }
 
     private void getLstAgendamentoModel() {
@@ -100,11 +96,18 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                     @Override
                     public void onDataChange(DataSnapshot dSnp)
                     {
+                        List<AgendamentoModel> lstVazia = new ArrayList<>();
+                        lstAgendamentoModel = lstVazia;
                         for(DataSnapshot objSnp : dSnp.getChildren())
                         {
                             AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
                             lstAgendamentoModel.add(a);
-                            break;
+                        }
+
+                        if(lstAgendamentoModel.size() <= 0){
+                            alertDialog("Atenção", "Você não possui nenhum agendamento");
+                        }else{
+                            atualizaLista(lstAgendamentoModel);
                         }
                     }
                     @Override

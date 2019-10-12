@@ -55,7 +55,7 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emp_cadastro_teste);
+        setContentView(R.layout.activity_emp_cadastro);
         inicializarComponentes();
         inicializarFirebase();
         preencheSpinnerEstados();

@@ -15,7 +15,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home_emp"
-        app:menu="@menu/activity_empr_home_drawer" />
+        app:menu="@menu/activity_emp_home_drawer" />
 
     <include
         layout="@layout/app_bar_home_emp"

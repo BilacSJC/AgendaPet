@@ -164,7 +164,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_cli, menu);
+        getMenuInflater().inflate(R.menu.home_cli, menu);
         return true;
     }
 

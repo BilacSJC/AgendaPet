@@ -28,6 +28,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <include layout="@layout/content_home_emp" />
+    <include layout="@layout/content_emp_home" />
 
 </android.support.design.widget.CoordinatorLayout>

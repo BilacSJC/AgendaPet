@@ -13,59 +13,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/emp_home_lst_age"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/txtQualificadorUsuarioLista"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:text="Serviço"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtNomeLista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Nome:"
-                android:textAlignment="textStart" />
-
-            <TextView
-                android:id="@+id/txtDocumentoLista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RG::"
-                android:textAlignment="textStart" />
-
-            <TextView
-                android:id="@+id/txtQuadraLoteLista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Quadra/Lote:"
-                android:textAlignment="textStart" />
-
-            <TextView
-                android:id="@+id/txtEnderecoLista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Endereço:"
-                android:textAlignment="textStart" />
-
-        </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

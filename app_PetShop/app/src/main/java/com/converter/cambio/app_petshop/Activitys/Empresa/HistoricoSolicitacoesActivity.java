@@ -121,7 +121,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
             public void run() {
 
                 try{
-                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(lstAgendamentos, HistoricoSolicitacoesActivity.this);
+                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, lstAgendamentos, HistoricoSolicitacoesActivity.this);
                     HistoricoSolicitacoesActivity.this.lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){

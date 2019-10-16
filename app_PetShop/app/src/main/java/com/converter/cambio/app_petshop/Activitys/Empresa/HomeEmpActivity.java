@@ -15,11 +15,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.Adapter.ListaAdapter;
+import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
+import com.converter.cambio.app_petshop.Activitys.Empresa.Adapter.ListaAdapterSolicitacoes;
+import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeEmpActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,11 +40,15 @@ public class HomeEmpActivity extends AppCompatActivity
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private String idUsuario;
+    private List<AgendamentoModel> lstAgendamentoModel = new ArrayList<>();
+    private ListView lstAgendamentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_home);
+        lstAgendamentos = findViewById(R.id.emp_home_lst_age);
+        getExtraIdUsuario();
         DrawerLayout drawer;
 
         toolbar = findViewById(R.id.toolbar);
@@ -62,6 +77,61 @@ public class HomeEmpActivity extends AppCompatActivity
 
         getExtraIdUsuario();
         inicializarFirebase();
+
+        List<AgendamentoModel> lstAgendamento = new ArrayList<>();
+        getLstAgendamentoModel();
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    private void getLstAgendamentoModel() {
+
+        databaseReference.child("Agendamento").orderByChild("age_emp_id").equalTo(idUsuario)
+                .addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp)
+                    {
+                        List<AgendamentoModel> lstVazia = new ArrayList<>();
+                        lstAgendamentoModel = lstVazia;
+                        for(DataSnapshot objSnp : dSnp.getChildren())
+                        {
+                            AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
+                            lstAgendamentoModel.add(a);
+                        }
+
+                        if(lstAgendamentoModel.size() <= 0){
+                            alertDialog("Atenção", "Você não possui nenhum agendamento");
+                        }else{
+                            atualizaLista(lstAgendamentoModel);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+    }
+
+    private void atualizaLista(final List<AgendamentoModel> listAgendamentos) {
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                try{
+                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, listAgendamentos, HomeEmpActivity.this);
+                    lstAgendamentos.setAdapter(filaAdapter);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private void inicializarFirebase() {

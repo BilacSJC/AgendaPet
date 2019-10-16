@@ -27,7 +27,7 @@
 
 
         <TextView
-            android:id="@+id/txtNome"
+            android:id="@+id/lst_sol_txtNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,23 +35,31 @@
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/txt_data_age"
+            android:id="@+id/lst_sol_txtTelefone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Data:"
+            android:text="Telefone:"
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/txtx_hora_age"
+            android:id="@+id/lst_sol_txt_data_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Hora:"
+            android:text="Data solicitada:"
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/txtStatus"
+            android:id="@+id/lst_sol_txt_hora_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hora solicitada:"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/lst_sol_txtStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,10 +67,22 @@
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/txt_nome_pet"
+            android:id="@+id/lst_sol_txt_nome_pet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nome Pet:" />
+
+        <TextView
+            android:id="@+id/lst_sol_txt_porte_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Porte Pet:" />
+
+        <TextView
+            android:id="@+id/lst_sol_txt_raca_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Raça do Pet:" />
 
         <LinearLayout
             android:layout_width="match_parent"

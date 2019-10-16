@@ -126,11 +126,6 @@ public class HomeEmpActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_emp_home) {
-            Intent intent = new Intent(HomeEmpActivity.this, HomeEmpActivity.class);
-            intent.putExtra("ID_USUARIO", idUsuario);
-            startActivity(intent);
-            finish();
         } else if (id == R.id.nav_emp_lst_servicos) {
             Intent intent = new Intent(HomeEmpActivity.this, ServicosActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);

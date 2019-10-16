@@ -18,10 +18,18 @@ import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.AgendamentoModel;
+import com.converter.cambio.app_petshop.Model.ClienteModel;
+import com.converter.cambio.app_petshop.Model.EmpresaModel;
+import com.converter.cambio.app_petshop.Model.EnderecoModel;
+import com.converter.cambio.app_petshop.Model.PetModel;
+import com.converter.cambio.app_petshop.Model.ServicoEmpresaModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,13 +37,10 @@ import java.util.UUID;
 
 public class AgendamentoActivity extends AppCompatActivity {
     private MaterialButton btnSolicitar, btnLimpar;
-    private EditText edtNomePet, edtRacaPet, edtNomeUsuario, edtTelefone;
-    private TextView txtCusto;
-    private TextView txtNomeEmpresa;
-    private Spinner spnPortePet;
-    private String idUsuario;
-    private String idEmpresa;
-    private  String servico;
+    private EditText edtData, edtHora;
+    private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtNomeCliente, txtTelefoneCliente;
+    private Spinner spnPet;
+    private String idUsuario, idEmpresa, idPet, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
 
     private Context context;
 
@@ -49,9 +54,9 @@ public class AgendamentoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cli_agendamento);
-        inicializaCampos();
-        getExtraIdUsuario();
         inicializarFirebase();
+        getExtraIdUsuario();
+        inicializaCampos();
         configuraNavBar();
         eventosClick();
     }
@@ -66,10 +71,9 @@ public class AgendamentoActivity extends AppCompatActivity {
         btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtRacaPet.setText("");
-                edtNomeUsuario.setText("");
-                edtTelefone.setText("");
-                edtNomePet.setText("");
+                edtData.setText("");
+                edtHora.setText("");
+                spnPet.setSelection(0);
             }
         });
 
@@ -101,27 +105,22 @@ public class AgendamentoActivity extends AppCompatActivity {
         AgendamentoModel a = new AgendamentoModel();
         ValidaCampos v = new ValidaCampos();
 
-        String strMensagemNome = v.vString(edtNomePet.getText().toString());
-        String strMensagemTelefone = v.vStringTelefone(edtTelefone.getText().toString());
-        String strMensagemCpf = v.vString(edtNomeUsuario.getText().toString());
-        String strMensagemSenha = v.vString(edtRacaPet.getText().toString());
+        String strMensagemData = v.vStringData(edtData.getText().toString().toString());
+        String strMensagemHora = v.vStringHora(edtHora.getText().toString().toString());
+        int intPositionSelected = spnPet.getSelectedItemPosition();
 
         int contMsg = 0;
 
-        if(!strMensagemNome.equals("ok")){
-            edtNomePet.setError(strMensagemNome);
+//        if(intPositionSelected <= 0){
+//            m.alertDialog(context,"ATENÇÃO!", "Selecione um pet");
+//            contMsg = 1;
+//        }
+        if(!strMensagemData.equals("ok")){
+            edtData.setError(strMensagemData);
             contMsg += 1;
         }
-        if(!strMensagemCpf.equals("ok")){
-            edtTelefone.setError(strMensagemNome);
-            contMsg += 1;
-        }
-        if(!strMensagemTelefone.equals("ok")){
-            edtNomeUsuario.setError(strMensagemNome);
-            contMsg += 1;
-        }
-        if(!strMensagemSenha.equals("ok")){
-            edtRacaPet.setError(strMensagemNome);
+        if(!strMensagemHora.equals("ok")){
+            edtHora.setError(strMensagemHora);
             contMsg += 1;
         }
 
@@ -131,17 +130,19 @@ public class AgendamentoActivity extends AppCompatActivity {
 
         a.setAge_id(UUID.randomUUID().toString());
         a.setAge_cli_id(idUsuario);
-        a.setAge_data(edtTelefone.getText().toString().trim());
-        a.setAge_empresa_id(idEmpresa);
-        a.setAge_pet_id(getPetId());
+        a.setAge_data_solicitada(edtData.getText().toString().trim());
+        a.setAge_hora_solicitada(edtHora.getText().toString().trim());
+        a.setAge_emp_id(idEmpresa);
+        a.setAge_pet_id(idPet);
         a.setAge_status("Aguardando Atendimento");
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
-        a.setAge_data(dataFormatada);
-        a.setAge_hora("15:00");
+        a.setAge_data_cad(dataFormatada);
+        a.setAge_hora_cad("20:42");
+
 
         return a;
     }
@@ -189,20 +190,82 @@ public class AgendamentoActivity extends AppCompatActivity {
     private void inicializaCampos() {
         btnSolicitar = findViewById(R.id.age_btn_solicitar);
         btnLimpar = findViewById(R.id.age_btn_limpar);
-        edtNomePet = findViewById(R.id.age_nome_pet);
-        spnPortePet = findViewById(R.id.age_porte_pet);
-        edtRacaPet = findViewById(R.id.age_raca_pet);
-        edtNomeUsuario = findViewById(R.id.age_txt_nome_usuario);
-        edtTelefone = findViewById(R.id.age_txt_telefone);
-        txtCusto = findViewById(R.id.age_txt_custo);
-        txtNomeEmpresa = findViewById(R.id.age_txt_nome_empresa);
+
+        spnPet = findViewById(R.id.age_cli_spn_pet);
+
+        edtData = findViewById(R.id.age_cli_edt_data);
+        edtHora = findViewById(R.id.age_cli_edt_hora);
+
+        txtNomeEmpresa = findViewById(R.id.age_cli_txt_nome_empresa);
+        txtEnderecoEmpresa = findViewById(R.id.age_cli_txt_endereco_empresa);
+        txtServico = findViewById(R.id.age_cli_txt_servico);
+        txtNomeCliente = findViewById(R.id.age_cli_txt_nome_cliente);
+        txtTelefoneCliente = findViewById(R.id.age_cli_txt_telefone_cliente);
 
         context = AgendamentoActivity.this;
+        txtServico.setText("Serviço: "+ strServico);
+        getEmpresaNome();
+        getCliDados();
+        getEmpresaEndereco();
     }
 
     private void getExtraIdUsuario() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
         idEmpresa = getIntent().getStringExtra("ID_EMPRESA");
-        servico = getIntent().getStringExtra("SERVICO");
+        strServico = getIntent().getStringExtra("SERVICO");
+
+    }
+
+    private void getCliDados() {
+        databaseReference.child("Cliente").orderByChild("cli_id").equalTo(idUsuario)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp) {
+                        for (DataSnapshot objSnp : dSnp.getChildren()) {
+                            ClienteModel c = objSnp.getValue(ClienteModel.class);
+                            strCliNome = c.getCli_nome().trim();
+                            strCliTelefone = c.getCli_telefone();
+                            txtNomeCliente.setText("Nome: "+ strCliNome);
+                            txtTelefoneCliente.setText("Telefone: "+ strCliTelefone);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+    }
+
+    private void getEmpresaNome() {
+        databaseReference.child("Empresa").orderByChild("emp_id").equalTo(idEmpresa)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp) {
+                        for (DataSnapshot objSnp : dSnp.getChildren()) {
+                            EmpresaModel e = objSnp.getValue(EmpresaModel.class);
+                            strEmpNome = e.getEmp_nome().trim();
+                            txtNomeEmpresa.setText("Empresa: "+ strEmpNome);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+    }
+
+    private void getEmpresaEndereco() {
+        databaseReference.child("Endereco").orderByChild("id_usuario").equalTo(idEmpresa)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp) {
+                        for (DataSnapshot objSnp : dSnp.getChildren()) {
+                            EnderecoModel e = objSnp.getValue(EnderecoModel.class);
+                            strEmpEnd = e.getBairro() + " " +e.getNumero() + " " + e.getCidade() + "-" + e.getEstado();
+                            txtEnderecoEmpresa.setText("Endereço da empresa: "+ strEmpEnd);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
     }
 }

@@ -1,15 +1,15 @@
 package com.converter.cambio.app_petshop.Model;
 
-import android.provider.ContactsContract;
-
 public class AgendamentoModel {
     private String age_id;
-    private String age_data;
-    private String age_hora;
+    private String age_data_cad;
+    private String age_hora_cad;
+    private String age_data_solicitada;
+    private String age_hora_solicitada;
     private String age_status;
     private String age_cli_id;
     private String age_pet_id;
-    private String age_empresa_id;
+    private String age_emp_id;
 
     public String getAge_id() {
         return age_id;
@@ -19,20 +19,36 @@ public class AgendamentoModel {
         this.age_id = age_id;
     }
 
-    public String getAge_data() {
-        return age_data;
+    public String getAge_data_cad() {
+        return age_data_cad;
     }
 
-    public void setAge_data(String age_data) {
-        this.age_data = age_data;
+    public void setAge_data_cad(String age_data_cad) {
+        this.age_data_cad = age_data_cad;
     }
 
-    public String getAge_hora() {
-        return age_hora;
+    public String getAge_hora_cad() {
+        return age_hora_cad;
     }
 
-    public void setAge_hora(String age_hora) {
-        this.age_hora = age_hora;
+    public void setAge_hora_cad(String age_hora_cad) {
+        this.age_hora_cad = age_hora_cad;
+    }
+
+    public String getAge_data_solicitada() {
+        return age_data_solicitada;
+    }
+
+    public void setAge_data_solicitada(String age_data_solicitada) {
+        this.age_data_solicitada = age_data_solicitada;
+    }
+
+    public String getAge_hora_solicitada() {
+        return age_hora_solicitada;
+    }
+
+    public void setAge_hora_solicitada(String age_hora_solicitada) {
+        this.age_hora_solicitada = age_hora_solicitada;
     }
 
     public String getAge_status() {
@@ -59,11 +75,11 @@ public class AgendamentoModel {
         this.age_pet_id = age_pet_id;
     }
 
-    public String getAge_empresa_id() {
-        return age_empresa_id;
+    public String getAge_emp_id() {
+        return age_emp_id;
     }
 
-    public void setAge_empresa_id(String age_empresa_id) {
-        this.age_empresa_id = age_empresa_id;
+    public void setAge_emp_id(String age_emp_id) {
+        this.age_emp_id = age_emp_id;
     }
 }

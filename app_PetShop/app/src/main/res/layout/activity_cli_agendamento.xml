@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Activitys.Cliente.LoginClienteActivity">
+    tools:context=".Activitys.Cliente.AgendamentoActivity">
 
 
     <LinearLayout
@@ -18,86 +18,93 @@
             android:src="@drawable/banho" />
 
         <TextView
-            android:id="@+id/age_txt_nome_empresa"
+            android:id="@+id/age_cli_txt_nome_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:hint="Empresa: PetShop Brasil"
-            android:layout_margin="8dp"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Nome Cliente"
+            android:textSize="22dp" />
 
         <TextView
-            android:id="@+id/age_txt_custo"
+            android:id="@+id/age_cli_txt_telefone_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:hint="Custo do Serviço: R$35,00"
-            android:layout_margin="8dp"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:hint="Telefone Cliente"
+            android:textSize="22dp" />
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <TextView
+            android:id="@+id/age_cli_txt_nome_empresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Nome Empresa"
+            android:textSize="22dp" />
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/age_txt_nome_usuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/nome" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <TextView
+            android:id="@+id/age_cli_txt_endereco_empresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Endereço Empresa"
+            android:textSize="22dp" />
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/age_txt_telefone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/telefone" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <TextView
+            android:id="@+id/age_cli_txt_servico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/age_nome_pet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nome do Pet" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/age_raca_pet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Raça do Pet" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Serviço"
+            android:textSize="22dp" />
 
         <Spinner
-            android:id="@+id/age_porte_pet"
+            android:id="@+id/age_cli_spn_pet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:layout_marginHorizontal="12dp"
-            android:inputType="text"
-            android:hint="Porte"
-            android:layout_margin="20dp">
-        </Spinner>
+            android:hint="@string/pet"
+            android:inputType="text"></Spinner>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/age_cli_edt_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data"
+                android:inputType="datetime"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/age_cli_edt_hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hora"
+                android:inputType="time"/>
+        </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

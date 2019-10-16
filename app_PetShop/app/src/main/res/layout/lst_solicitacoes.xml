@@ -27,7 +27,7 @@
 
 
         <TextView
-            android:id="@+id/txtNomeLista"
+            android:id="@+id/txtNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,28 +35,56 @@
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/txtDocumentoLista"
+            android:id="@+id/txt_data_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RG::"
+            android:text="Data:"
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/txtQuadraLoteLista"
+            android:id="@+id/txtx_hora_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Quadra/Lote:"
+            android:text="Hora:"
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/txtEnderecoLista"
+            android:id="@+id/txtStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Endereço:"
+            android:text="Status:"
             android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/txt_nome_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome Pet:" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_remarcar"
+                android:layout_width="190dp"
+                android:layout_height="38dp"
+                android:text="REMARCAR"
+                card_view:backgroundTint="#F0C908" />
+
+            <Button
+                android:id="@+id/btn_Confirmar"
+                android:layout_width="190dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:text="Confirmar"
+                card_view:backgroundTint="#40B444" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

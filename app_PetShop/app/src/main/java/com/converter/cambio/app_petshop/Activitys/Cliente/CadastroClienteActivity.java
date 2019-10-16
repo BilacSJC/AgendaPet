@@ -85,6 +85,12 @@ public class CadastroClienteActivity extends AppCompatActivity {
                     return;
                 }
                 EnderecoModel enderecoModel = setEnderecoModel(clienteModel);
+
+                if(enderecoModel.getId_endereco() == null){
+                    m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
+                    return;
+                }
+
                 cadastrarUsuario(clienteModel, enderecoModel);
             }
         });
@@ -148,6 +154,45 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
     private EnderecoModel setEnderecoModel(ClienteModel clienteModel) {
         EnderecoModel e = new EnderecoModel();
+        ValidaCampos v = new ValidaCampos();
+
+        String strMensagemCep = v.vString(edtCep.getText().toString());
+        String strMensagemCidade = v.vStringTelefone(edtCidade.getText().toString());
+        String strMensagemNumero = v.vStringCpf(edtNumero.getText().toString());
+        String strMensagemLogradouro = v.vStringSenha(edtLogradouro.getText().toString());
+        int intPositionSelected = spnEstado.getSelectedItemPosition();
+        String strMensagemBairro = v.vStringEmail(edtBairro.getText().toString());
+
+        int contMsg = 0;
+
+        if(intPositionSelected <= 0){
+            m.alertDialog(context, "ATENÇÃO", "Selecione um estado");
+            contMsg += 1;
+        }
+        if(!strMensagemCep.equals("ok")){
+            edtCep.setError(strMensagemCep);
+            contMsg += 1;
+        }
+        if(!strMensagemCidade.equals("ok")){
+            edtCidade.setError(strMensagemCidade);
+            contMsg += 1;
+        }
+        if(!strMensagemNumero.equals("ok")){
+            edtNumero.setError(strMensagemNumero);
+            contMsg += 1;
+        }
+        if(!strMensagemLogradouro.equals("ok")){
+            edtLogradouro.setError(strMensagemLogradouro);
+            contMsg += 1;
+        }
+        if(!strMensagemBairro.equals("ok")){
+            edtBairro.setError(strMensagemBairro);
+            contMsg += 1;
+        }
+
+        if(contMsg > 0){
+            return new EnderecoModel();
+        }
 
         e.setId_usuario(clienteModel.getCli_id());
         e.setId_endereco(clienteModel.getCli_id_endereco());

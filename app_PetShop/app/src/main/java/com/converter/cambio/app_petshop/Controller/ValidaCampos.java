@@ -130,4 +130,31 @@ public class ValidaCampos {
         }
         return true;
     }
+
+    public String vStringData(String strData) {
+        if(strData.equals("")){
+            return "Selecione uma Data";
+        }
+
+        SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date();
+        String format = formatData.format(data);
+        int dSol = Integer.valueOf(format.substring(0,2));
+        int dStr = Integer.valueOf(strData.substring(0,2));
+        if(dStr - dSol < 0){
+            return "Data inválida, Selecione a partir de hoje";
+        }
+
+        return "ok";
+    }
+
+    public String vStringHora(String strHora) {
+        if(strHora.equals("")){
+            return "Selecione um horário";
+        }
+
+
+
+        return "ok";
+    }
 }

@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,17 +30,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class AgendamentoActivity extends AppCompatActivity {
     private MaterialButton btnSolicitar, btnLimpar;
     private EditText edtData, edtHora;
     private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtNomeCliente, txtTelefoneCliente;
-    private Spinner spnPet;
+    private Spinner spnNomePet, spnPet;
+    private List<String> lstPet = new ArrayList<>();
+    private ArrayAdapter<String> arrayAdapterPet;
     private String idUsuario, idEmpresa, idPet, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
 
     private Context context;
@@ -185,6 +191,30 @@ public class AgendamentoActivity extends AppCompatActivity {
             default:break;
         }
         return true;
+    }
+
+    private void preencheSpinnerNomePet() {
+        Query query;
+        query = databaseReference.child("Pet").orderByChild("pet_cli_id").equalTo(idUsuario);
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lstPet.clear();
+
+                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    PetModel p = objSnapshot.getValue(PetModel.class);
+                    lstPet.add(p.getPet_nome());
+                }
+                arrayAdapterPet = new ArrayAdapter<>(AgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
+                spnNomePet.setAdapter(arrayAdapterPet);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void inicializaCampos() {

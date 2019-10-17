@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Activitys.Cliente.AgendamentoActivity">
 
 
@@ -18,7 +18,7 @@
             android:src="@drawable/banho" />
 
         <TextView
-            android:id="@+id/age_cli_txt_nome_cliente"
+            android:id="@+id/alt_age_cli_txt_nome_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -28,7 +28,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/age_cli_txt_telefone_cliente"
+            android:id="@+id/alt_age_cli_txt_telefone_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -38,7 +38,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/age_cli_txt_nome_empresa"
+            android:id="@+id/alt_age_cli_txt_nome_empresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -48,7 +48,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/age_cli_txt_endereco_empresa"
+            android:id="@+id/alt_age_cli_txt_endereco_empresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -58,7 +58,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/age_cli_txt_servico"
+            android:id="@+id/alt_age_cli_txt_servico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -68,7 +68,7 @@
             android:textSize="18dp" />
 
         <Spinner
-            android:id="@+id/age_cli_spn_pet"
+            android:id="@+id/alt_age_cli_spn_pet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -84,11 +84,11 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/age_cli_edt_data"
+                android:id="@+id/alt_age_cli_edt_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Data"
-                android:inputType="datetime"/>
+                android:inputType="datetime" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Hora"
-                android:inputType="time"/>
+                android:inputType="time" />
         </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
@@ -111,28 +111,25 @@
             android:layout_height="wrap_content">
 
             <android.support.design.button.MaterialButton
-                android:id="@+id/age_btn_solicitar"
+                android:id="@+id/alt_age_btn_alterar"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:text="@string/agendar"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                style="@style/Widget.MaterialComponents.Button"/>
+                android:layout_marginHorizontal="20dp"
+                android:text="@string/alterar" />
 
             <android.support.design.button.MaterialButton
-                android:id="@+id/age_btn_limpar"
+                android:id="@+id/alt_age_btn_limpar"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:layout_marginRight="12dp"
-                android:layout_toStartOf="@id/age_btn_solicitar"
-                android:layout_toLeftOf="@id/age_btn_solicitar"
-                android:text="@string/limpar"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                android:layout_toStartOf="@id/alt_age_btn_alterar"
+                android:layout_toLeftOf="@id/alt_age_btn_alterar"
+                android:text="@string/limpar" />
         </RelativeLayout>
-
-
     </LinearLayout>
-
 </ScrollView>

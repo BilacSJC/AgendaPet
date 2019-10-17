@@ -65,6 +65,7 @@ public class AgendamentoActivity extends AppCompatActivity {
         inicializaCampos();
         configuraNavBar();
         eventosClick();
+        preencheSpinnerNomePet();
     }
 
     private void inicializarFirebase() {

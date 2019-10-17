@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Activitys.Empresa.ServicosActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_nome_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Nome Cliente"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_telefone_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Telefone Cliente"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_nome_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Nome Pet"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_raca_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Raça Pet"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_sexo_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Sexo Pet"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_porte_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Porte Pet"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_data_agenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Data Agenda"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_hora_agenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Hora Agenda"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vis_sol_emp_txt_custo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Custo Serviço"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+</ScrollView>

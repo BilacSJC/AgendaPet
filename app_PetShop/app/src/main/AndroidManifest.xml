@@ -10,10 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activitys.Empresa.VisualizarSolicitacaoActivity"></activity>
+        <activity android:name=".Activitys.Cliente.AlterarAgendamentoActivity" />
         <activity
             android:name=".Activitys.Empresa.HomeEmpActivity"
             android:label="@string/title_activity_home_emp"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activitys.Empresa.ServicosAdd" />
         <activity android:name=".Activitys.Empresa.HistoricoSolicitacoesActivity" />
         <activity android:name=".Activitys.Empresa.SobreActivity" />

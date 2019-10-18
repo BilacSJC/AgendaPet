@@ -3,11 +3,11 @@ package com.converter.cambio.app_petshop.Activitys.Cliente;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -38,8 +38,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class AgendamentoActivity extends AppCompatActivity {
-    private MaterialButton btnSolicitar, btnLimpar;
+public class AlterarAgendamentoActivity extends AppCompatActivity {
+
+    private MaterialButton btnAlterar, btnLimpar;
     private EditText edtData, edtHora;
     private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtNomeCliente, txtTelefoneCliente;
     private Spinner spnNomePet, spnPet;
@@ -58,13 +59,14 @@ public class AgendamentoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cli_agendamento);
+        setContentView(R.layout.activity_cli_alterar_agendamento);
         inicializarFirebase();
         getExtraIdUsuario();
         inicializaCampos();
         configuraNavBar();
         eventosClick();
         preencheSpinnerNomePet();
+
     }
 
     private void inicializarFirebase() {
@@ -83,19 +85,19 @@ public class AgendamentoActivity extends AppCompatActivity {
             }
         });
 
-        btnSolicitar.setOnClickListener(new View.OnClickListener() {
+        btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 AgendamentoModel agendamentoModel = validaCampos();
 
-                if(agendamentoModel.getAge_id() == null){
-                    m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
+                if (agendamentoModel.getAge_id() == null) {
+                    m.alertDialog(context, "ATENCÃO", "Preencha todos os campos.");
                     return;
                 }
                 cadastrarAgendamento(agendamentoModel);
-                
-                Intent intent = new Intent(AgendamentoActivity.this, PaginaPrincipalActivity.class);
+
+                Intent intent = new Intent(AlterarAgendamentoActivity.this, PaginaPrincipalActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
@@ -121,16 +123,16 @@ public class AgendamentoActivity extends AppCompatActivity {
 //            m.alertDialog(context,"ATENÇÃO!", "Selecione um pet");
 //            contMsg = 1;
 //        }
-        if(!strMensagemData.equals("ok")){
+        if (!strMensagemData.equals("ok")) {
             edtData.setError(strMensagemData);
             contMsg += 1;
         }
-        if(!strMensagemHora.equals("ok")){
+        if (!strMensagemHora.equals("ok")) {
             edtHora.setError(strMensagemHora);
             contMsg += 1;
         }
 
-        if(contMsg > 0){
+        if (contMsg > 0) {
             return new AgendamentoModel();
         }
 
@@ -168,7 +170,7 @@ public class AgendamentoActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true); //habilita click
     }
 
-    private void  alertDialog(String strTitle, String strMsg){
+    private void alertDialog(String strTitle, String strMsg) {
         new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
                 .setTitle(strTitle)
                 .setMessage(strMsg)
@@ -176,19 +178,21 @@ public class AgendamentoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                    } }).show();
+                    }
+                }).show();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(AgendamentoActivity.this, LocalizaPetShopActivity.class);
+                Intent intent = new Intent(AlterarAgendamentoActivity.this, LocalizaPetShopActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;
-            default:break;
+            default:
+                break;
         }
         return true;
     }
@@ -202,11 +206,11 @@ public class AgendamentoActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 lstPet.clear();
 
-                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     PetModel p = objSnapshot.getValue(PetModel.class);
                     lstPet.add(p.getPet_nome());
                 }
-                arrayAdapterPet = new ArrayAdapter<>(AgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
+                arrayAdapterPet = new ArrayAdapter<>(AlterarAgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
                 spnNomePet.setAdapter(arrayAdapterPet);
             }
 
@@ -218,7 +222,7 @@ public class AgendamentoActivity extends AppCompatActivity {
     }
 
     private void inicializaCampos() {
-        btnSolicitar = findViewById(R.id.alt_age_btn_alterar);
+        btnAlterar = findViewById(R.id.alt_age_btn_alterar);
         btnLimpar = findViewById(R.id.alt_age_btn_limpar);
 
         spnPet = findViewById(R.id.alt_age_cli_spn_pet);
@@ -232,8 +236,8 @@ public class AgendamentoActivity extends AppCompatActivity {
         txtNomeCliente = findViewById(R.id.alt_age_cli_txt_nome_cliente);
         txtTelefoneCliente = findViewById(R.id.alt_age_cli_txt_telefone_cliente);
 
-        context = AgendamentoActivity.this;
-        txtServico.setText("Serviço: "+ strServico);
+        context = AlterarAgendamentoActivity.this;
+        txtServico.setText("Serviço: " + strServico);
         getEmpresaNome();
         getCliDados();
         getEmpresaEndereco();
@@ -255,13 +259,14 @@ public class AgendamentoActivity extends AppCompatActivity {
                             ClienteModel c = objSnp.getValue(ClienteModel.class);
                             strCliNome = c.getCli_nome().trim();
                             strCliTelefone = c.getCli_telefone();
-                            txtNomeCliente.setText("Nome: "+ strCliNome);
-                            txtTelefoneCliente.setText("Telefone: "+ strCliTelefone);
+                            txtNomeCliente.setText("Nome: " + strCliNome);
+                            txtTelefoneCliente.setText("Telefone: " + strCliTelefone);
                         }
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {}
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
                 });
     }
 
@@ -273,12 +278,13 @@ public class AgendamentoActivity extends AppCompatActivity {
                         for (DataSnapshot objSnp : dSnp.getChildren()) {
                             EmpresaModel e = objSnp.getValue(EmpresaModel.class);
                             strEmpNome = e.getEmp_nome().trim();
-                            txtNomeEmpresa.setText("Empresa: "+ strEmpNome);
+                            txtNomeEmpresa.setText("Empresa: " + strEmpNome);
                         }
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {}
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
                 });
     }
 
@@ -289,13 +295,15 @@ public class AgendamentoActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dSnp) {
                         for (DataSnapshot objSnp : dSnp.getChildren()) {
                             EnderecoModel e = objSnp.getValue(EnderecoModel.class);
-                            strEmpEnd = e.getBairro() + " " +e.getNumero() + " " + e.getCidade() + "-" + e.getEstado();
-                            txtEnderecoEmpresa.setText("Endereço da empresa: "+ strEmpEnd);
+                            strEmpEnd = e.getBairro() + " " + e.getNumero() + " " + e.getCidade() + "-" + e.getEstado();
+                            txtEnderecoEmpresa.setText("Endereço da empresa: " + strEmpEnd);
                         }
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {}
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
                 });
     }
 }
+

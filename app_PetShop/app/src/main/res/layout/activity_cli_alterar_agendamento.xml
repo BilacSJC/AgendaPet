@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".Activitys.Cliente.AgendamentoActivity">
+    tools:context=".Activitys.Cliente.AlterarAgendamentoActivity">
 
 
     <LinearLayout
@@ -99,7 +99,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/age_cli_edt_hora"
+                android:id="@+id/alt_age_cli_edt_hora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Hora"

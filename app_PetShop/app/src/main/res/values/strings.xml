@@ -40,6 +40,8 @@
     <string name="cpf">CPF</string>
     <string name="cnpj">CNPJ</string>
     <string name="ver_solicitacao">Visualizar Solicitação</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="remarcar">Remarcar</string>
 
 
     //Tabelas do Banco de Dados

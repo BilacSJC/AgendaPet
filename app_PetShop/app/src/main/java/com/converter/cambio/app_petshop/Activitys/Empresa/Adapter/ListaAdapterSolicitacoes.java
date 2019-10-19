@@ -35,16 +35,12 @@ import java.util.List;
 
         TextView txt_sol_cli_nome, txt_sol_telefone, txt_sol_ser_nome_pet, txt_sol_data, txt_sol_hora, txt_sol_status;
 
-        public ListaAdapterSolicitacoes(String idUsuario, List<AgendamentoModel> lista, Context context)
+        public ListaAdapterSolicitacoes(String idUsuario, String idPet, List<AgendamentoModel> lista, Context context)
         {
             this.idUsuario = idUsuario;
+            this.idPet = idPet;
             this.lstAgendamentos = lista;
             this.context = context;
-
-            FirebaseApp.initializeApp(context);
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            databaseReference = firebaseDatabase.getReference();
-
         }
 
         public List<AgendamentoModel> getLista(){
@@ -81,6 +77,9 @@ import java.util.List;
             txt_sol_hora = (TextView) view.findViewById(R.id.lst_sol_txt_hora_age);
             txt_sol_status = (TextView) view.findViewById(R.id.lst_sol_txtStatus);
 
+            FirebaseApp.initializeApp(context);
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            databaseReference = firebaseDatabase.getReference();
 
             getEmpresaNome();
             getPetNome();
@@ -91,9 +90,6 @@ import java.util.List;
         }
 
         private void setaCampos(AgendamentoModel agendamentoModel){
-
-
-
             txt_sol_data.setText("Data: " + agendamentoModel.getAge_data_solicitada().trim());
             txt_sol_hora.setText("Hora: " + agendamentoModel.getAge_hora_solicitada().trim());
             txt_sol_status.setText("Status: " + agendamentoModel.getAge_status().trim());
@@ -125,7 +121,7 @@ import java.util.List;
                                 ServicoEmpresaModel p = objSnp.getValue(ServicoEmpresaModel.class);
                                 servicoPreco = p.getSer_preco().trim();
                                 servicoNome = p.getSer_nome().trim();
-                                txt_sol_telefone.setText("Serviço: " + servicoNome + " " + servicoPreco);
+                                txt_sol_telefone.setText("Serviço: " + servicoNome.trim() + " " + servicoPreco.trim());
                             }
                         }
 
@@ -142,7 +138,7 @@ import java.util.List;
                             for (DataSnapshot objSnp : dSnp.getChildren()) {
                                 EmpresaModel p = objSnp.getValue(EmpresaModel.class);
                                 empresaNome = p.getEmp_nome().trim();
-                                txt_sol_cli_nome.setText("Empresa: " + empresaNome);
+                                txt_sol_cli_nome.setText("Nome: " + empresaNome.trim());
                             }
                         }
 

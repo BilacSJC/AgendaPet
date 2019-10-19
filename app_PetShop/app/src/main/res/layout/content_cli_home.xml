@@ -15,6 +15,7 @@
 
     <ListView
         android:id="@+id/cli_home_lst_age"
+        android:paddingTop="45dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

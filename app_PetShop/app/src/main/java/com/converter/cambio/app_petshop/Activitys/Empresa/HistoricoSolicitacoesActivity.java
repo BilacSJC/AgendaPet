@@ -37,7 +37,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     private Date data = new Date();
     
     private MetodosPadraoController m = new MetodosPadraoController();
-    private String idUsuario;
+    private String idUsuario, idPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +103,8 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
                     {
                         for(DataSnapshot objSnp : dSnp.getChildren())
                         {
-                            AgendamentoModel c = objSnp.getValue(AgendamentoModel.class);
-                            
+                            AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
+                            idPet = a.getAge_pet_id();
                             break;
                         }
                     }
@@ -121,7 +121,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
             public void run() {
 
                 try{
-                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, lstAgendamentos, HistoricoSolicitacoesActivity.this);
+                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, idPet, lstAgendamentos, HistoricoSolicitacoesActivity.this);
                     HistoricoSolicitacoesActivity.this.lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){

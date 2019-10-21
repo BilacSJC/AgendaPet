@@ -202,24 +202,44 @@ public class HomeEmpActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
+        if (id == R.id.nav_emp_home) {
+            Intent intent = new Intent(HomeEmpActivity.this, HomeEmpActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_emp_solicitacoes)  {
+            Intent intent = new Intent(HomeEmpActivity.this, VisualizarSolicitacaoActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_emp_historico) {
+            Intent intent = new Intent(HomeEmpActivity.this, HistoricoSolicitacoesActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_emp_lst_servicos) {
             Intent intent = new Intent(HomeEmpActivity.this, ServicosActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_slideshow) {
-            Intent intent = new Intent(HomeEmpActivity.this, SobreActivity.class);
-            intent.putExtra("ID_USUARIO", idUsuario);
-            startActivity(intent);
-            finish();
-        }else if (id == R.id.nav_emp_add_servicos) {
+        } else if (id == R.id.nav_emp_add_servicos) {
             Intent intent = new Intent(HomeEmpActivity.this, ServicosAdd.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        }else if (id == R.id.nav_sair) {
+        } else if (id == R.id.nav_emp_perfil) {
+            Intent intent = new Intent(HomeEmpActivity.this, PerfilActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_emp_sobre) {
+            Intent intent = new Intent(HomeEmpActivity.this, SobreActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_emp_sair) {
+            Intent intent = new Intent(HomeEmpActivity.this, LoginEmpresaActivity.class);
+            startActivity(intent);
             finish();
         }
 

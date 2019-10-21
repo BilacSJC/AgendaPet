@@ -5,25 +5,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_emp_perfil"
-            android:icon="@drawable/ic_perfil_azul"
+            android:id="@+id/nav_emp_home"
+            android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_emp_solicitacoes"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Listar Serviços" />
+            android:icon="@drawable/ic_agenda"
+            android:title="@string/menu_solicitacoes" />
+        <item
+            android:id="@+id/nav_emp_historico"
+            android:icon="@drawable/ic_historico"
+            android:title="@string/menu_historico" />
         <item
             android:id="@+id/nav_emp_lst_servicos"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Listar Serviços" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:icon="@drawable/ic_lista_servicos"
+            android:title="menu_lst_servicos" />
         <item
             android:id="@+id/nav_emp_add_servicos"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Adicionar Serviço" />
+            android:icon="@drawable/ic_servicos"
+            android:title="menu_add_servico" />
+        <item
+            android:id="@+id/nav_emp_perfil"
+            android:icon="@drawable/ic_perfil"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_emp_sobre"
+            android:icon="@drawable/ic_info"
+            android:title="@string/menu_sobre" />
+        <item
+            android:id="@+id/nav_emp_sair"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/menu_sair" />
     </group>
 
 

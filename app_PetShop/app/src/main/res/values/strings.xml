@@ -13,6 +13,9 @@
     <string name="app_name">Agenda Pet</string>
     <string name="menu_home">Home</string>
     <string name="menu_historico">Histórico</string>
+    <string name="menu_solicitacoes">Solicitações</string>
+    <string name="menu_lst_servicos">Listar Serviços</string>
+    <string name="menu_add_servico">Adicionar Serviço</string>
     <string name="menu_perfil">Perfil</string>
     <string name="menu_sobre">Sobre</string>
     <string name="menu_sair">Sair</string>
@@ -55,15 +58,9 @@
     <string name="raca">Raça</string>
     <string name="idade">Idade</string>
 
-
     <string name="title_activity_home_empresa">HomeEmpresaActivity</string>
-
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
     <string name="title_activity_home_emp">HomeEmpActivity</string>
+
     <string-array name="lista_pet_sexo">
         <item>Macho</item>
         <item>Fêmea</item>

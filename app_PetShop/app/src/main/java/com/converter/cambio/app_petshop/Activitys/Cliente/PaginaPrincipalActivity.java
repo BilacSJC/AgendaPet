@@ -199,34 +199,39 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_agendamento) {
+        if (id == R.id.nav_cli_home) {
+            Intent intent = new Intent(PaginaPrincipalActivity.this, PaginaPrincipalActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_cli_agendamento) {
             Intent intent = new Intent(PaginaPrincipalActivity.this, LocalizaPetShopActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_historico) {
+        } else if (id == R.id.nav_cli_historico) {
             Intent intent = new Intent(PaginaPrincipalActivity.this, HistoricoAgendamentosActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_perfil) {
+        } else if (id == R.id.nav_cli_perfil) {
             Intent intent = new Intent(PaginaPrincipalActivity.this, PerfilActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_sobre) {
+        } else if (id == R.id.nav_cli_sobre) {
             Intent intent = new Intent(PaginaPrincipalActivity.this, SobreActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        }else if (id == R.id.nav_pet) {
+        }else if (id == R.id.nav_cli_pet) {
             Intent intent = new Intent(PaginaPrincipalActivity.this, CadastroPetActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        }else if (id == R.id.nav_sair) {
+        }else if (id == R.id.nav_cli_sair) {
+            Intent intent = new Intent(PaginaPrincipalActivity.this, LoginClienteActivity.class);
+            startActivity(intent);
             finish();
         }
 

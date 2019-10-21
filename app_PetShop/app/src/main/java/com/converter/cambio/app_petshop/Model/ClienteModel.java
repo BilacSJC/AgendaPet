@@ -1,7 +1,7 @@
 package com.converter.cambio.app_petshop.Model;
 
 public class ClienteModel{
-    private  String cli_id;
+    private String cli_id;
     private String cli_cpf;
     private String cli_nome;
     private String cli_telefone;

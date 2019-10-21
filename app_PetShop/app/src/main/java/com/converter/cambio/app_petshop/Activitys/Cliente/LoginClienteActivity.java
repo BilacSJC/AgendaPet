@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.converter.cambio.app_petshop.Activitys.TipoLoginActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
@@ -51,7 +54,29 @@ public class LoginClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cli_login);
         inicializaComponentes();
         inicializarFirebase();
+        configuraNavBar();
         eventosClick();
+    }
+
+    private void configuraNavBar() {
+        setTitle("Login");
+        ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
+        actionBar.setDisplayHomeAsUpEnabled(true); //exibe o icone
+        actionBar.setHomeButtonEnabled(true); //habilita click
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(LoginClienteActivity.this, TipoLoginActivity.class);
+                startActivity(intent);
+                // finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override

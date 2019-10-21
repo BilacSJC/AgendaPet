@@ -36,8 +36,8 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
-        edtEmail = (EditText) findViewById(R.id.per_usu_edt_email);
-        edtNome = (EditText) findViewById(R.id.per_usu_edt_nome);
+        edtEmail = findViewById(R.id.per_usu_edt_email);
+        edtNome = findViewById(R.id.per_usu_edt_nome);
     }
 
     @Override
@@ -84,7 +84,8 @@ public class PerfilActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
-            default:break;
+            default:
+                break;
         }
         return true;
     }

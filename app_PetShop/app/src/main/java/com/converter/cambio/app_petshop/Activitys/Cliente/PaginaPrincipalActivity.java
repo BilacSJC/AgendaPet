@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -49,6 +50,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         lstAgendamentos = findViewById(R.id.cli_home_lst_age);
         getExtraIdUsuario();
         DrawerLayout drawer;
+        configuraNavBar();
 
         toolbar = findViewById(R.id.toolbar);
         fab = findViewById(R.id.fab);
@@ -81,6 +83,11 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         getLstAgendamentoModel();
 
 
+    }
+
+    private void configuraNavBar() {
+        setTitle("Home");
+        ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,7 @@ public class HomeEmpActivity extends AppCompatActivity
         lstAgendamentos = findViewById(R.id.emp_home_lst_age);
         getExtraIdUsuario();
         DrawerLayout drawer;
+        configuraNavBar();
 
         toolbar = findViewById(R.id.toolbar);
         fab = findViewById(R.id.fab);
@@ -82,6 +84,11 @@ public class HomeEmpActivity extends AppCompatActivity
         getLstAgendamentoModel();
 
 
+    }
+
+    private void configuraNavBar() {
+        setTitle("Home");
+        ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
     }
 
     @Override

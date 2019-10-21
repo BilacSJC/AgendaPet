@@ -1,11 +1,14 @@
 package com.converter.cambio.app_petshop.Activitys.Cliente;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,7 +32,29 @@ public class ResetSenhaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cli_reset_senha);
 
         inicalizaComponentes();
+        configuraNavBar();
         eventosClick();
+    }
+
+    private void configuraNavBar() {
+        setTitle("Reset Senha");
+        ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
+        actionBar.setDisplayHomeAsUpEnabled(true); //exibe o icone
+        actionBar.setHomeButtonEnabled(true); //habilita click
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ResetSenhaActivity.this, LoginClienteActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     private void eventosClick() {

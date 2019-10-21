@@ -122,7 +122,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_emp_edt_cep"
+                android:id="@+id/cad_emp_edt_cep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cep"
@@ -137,7 +137,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_emp_edt_logradouro"
+                android:id="@+id/cad_emp_edt_logradouro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/logradouro"
@@ -152,7 +152,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_emp_edt_numero"
+                android:id="@+id/cad_emp_edt_numero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/num_residencia"
@@ -167,7 +167,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_emp_edt_bairro"
+                android:id="@+id/cad_emp_edt_bairro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/bairro"
@@ -182,7 +182,7 @@
             android:layout_marginVertical="10dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/per_emp_edt_cidade"
+                android:id="@+id/cad_emp_edt_cidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cidade"

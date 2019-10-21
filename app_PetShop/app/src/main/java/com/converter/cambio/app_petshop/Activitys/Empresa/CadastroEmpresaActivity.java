@@ -5,14 +5,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.button.MaterialButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.PerfilActivity;
+import com.converter.cambio.app_petshop.Activitys.TipoLoginActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
@@ -39,7 +45,7 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
 
     private EditText edtNome, edtEmail, edtCnpj, edtTelefone, edtSenha;
     private EditText edtCidade, edtBairro, edtLogradouro, edtNumero, edtCep;
-    private Button btnCadastrar;
+    private MaterialButton btnCadastrar;
     private Spinner spnEstado;
 
     private FirebaseDatabase firebaseDatabase;
@@ -59,8 +65,31 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emp_cadastro);
         inicializarComponentes();
         inicializarFirebase();
+        configuraNavBar();
         preencheSpinnerEstados();
         eventosClick();
+    }
+
+    private void configuraNavBar() {
+        setTitle("Cadastro de Usuário");
+        ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
+        actionBar.setDisplayHomeAsUpEnabled(true); //exibe o icone
+        actionBar.setHomeButtonEnabled(true); //habilita click
+    }
+
+    //Para inserir a ação e selecionar para qual página voltar...
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(CadastroEmpresaActivity.this, LoginEmpresaActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     private void preencheSpinnerEstados() {
@@ -80,14 +109,14 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EmpresaModel empresaModel = validacaoInputUsuario();
-                if(empresaModel.getEmp_id() == null){
-                    m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
+                if (empresaModel.getEmp_id() == null) {
+                    m.alertDialog(context, "ATENCÃO", "Preencha todos os campos.");
                     return;
                 }
                 EnderecoModel enderecoModel = setEnderecoModel(empresaModel);
 
-                if(enderecoModel.getId_endereco() == null){
-                    m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
+                if (enderecoModel.getId_endereco() == null) {
+                    m.alertDialog(context, "ATENCÃO", "Preencha todos os campos.");
                     return;
                 }
 
@@ -96,29 +125,29 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         });
     }
 
-    private void cadastrarUsuario(EmpresaModel empresaModel, EnderecoModel enderecoModel){
+    private void cadastrarUsuario(EmpresaModel empresaModel, EnderecoModel enderecoModel) {
         fireBaseQuery.InsertObjectDb(empresaModel, "Empresa", empresaModel.getEmp_id(), databaseReference);
-        if(databaseReference.getDatabase() != null){
+        if (databaseReference.getDatabase() != null) {
             fireBaseQuery.InsertObjectDb(enderecoModel, "Endereco", enderecoModel.getId_endereco(), databaseReference);
             cadastrarLoginUsuario(empresaModel);
         }
     }
 
-    private void cadastrarLoginUsuario(final EmpresaModel empresaModel){
+    private void cadastrarLoginUsuario(final EmpresaModel empresaModel) {
         auth.createUserWithEmailAndPassword(empresaModel.getEmp_email(), empresaModel.getEmp_senha())
-            .addOnCompleteListener(CadastroEmpresaActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    // task retorna o status da autenticação
-                    if(task.isSuccessful()){
-                        limparCampos();
-                        alertDialogBackToLogin("Sucesso!","Usuário cadastrado com sucesso!");
-                    }else{
-                        m.alertToast(context,"Erro ao cadastrar. Tente novamente.");
-                    }
-                }
-            }
-        );
+                .addOnCompleteListener(CadastroEmpresaActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                // task retorna o status da autenticação
+                                if (task.isSuccessful()) {
+                                    limparCampos();
+                                    alertDialogBackToLogin("Sucesso!", "Usuário cadastrado com sucesso!");
+                                } else {
+                                    m.alertToast(context, "Erro ao cadastrar. Tente novamente.");
+                                }
+                            }
+                        }
+                );
     }
 
     private EmpresaModel validacaoInputUsuario() {
@@ -136,21 +165,53 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         boolean booCep = v.validacaoBasicaStr(edtCep.getText().toString().trim());
         int contMsg = 0;
 
-        if(!strMsgEstado.equals("ok")){
+        if (!strMsgEstado.equals("ok")) {
             m.alertDialog(CadastroEmpresaActivity.this, "ATENÇÃO!", "Selecione um Estado.");
         }
-        if(!booCidade){ edtCidade.setError("Campo Obrigatório"); contMsg=+1; }
-        if(!booBairro){ edtBairro.setError("Campo Obrigatório"); contMsg=+1; }
-        if(!booLogradouro){ edtLogradouro.setError("Campo Obrigatório"); contMsg=+1; }
-        if(!booNumero){ edtNumero.setError("Campo Obrigatório"); contMsg=+1; }
-        if(!booCep){ edtCep.setError("Campo Obrigatório"); contMsg=+1; }
-        if(!strMsgNome.equals("ok")) { edtNome.setError(strMsgNome); contMsg=+1; }
-        if(!strMsgCnpj.equals("ok")) { edtCnpj.setError(strMsgCnpj); contMsg=+1; }
-        if(!strMsgTelefone.equals("ok")) { edtTelefone.setError(strMsgTelefone); contMsg=+1; }
-        if(!strMsgEmail.equals("ok")) { edtEmail.setError(strMsgEmail); contMsg=+1; }
-        if(!strMsgSenha.equals("ok")) { edtSenha.setError(strMsgSenha); contMsg=+1; }
+        if (!booCidade) {
+            edtCidade.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!booBairro) {
+            edtBairro.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!booLogradouro) {
+            edtLogradouro.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!booNumero) {
+            edtNumero.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!booCep) {
+            edtCep.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!strMsgNome.equals("ok")) {
+            edtNome.setError(strMsgNome);
+            contMsg = +1;
+        }
+        if (!strMsgCnpj.equals("ok")) {
+            edtCnpj.setError(strMsgCnpj);
+            contMsg = +1;
+        }
+        if (!strMsgTelefone.equals("ok")) {
+            edtTelefone.setError(strMsgTelefone);
+            contMsg = +1;
+        }
+        if (!strMsgEmail.equals("ok")) {
+            edtEmail.setError(strMsgEmail);
+            contMsg = +1;
+        }
+        if (!strMsgSenha.equals("ok")) {
+            edtSenha.setError(strMsgSenha);
+            contMsg = +1;
+        }
 
-        if(contMsg > 0) { return new EmpresaModel();}
+        if (contMsg > 0) {
+            return new EmpresaModel();
+        }
 
         e.setEmp_id(String.valueOf(UUID.randomUUID()));
         e.setEmp_nome(edtNome.getText().toString());
@@ -183,32 +244,32 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
 
         int contMsg = 0;
 
-        if(intPositionSelected <= 0){
+        if (intPositionSelected <= 0) {
             m.alertDialog(context, "ATENÇÃO", "Selecione um estado");
             contMsg += 1;
         }
-        if(!strMensagemCep.equals("ok")){
+        if (!strMensagemCep.equals("ok")) {
             edtCep.setError(strMensagemCep);
             contMsg += 1;
         }
-        if(!strMensagemCidade.equals("ok")){
+        if (!strMensagemCidade.equals("ok")) {
             edtCidade.setError(strMensagemCidade);
             contMsg += 1;
         }
-        if(!strMensagemNumero.equals("ok")){
+        if (!strMensagemNumero.equals("ok")) {
             edtNumero.setError(strMensagemNumero);
             contMsg += 1;
         }
-        if(!strMensagemLogradouro.equals("ok")){
+        if (!strMensagemLogradouro.equals("ok")) {
             edtLogradouro.setError(strMensagemLogradouro);
             contMsg += 1;
         }
-        if(!strMensagemBairro.equals("ok")){
+        if (!strMensagemBairro.equals("ok")) {
             edtBairro.setError(strMensagemBairro);
             contMsg += 1;
         }
 
-        if(contMsg > 0){
+        if (contMsg > 0) {
             return new EnderecoModel();
         }
 
@@ -247,11 +308,11 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         edtTelefone = findViewById(R.id.cad_emp_edt_telefone);
         btnCadastrar = findViewById(R.id.cad_emp_btn_cadastrar);
 
-        edtCidade = findViewById(R.id.per_emp_edt_cidade);
-        edtBairro = findViewById(R.id.per_emp_edt_bairro);
-        edtLogradouro = findViewById(R.id.per_emp_edt_logradouro);
-        edtNumero = findViewById(R.id.per_emp_edt_numero);
-        edtCep = findViewById(R.id.per_emp_edt_cep);
+        edtCidade = findViewById(R.id.cad_emp_edt_cidade);
+        edtBairro = findViewById(R.id.cad_emp_edt_bairro);
+        edtLogradouro = findViewById(R.id.cad_emp_edt_logradouro);
+        edtNumero = findViewById(R.id.cad_emp_edt_numero);
+        edtCep = findViewById(R.id.cad_emp_edt_cep);
         spnEstado = findViewById(R.id.cad_emp_spn_estado);
 
         context = CadastroEmpresaActivity.this;
@@ -269,6 +330,7 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
                         Intent intent = new Intent(CadastroEmpresaActivity.this, LoginEmpresaActivity.class);
                         startActivity(intent);
                         finish();
-                    } }).show();
+                    }
+                }).show();
     }
 }

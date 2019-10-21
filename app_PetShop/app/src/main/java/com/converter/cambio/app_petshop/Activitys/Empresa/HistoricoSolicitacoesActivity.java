@@ -1,5 +1,6 @@
 package com.converter.cambio.app_petshop.Activitys.Empresa;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,9 +73,12 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent = new Intent(HistoricoSolicitacoesActivity.this, HomeEmpActivity.class);
+                startActivity(intent);
                 finish();
                 break;
-            default:break;
+            default:
+                break;
         }
         return true;
     }

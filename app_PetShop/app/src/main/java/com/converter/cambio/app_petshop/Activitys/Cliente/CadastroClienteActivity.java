@@ -274,7 +274,8 @@ public class CadastroClienteActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
-            default:break;
+            default:
+                break;
         }
         return true;
     }

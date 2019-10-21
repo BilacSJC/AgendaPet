@@ -164,22 +164,10 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
     }
 
     private void configuraNavBar() {
-        setTitle("Agendamento");
+        setTitle("Alterar Agendamento");
         ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
         actionBar.setDisplayHomeAsUpEnabled(true); //exibe o icone
         actionBar.setHomeButtonEnabled(true); //habilita click
-    }
-
-    private void alertDialog(String strTitle, String strMsg) {
-        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
-                .setTitle(strTitle)
-                .setMessage(strMsg)
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                }).show();
     }
 
     @Override
@@ -195,6 +183,18 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    private void alertDialog(String strTitle, String strMsg) {
+        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(strTitle)
+                .setMessage(strMsg)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).show();
     }
 
     private void preencheSpinnerNomePet() {

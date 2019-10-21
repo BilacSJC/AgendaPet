@@ -168,17 +168,6 @@ public class AgendamentoActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true); //habilita click
     }
 
-    private void  alertDialog(String strTitle, String strMsg){
-        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
-                .setTitle(strTitle)
-                .setMessage(strMsg)
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    } }).show();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
@@ -188,9 +177,21 @@ public class AgendamentoActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
-            default:break;
+            default:
+                break;
         }
         return true;
+    }
+
+    private void  alertDialog(String strTitle, String strMsg){
+        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(strTitle)
+                .setMessage(strMsg)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    } }).show();
     }
 
     private void preencheSpinnerNomePet() {

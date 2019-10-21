@@ -50,13 +50,13 @@ public class ValidaCampos {
         if(strTelefone.trim().length() >= 8) {
             return "ok";
         }
-        return "formato de telefone inválido";
+        return "Formato de telefone inválido";
     }
 
     public String vStringCpf(String strCpf) {
 
         if(strCpf.trim().equals("")){
-            return "O cmapo Cpf é obrigatório";
+            return "O campo CPF é obrigatório";
         }
         else if(strCpf.trim().length() < 11){
             return "Digite um CPF válido!";
@@ -70,7 +70,7 @@ public class ValidaCampos {
     public String vStringCnpj(String strCnpj) {
 
         if(strCnpj.trim().equals("")){
-            return "O cmapo CNPJ é obrigatório";
+            return "O campo CNPJ é obrigatório";
         }
         else if(strCnpj.trim().length() < 11){
             return "Digite um CNPJ válido!";

@@ -55,7 +55,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cli_cadastro);
         inicializaComponentes();
         configuraNavBar();
-        preencheSpinnerEstados();
 
         inicializarFirebase();
         eventoClicks();

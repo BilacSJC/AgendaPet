@@ -1,31 +1,28 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+     Base application theme.
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-<!--         Referência para style com ActionBar Customizado -->
-<!--        <item name="android:actionBarStyle">@style/MyActionBar</item>-->
-<!--        <item name="actionBarStyle">@style/MyActionBar</item>-->
-
     </style>
 
-    <!-- Style com ActionBar Customizado -->
-<!--    <style name="MyActionBar" parent="@style/Theme.MaterialComponents.Light">-->
-<!--        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item> -->
-<!--        <item name="android:background">black</item>-->
-<!--        <item name="titleTextStyle">@style/MyActionBarTitleText</item>-->
-<!--    </style>-->
 
-    <!-- Style que altera cor do ActionBar -->
-<!--    <style name="MyActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
-<!--        &lt;!&ndash; Cor branca &ndash;&gt;-->
-<!--        <item name="android:textColor">@android:color/white</item>-->
-<!--    </style>-->
+    <!-- Inclua este style -->
+    <style name="MyActionBar"
+        parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+        <item name="titleTextStyle">@style/MyActionBarTitleText</item>
+    </style>
 
+    <!-- Inclua este style, altere o código para a cor que pretender -->
+    <style name="MyActionBarTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+
+        <!-- Cor -->
+        <item name="android:textColor">#FFF</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

@@ -32,17 +32,18 @@ public class ListaAdapter extends BaseAdapter {
     private FireBaseQuery fireBaseQuery = new FireBaseQuery();
 
     private List<AgendamentoModel> lstAgendamentos;
-    private String idUsuario, empresaNome, servicoPreco, servicoNome, petNome;
+    private String idUsuario, idEmp, idPet, empresaNome, servicoPreco, servicoNome, petNome;
     private Context context;
 
     ImageView imgFotoLista;
     TextView txt_age_emp_nome, txt_age_ser_preco, txt_age_ser_nome_pet, txt_age_data, txt_age_hora, txt_age_status;
 
-    public ListaAdapter(String idUsuario, List<AgendamentoModel> lista, Context context)
+    public ListaAdapter(String idUsuario, String idEmp, String idPet, List<AgendamentoModel> lista, Context context)
     {
         this.idUsuario = idUsuario;
         this.lstAgendamentos = lista;
         this.context = context;
+        this.idEmp = idEmp;
 
         FirebaseApp.initializeApp(context);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -84,19 +85,16 @@ public class ListaAdapter extends BaseAdapter {
         txt_age_hora = (TextView) view.findViewById(R.id.txt_age_hora);
         txt_age_status = (TextView) view.findViewById(R.id.txt_age_status);
 
-
+        getServicoPreco();
         getEmpresaNome();
         getPetNome();
-        getServicoPreco();
+
         setaCampos(usuarioModelLista);
 
         return view;
     }
 
     private void setaCampos(AgendamentoModel agendamentoModel){
-
-
-
         txt_age_data.setText("Data: " + agendamentoModel.getAge_data_solicitada().trim());
         txt_age_hora.setText("Hora: " + agendamentoModel.getAge_hora_solicitada().trim());
         txt_age_status.setText("Status: " + agendamentoModel.getAge_status().trim());
@@ -120,7 +118,7 @@ public class ListaAdapter extends BaseAdapter {
     }
 
     private void getServicoPreco() {
-        databaseReference.child("Servicos").orderByChild("ser_emp_id").equalTo(idUsuario)
+        databaseReference.child("Servicos").orderByChild("ser_emp_id").equalTo(idEmp)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dSnp) {
@@ -138,7 +136,7 @@ public class ListaAdapter extends BaseAdapter {
     }
 
     private void getEmpresaNome() {
-        databaseReference.child("Empresa").orderByChild("emp_id").equalTo(idUsuario)
+        databaseReference.child("Empresa").orderByChild("emp_id").equalTo(idEmp)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dSnp) {

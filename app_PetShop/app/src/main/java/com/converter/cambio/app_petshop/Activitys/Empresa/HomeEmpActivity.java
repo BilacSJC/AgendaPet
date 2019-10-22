@@ -40,7 +40,7 @@ public class HomeEmpActivity extends AppCompatActivity
     private FloatingActionButton fab;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private String idUsuario, idPet;
+    private String idUsuario, idPet, idCliente;
     private List<AgendamentoModel> lstAgendamentoModel = new ArrayList<>();
     private ListView lstAgendamentos;
 
@@ -111,12 +111,13 @@ public class HomeEmpActivity extends AppCompatActivity
                             AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
                             lstAgendamentoModel.add(a);
                             idPet = a.getAge_pet_id();
+                            idCliente = a.getAge_cli_id();
                         }
 
                         if(lstAgendamentoModel.size() <= 0){
                             alertDialog("Atenção", "Você não possui nenhum agendamento");
                         }else{
-                            atualizaLista(lstAgendamentoModel, idPet);
+                            atualizaLista(lstAgendamentoModel, idPet, idCliente);
                         }
                     }
                     @Override
@@ -124,7 +125,7 @@ public class HomeEmpActivity extends AppCompatActivity
                 });
     }
 
-    private void atualizaLista(final List<AgendamentoModel> listAgendamentos, final String idPet) {
+    private void atualizaLista(final List<AgendamentoModel> listAgendamentos, final String idPet, final String idCliente) {
 
         runOnUiThread(new Runnable() {
 
@@ -132,7 +133,7 @@ public class HomeEmpActivity extends AppCompatActivity
             public void run() {
 
                 try{
-                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, idPet, listAgendamentos, HomeEmpActivity.this);
+                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, idPet, idCliente, listAgendamentos, HomeEmpActivity.this);
                     lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){
@@ -189,9 +190,6 @@ public class HomeEmpActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

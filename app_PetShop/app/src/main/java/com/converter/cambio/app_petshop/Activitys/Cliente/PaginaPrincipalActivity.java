@@ -39,7 +39,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     private FloatingActionButton fab;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private String idUsuario;
+    private String idUsuario, idEmp, idPet;
     private List<AgendamentoModel> lstAgendamentoModel = new ArrayList<>();
     private ListView lstAgendamentos;
 
@@ -109,12 +109,14 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                         {
                             AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
                             lstAgendamentoModel.add(a);
+                            idEmp = a.getAge_emp_id();
+                            idPet = a.getAge_pet_id();
                         }
 
                         if(lstAgendamentoModel.size() <= 0){
                             alertDialog("Atenção", "Você não possui nenhum agendamento");
                         }else{
-                            atualizaLista(lstAgendamentoModel);
+                            atualizaLista(lstAgendamentoModel, idEmp, idPet);
                         }
                     }
                     @Override
@@ -122,7 +124,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                 });
     }
 
-    private void atualizaLista(final List<AgendamentoModel> listAgendamentos) {
+    private void atualizaLista(final List<AgendamentoModel> listAgendamentos, final String idEmp, final String idPet) {
 
         runOnUiThread(new Runnable() {
 
@@ -130,7 +132,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             public void run() {
 
                 try{
-                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, listAgendamentos, PaginaPrincipalActivity.this);
+                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, idEmp, idPet, listAgendamentos, PaginaPrincipalActivity.this);
                     lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){
@@ -185,11 +187,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
+        //noinspection SimplifiableIfStatemen
         return super.onOptionsItemSelected(item);
     }
 

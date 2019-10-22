@@ -28,7 +28,6 @@ public class PerfilActivity extends AppCompatActivity {
         configuraNavBar();
         getExtraIdUsuario();
         eventosClick();
-
     }
 
     private void eventosClick() {
@@ -81,6 +80,7 @@ public class PerfilActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(PerfilActivity.this, PaginaPrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;

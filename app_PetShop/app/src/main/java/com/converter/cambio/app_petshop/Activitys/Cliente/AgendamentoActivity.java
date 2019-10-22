@@ -42,9 +42,9 @@ public class AgendamentoActivity extends AppCompatActivity {
     private MaterialButton btnSolicitar, btnLimpar;
     private EditText edtData, edtHora;
     private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtNomeCliente, txtTelefoneCliente;
-    private Spinner spnNomePet, spnPet;
+    private Spinner spnNomePet;
     private List<String> lstPet = new ArrayList<>();
-    private ArrayAdapter<String> arrayAdapterPet;
+    private List<String> lstIdPet = new ArrayList<>();
     private String idUsuario, idEmpresa, idPet, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
 
     private Context context;
@@ -79,7 +79,7 @@ public class AgendamentoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 edtData.setText("");
                 edtHora.setText("");
-                spnPet.setSelection(0);
+                spnNomePet.setSelection(0);
             }
         });
 
@@ -113,7 +113,7 @@ public class AgendamentoActivity extends AppCompatActivity {
 
         String strMensagemData = v.vStringData(edtData.getText().toString().toString());
         String strMensagemHora = v.vStringHora(edtHora.getText().toString().toString());
-        int intPositionSelected = spnPet.getSelectedItemPosition();
+        int intPositionSelected = spnNomePet.getSelectedItemPosition();
 
         int contMsg = 0;
 
@@ -139,6 +139,7 @@ public class AgendamentoActivity extends AppCompatActivity {
         a.setAge_data_solicitada(edtData.getText().toString().trim());
         a.setAge_hora_solicitada(edtHora.getText().toString().trim());
         a.setAge_emp_id(idEmpresa);
+        getIdPet(intPositionSelected);
         a.setAge_pet_id(idPet);
         a.setAge_status("Aguardando Atendimento");
 
@@ -153,12 +154,13 @@ public class AgendamentoActivity extends AppCompatActivity {
         return a;
     }
 
-    private String getPetId() {
-        String idPet = "";
-
-        //Fazer Select e preencher os pets do usuario...para pegar o ID
-
-        return idPet;
+    private void getIdPet(int intPetSelectedPosition) {
+        for (int i = 0; i < lstIdPet.size(); i++){
+            if(i == intPetSelectedPosition){
+                idPet = lstIdPet.get(i);
+                break;
+            }
+        }
     }
 
     private void configuraNavBar() {
@@ -206,8 +208,9 @@ public class AgendamentoActivity extends AppCompatActivity {
                 for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     PetModel p = objSnapshot.getValue(PetModel.class);
                     lstPet.add(p.getPet_nome());
+                    lstIdPet.add(p.getPet_id());
                 }
-                arrayAdapterPet = new ArrayAdapter<>(AgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
+                ArrayAdapter<String> arrayAdapterPet = new ArrayAdapter<>(AgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
                 spnNomePet.setAdapter(arrayAdapterPet);
             }
 
@@ -222,7 +225,7 @@ public class AgendamentoActivity extends AppCompatActivity {
         btnSolicitar = findViewById(R.id.alt_age_btn_alterar);
         btnLimpar = findViewById(R.id.alt_age_btn_limpar);
 
-        spnPet = findViewById(R.id.alt_age_cli_spn_pet);
+        spnNomePet = findViewById(R.id.alt_age_cli_spn_pet);
 
         edtData = findViewById(R.id.alt_age_cli_edt_data);
         edtHora = findViewById(R.id.alt_age_cli_edt_hora);

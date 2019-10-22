@@ -156,41 +156,41 @@ public class CadastroClienteActivity extends AppCompatActivity {
         EnderecoModel e = new EnderecoModel();
         ValidaCampos v = new ValidaCampos();
 
-        String strMensagemCep = v.vString(edtCep.getText().toString());
-        String strMensagemCidade = v.vStringTelefone(edtCidade.getText().toString());
-        String strMensagemNumero = v.vStringCpf(edtNumero.getText().toString());
-        String strMensagemLogradouro = v.vStringSenha(edtLogradouro.getText().toString());
+        boolean booMensagemCep = v.validacaoBasicaStr(edtCep.getText().toString());
+        boolean booMensagemCidade = v.validacaoBasicaStr(edtCidade.getText().toString());
+        boolean booMensagemNumero = v.validacaoBasicaStr(edtNumero.getText().toString());
+        boolean booMensagemLogradouro = v.validacaoBasicaStr(edtLogradouro.getText().toString());
         int intPositionSelected = spnEstado.getSelectedItemPosition();
-        String strMensagemBairro = v.vStringEmail(edtBairro.getText().toString());
+        boolean strMensagemBairro = v.validacaoBasicaStr(edtBairro.getText().toString());
 
         int contMsg = 0;
-
-        if(intPositionSelected <= 0){
+        String strMsg = "Preencha este campo";
+        if (intPositionSelected <= 0) {
             m.alertDialog(context, "ATENÇÃO", "Selecione um estado");
             contMsg += 1;
         }
-        if(!strMensagemCep.equals("ok")){
-            edtCep.setError(strMensagemCep);
+        if (!booMensagemCep) {
+            edtCep.setError(strMsg);
             contMsg += 1;
         }
-        if(!strMensagemCidade.equals("ok")){
-            edtCidade.setError(strMensagemCidade);
+        if (!booMensagemCidade) {
+            edtCidade.setError(strMsg);
             contMsg += 1;
         }
-        if(!strMensagemNumero.equals("ok")){
-            edtNumero.setError(strMensagemNumero);
+        if (!booMensagemNumero) {
+            edtNumero.setError(strMsg);
             contMsg += 1;
         }
-        if(!strMensagemLogradouro.equals("ok")){
-            edtLogradouro.setError(strMensagemLogradouro);
+        if (!booMensagemLogradouro) {
+            edtLogradouro.setError(strMsg);
             contMsg += 1;
         }
-        if(!strMensagemBairro.equals("ok")){
-            edtBairro.setError(strMensagemBairro);
+        if (!strMensagemBairro) {
+            edtBairro.setError(strMsg);
             contMsg += 1;
         }
 
-        if(contMsg > 0){
+        if (contMsg > 0) {
             return new EnderecoModel();
         }
 

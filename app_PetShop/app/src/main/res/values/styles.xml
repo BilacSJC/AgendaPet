@@ -13,13 +13,14 @@
 
     </style>
 
-<!--    &lt;!&ndash; Style com ActionBar Customizado &ndash;&gt;-->
+    <!-- Style com ActionBar Customizado -->
 <!--    <style name="MyActionBar" parent="@style/Theme.MaterialComponents.Light">-->
-<!--        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>-->
+<!--        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item> -->
+<!--        <item name="android:background">black</item>-->
 <!--        <item name="titleTextStyle">@style/MyActionBarTitleText</item>-->
 <!--    </style>-->
 
-<!--    &lt;!&ndash; Style que altera cor do ActionBar &ndash;&gt;-->
+    <!-- Style que altera cor do ActionBar -->
 <!--    <style name="MyActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
 <!--        &lt;!&ndash; Cor branca &ndash;&gt;-->
 <!--        <item name="android:textColor">@android:color/white</item>-->
@@ -31,7 +32,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

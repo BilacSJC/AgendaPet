@@ -10,11 +10,13 @@ import com.converter.cambio.app_petshop.R;
 
 public class VisualizarSolicitacaoActivity extends AppCompatActivity {
 
+    private String idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_visualizar_solicitacao);
         configuraNavBar();
+        getExtraIdUsuario();
     }
 
     private void configuraNavBar() {
@@ -29,6 +31,7 @@ public class VisualizarSolicitacaoActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(VisualizarSolicitacaoActivity.this, HomeEmpActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;
@@ -36,5 +39,9 @@ public class VisualizarSolicitacaoActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

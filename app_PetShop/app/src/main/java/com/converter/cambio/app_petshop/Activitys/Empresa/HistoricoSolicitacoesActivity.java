@@ -38,12 +38,13 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     private Date data = new Date();
     
     private MetodosPadraoController m = new MetodosPadraoController();
-    private String idUsuario, idPet;
+    private String idUsuario, idPet,idCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_historico_solicitacoes);
+        getExtraIdUsuario();
         inicializaCampos();
         configuraNavBar();
         inicializarFirebase();
@@ -74,6 +75,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(HistoricoSolicitacoesActivity.this, HomeEmpActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;
@@ -81,6 +83,9 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 
     @Override
@@ -109,6 +114,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
                         {
                             AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
                             idPet = a.getAge_pet_id();
+                            idCliente = a.getAge_cli_id();
                             break;
                         }
                     }
@@ -125,7 +131,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
             public void run() {
 
                 try{
-                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, idPet, lstAgendamentos, HistoricoSolicitacoesActivity.this);
+                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, idPet, idCliente, lstAgendamentos, HistoricoSolicitacoesActivity.this);
                     HistoricoSolicitacoesActivity.this.lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){

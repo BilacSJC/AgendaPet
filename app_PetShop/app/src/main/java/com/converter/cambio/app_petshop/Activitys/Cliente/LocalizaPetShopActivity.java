@@ -131,6 +131,9 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(LocalizaPetShopActivity.this, PaginaPrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
+                intent.putExtra("ID_EMPRESA", empId);
+                intent.putExtra("SERVICO", spnServicos.getSelectedItem().toString());
                 startActivity(intent);
                 // finish();
                 break;

@@ -13,6 +13,7 @@
     <string name="app_name">Agenda Pet</string>
     <string name="menu_home">Home</string>
     <string name="menu_historico">Histórico</string>
+    <string name="menu_horario_funcionamento">Horário de Funcionamento</string>
     <string name="menu_solicitacoes">Solicitações</string>
     <string name="menu_lst_servicos">Listar Serviços</string>
     <string name="menu_add_servico">Adicionar Serviço</string>

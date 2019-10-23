@@ -78,6 +78,7 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         spnEmpresas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position > 0)
                 empId = getEmpId(position);
                 databaseReference.child("Servicos").orderByChild("ser_emp_id").equalTo(empId)
                         .addValueEventListener(new ValueEventListener(){
@@ -125,7 +126,6 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true); //habilita click
     }
 
-    //Para inserir a ação e selecionar para qual página voltar...
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
@@ -144,7 +144,7 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
     }
 
     private String getEmpId(int position) {
-        for(int i = 0; i < lstEmpresaId.size(); i++){
+        for(int i = 0; i < lstEmpresaNome.size(); i++){
             if(position == i && position > 0){
                 return lstEmpresaId.get(i-1);
             }

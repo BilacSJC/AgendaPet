@@ -93,7 +93,7 @@
                 android:id="@+id/btn_remarcar"
                 android:layout_width="190dp"
                 android:layout_height="38dp"
-                android:text="REMARCAR"
+                android:text="Remarcar"
                 card_view:backgroundTint="#F0C908" />
 
             <Button

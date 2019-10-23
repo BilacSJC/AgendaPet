@@ -24,6 +24,7 @@ import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.Model.EnderecoModel;
 import com.converter.cambio.app_petshop.Model.PetModel;
 import com.converter.cambio.app_petshop.R;
+import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +46,7 @@ public class AgendamentoActivity extends AppCompatActivity {
     private Spinner spnNomePet;
     private List<String> lstPet = new ArrayList<>();
     private List<String> lstIdPet = new ArrayList<>();
-    private String idUsuario, idEmpresa, idPet, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
+    private String idUsuario, idEmpresa, petNome, petPorte, petRaca, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
 
     private Context context;
 
@@ -87,7 +88,7 @@ public class AgendamentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AgendamentoModel agendamentoModel = validaCampos();
+                AgendamentoViewModel agendamentoModel = validaCampos();
 
                 if(agendamentoModel.getAge_id() == null){
                     m.alertDialog(context,"ATENCÃO", "Preencha todos os campos.");
@@ -103,12 +104,12 @@ public class AgendamentoActivity extends AppCompatActivity {
         });
     }
 
-    private void cadastrarAgendamento(AgendamentoModel agendamentoModel) {
+    private void cadastrarAgendamento(AgendamentoViewModel agendamentoModel) {
         fireBaseQuery.InsertObjectDb(agendamentoModel, "Agendamento", agendamentoModel.getAge_id(), databaseReference);
     }
 
-    private AgendamentoModel validaCampos() {
-        AgendamentoModel a = new AgendamentoModel();
+    private AgendamentoViewModel validaCampos() {
+        AgendamentoViewModel a = new AgendamentoViewModel();
         ValidaCampos v = new ValidaCampos();
 
         String strMensagemData = v.vStringData(edtData.getText().toString().toString());
@@ -131,37 +132,37 @@ public class AgendamentoActivity extends AppCompatActivity {
         }
 
         if(contMsg > 0){
-            return new AgendamentoModel();
+            return new AgendamentoViewModel();
         }
-
-        a.setAge_id(UUID.randomUUID().toString());
         a.setAge_cli_id(idUsuario);
-        a.setAge_data_solicitada(edtData.getText().toString().trim());
-        a.setAge_hora_solicitada(edtHora.getText().toString().trim());
         a.setAge_emp_id(idEmpresa);
-        getIdPet(intPositionSelected);
-        a.setAge_pet_id(idPet);
-        a.setAge_status("Aguardando Atendimento");
-
-        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
-
-        a.setAge_data_cad(dataFormatada);
-        a.setAge_hora_cad("20:42");
-
+        a.setAge_id(UUID.randomUUID().toString());
+        getDadosPet(spnNomePet.getSelectedItem().toString());
+        a.setAlt_age_pet_nome(spnNomePet.getSelectedItem().toString());
+        a.setAlt_age_data(edtData.getText().toString().trim());
+        a.setAlt_age_hora(edtHora.getText().toString().trim());
+        a.setAlt_age_emp_nome(strEmpNome);
+        a.setAlt_age_emp_endereco(strEmpEnd);
+        a.setAlt_age_servico(strServico);
+        a.setAlt_age_cli_nome(strCliNome);
+        a.setAlt_age_cli_telefone(strCliTelefone);
+        a.setAlt_age_status("Aguardando Atendimento");
 
         return a;
     }
 
-    private void getIdPet(int intPetSelectedPosition) {
-        for (int i = 0; i < lstIdPet.size(); i++){
-            if(i == intPetSelectedPosition){
-                idPet = lstIdPet.get(i);
-                break;
-            }
-        }
+    private void getDadosPet(String toString) {
+
     }
+
+//    private void getIdPet(int intPetSelectedPosition) {
+//        for (int i = 0; i < lstIdPet.size(); i++){
+//            if(i == intPetSelectedPosition){
+//                idPet = lstIdPet.get(i);
+//                break;
+//            }
+//        }
+//    }
 
     private void configuraNavBar() {
         setTitle("Agendamento");

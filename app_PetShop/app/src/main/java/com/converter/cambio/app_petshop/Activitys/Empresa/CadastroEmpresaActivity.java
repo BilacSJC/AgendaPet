@@ -139,12 +139,8 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 // task retorna o status da autenticação
-                                if (task.isSuccessful()) {
                                     limparCampos();
                                     alertDialogBackToLogin("Sucesso!", "Usuário cadastrado com sucesso!");
-                                } else {
-                                    m.alertToast(context, "Erro ao cadastrar. Tente novamente.");
-                                }
                             }
                         }
                 );

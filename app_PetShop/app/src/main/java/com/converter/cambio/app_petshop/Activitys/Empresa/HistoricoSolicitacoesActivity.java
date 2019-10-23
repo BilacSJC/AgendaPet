@@ -15,6 +15,7 @@ import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.R;
+import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -92,7 +93,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        List<AgendamentoModel> lstAgendamentos = new ArrayList<>();
+        List<AgendamentoViewModel> lstAgendamentos = new ArrayList<>();
 
         getLstAgendamentos();
 
@@ -123,7 +124,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
                 });
     }
 
-    private void atualizaLista(final List<AgendamentoModel> lstAgendamentos) {
+    private void atualizaLista(final List<AgendamentoViewModel> lstAgendamentos) {
 
         runOnUiThread(new Runnable() {
 
@@ -131,7 +132,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
             public void run() {
 
                 try{
-                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, idPet, idCliente, lstAgendamentos, HistoricoSolicitacoesActivity.this);
+                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, lstAgendamentos, HistoricoSolicitacoesActivity.this);
                     HistoricoSolicitacoesActivity.this.lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){

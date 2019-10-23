@@ -15,6 +15,7 @@ import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.Model.PetModel;
 import com.converter.cambio.app_petshop.Model.ServicoEmpresaModel;
 import com.converter.cambio.app_petshop.R;
+import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,22 +31,24 @@ import java.util.List;
         private DatabaseReference databaseReference;
         private FireBaseQuery fireBaseQuery = new FireBaseQuery();
 
-        private List<AgendamentoModel> lstAgendamentos;
+        private List<AgendamentoViewModel> lstAgendamentos;
         private String idUsuario, empresaNome, servicoPreco, servicoNome, cliNome, cliTel,  petNome, petRaca, petPorte, idPet, idCliente;
         private Context context;
-
-        TextView txt_sol_cli_nome, txt_sol_telefone, txt_sol_ser_nome_pet,txt_sol_ser_porte_pet,txt_sol_ser_raca_pet, txt_sol_data, txt_sol_hora, txt_sol_status;
-
-        public ListaAdapterSolicitacoes(String idUsuario, String idPet, String idCliente, List<AgendamentoModel> lista, Context context)
+        private TextView lst_sol_txtNome, lst_sol_txtTelefone ,lst_sol_txt_nome_pet ,lst_sol_txt_porte_pet;
+        private TextView lst_sol_txt_raca_pet, lst_sol_txt_data_age, lst_sol_txt_hora_age,  lst_sol_txtStatus;
+        public ListaAdapterSolicitacoes(String idUsuario, List<AgendamentoViewModel> lista, Context context)
         {
             this.idUsuario = idUsuario;
-            this.idPet = idPet;
             this.lstAgendamentos = lista;
             this.context = context;
-            this.idCliente = idCliente;
+
+            FirebaseApp.initializeApp(context);
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            databaseReference = firebaseDatabase.getReference();
+
         }
 
-        public List<AgendamentoModel> getLista(){
+        public List<AgendamentoViewModel> getLista(){
             return lstAgendamentos;
         }
 
@@ -67,110 +70,34 @@ import java.util.List;
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            AgendamentoModel usuarioModelLista = (AgendamentoModel) getItem(position);
+            AgendamentoViewModel usuarioModelLista = (AgendamentoViewModel) getItem(position);
 
             LayoutInflater inflater = LayoutInflater.from(context);
             View view = inflater.inflate(R.layout.lst_solicitacoes, null);
 
-            txt_sol_cli_nome = (TextView) view.findViewById(R.id.lst_sol_txtNome);
-            txt_sol_telefone = (TextView) view.findViewById(R.id.lst_sol_txtTelefone);
-            txt_sol_ser_nome_pet = (TextView) view.findViewById(R.id.lst_sol_txt_nome_pet);
-            txt_sol_ser_porte_pet = view.findViewById(R.id.lst_sol_txt_porte_pet);
-            txt_sol_ser_raca_pet =  view.findViewById(R.id.lst_sol_txt_raca_pet);
-            txt_sol_data = (TextView) view.findViewById(R.id.lst_sol_txt_data_age);
-            txt_sol_hora = (TextView) view.findViewById(R.id.lst_sol_txt_hora_age);
-            txt_sol_status = (TextView) view.findViewById(R.id.lst_sol_txtStatus);
+            lst_sol_txtNome = (TextView) view.findViewById(R.id.lst_sol_txtNome);
+            lst_sol_txtTelefone = (TextView) view.findViewById(R.id.lst_sol_txtTelefone);
+            lst_sol_txt_nome_pet = (TextView) view.findViewById(R.id.lst_sol_txt_nome_pet);
+            lst_sol_txt_porte_pet = (TextView) view.findViewById(R.id.lst_sol_txt_porte_pet);
+            lst_sol_txt_raca_pet = (TextView) view.findViewById(R.id.lst_sol_txt_raca_pet);
+            lst_sol_txt_data_age = (TextView) view.findViewById(R.id.lst_sol_txt_data_age);
+            lst_sol_txt_hora_age = (TextView) view.findViewById(R.id.lst_sol_txt_hora_age);
+            lst_sol_txtStatus = (TextView) view.findViewById(R.id.lst_sol_txtStatus);
 
-            FirebaseApp.initializeApp(context);
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            databaseReference = firebaseDatabase.getReference();
-
-//            getEmpresaNome();
-            getDadosCliente();
-            getPetNome();
-            getServicoPreco();
             setaCampos(usuarioModelLista);
 
             return view;
         }
 
-        private void setaCampos(AgendamentoModel agendamentoModel){
-            txt_sol_data.setText("Data: " + agendamentoModel.getAge_data_solicitada().trim());
-            txt_sol_hora.setText("Hora: " + agendamentoModel.getAge_hora_solicitada().trim());
-            txt_sol_status.setText("Status: " + agendamentoModel.getAge_status().trim());
-        }
+        private void setaCampos(AgendamentoViewModel agendamentoModel){
 
-        private void getPetNome() {
-            databaseReference.child("Pet").orderByChild("pet_id").equalTo(idPet)
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dSnp) {
-                            for (DataSnapshot objSnp : dSnp.getChildren()) {
-                                PetModel p = objSnp.getValue(PetModel.class);
-                                petNome = p.getPet_nome().trim();
-                                petPorte = p.getPet_porte().trim();
-                                petRaca = p.getPet_raca().trim();
-                                txt_sol_ser_nome_pet.setText("Pet: " + petNome);
-                                txt_sol_ser_porte_pet.setText("Porte: " + petPorte);
-                                txt_sol_ser_raca_pet.setText("Raça: " + petRaca);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {}
-                    });
-        }
-
-        private void getServicoPreco() {
-            databaseReference.child("Servicos").orderByChild("ser_emp_id").equalTo(idUsuario)
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dSnp) {
-                            for (DataSnapshot objSnp : dSnp.getChildren()) {
-                                ServicoEmpresaModel p = objSnp.getValue(ServicoEmpresaModel.class);
-                                servicoPreco = p.getSer_preco().trim();
-                                servicoNome = p.getSer_nome().trim();
-                                txt_sol_telefone.setText("Serviço: " + servicoNome.trim() + " " + servicoPreco.trim());
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {}
-                    });
-        }
-
-//        private void getEmpresaNome() {
-//            databaseReference.child("Empresa").orderByChild("emp_id").equalTo(idUsuario)
-//                    .addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dSnp) {
-//                            for (DataSnapshot objSnp : dSnp.getChildren()) {
-//                                EmpresaModel p = objSnp.getValue(EmpresaModel.class);
-//                                empresaNome = p.getEmp_nome().trim();
-//                                txt_sol_cli_nome.setText("Nome: " + empresaNome.trim());
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {}
-//                    });
-//        }
-        private void getDadosCliente() {
-            databaseReference.child("Cliente").orderByChild("cli_id").equalTo(idCliente)
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dSnp) {
-                            for (DataSnapshot objSnp : dSnp.getChildren()) {
-                                ClienteModel c = objSnp.getValue(ClienteModel.class);
-                                cliNome = c.getCli_nome().trim();
-                                cliTel = c.getCli_telefone().trim();
-                                txt_sol_cli_nome.setText("Nome: " + cliNome.trim());
-                                txt_sol_telefone.setText("Telefone: " + cliTel.trim());
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {}
-                    });
+                  lst_sol_txtNome.setText("Nome: " + agendamentoModel.getAlt_age_cli_nome());
+              lst_sol_txtTelefone.setText("Telefone: " + agendamentoModel.getAlt_age_cli_telefone());
+             lst_sol_txt_nome_pet.setText("Pet: " + agendamentoModel.getAlt_age_pet_nome());
+            lst_sol_txt_porte_pet.setText("Porte: " + agendamentoModel.getAlt_age_pet_porte());
+             lst_sol_txt_raca_pet.setText("Raça: " + agendamentoModel.getAlt_age_pet_raca());
+             lst_sol_txt_data_age.setText("Data: " + agendamentoModel.getAlt_age_data());
+             lst_sol_txt_hora_age.setText("Hora: " + agendamentoModel.getAlt_age_hora());
+                lst_sol_txtStatus.setText("Status: " + agendamentoModel.getAlt_age_status());
         }
     }

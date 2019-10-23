@@ -20,8 +20,10 @@ import android.view.Menu;
 import android.widget.ListView;
 
 import com.converter.cambio.app_petshop.Activitys.Cliente.Adapter.ListaAdapter;
+import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.R;
+import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +42,10 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private String idUsuario, idEmp, idPet;
-    private List<AgendamentoModel> lstAgendamentoModel = new ArrayList<>();
+    private MetodosPadraoController m = new MetodosPadraoController();
+    private List<AgendamentoViewModel> lstAgendamentoModel = new ArrayList<>();
+    private List<String> lstIdEmp = new ArrayList<>();
+    private List<String> lstIdPet = new ArrayList<>();
     private ListView lstAgendamentos;
 
     @Override
@@ -103,20 +108,22 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                     @Override
                     public void onDataChange(DataSnapshot dSnp)
                     {
-                        List<AgendamentoModel> lstVazia = new ArrayList<>();
+                        List<AgendamentoViewModel> lstVazia = new ArrayList<>();
                         lstAgendamentoModel = lstVazia;
                         for(DataSnapshot objSnp : dSnp.getChildren())
                         {
-                            AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
+                            AgendamentoViewModel a = objSnp.getValue(AgendamentoViewModel.class);
                             lstAgendamentoModel.add(a);
-                            idEmp = a.getAge_emp_id();
-                            idPet = a.getAge_pet_id();
+//                            lstIdEmp.add(a.getAge_emp_id());
+//                            lstIdPet.add(a.getAge_pet_id());
                         }
 
                         if(lstAgendamentoModel.size() <= 0){
-                            alertDialog("Atenção", "Você não possui nenhum agendamento");
+                            m.alertToast(PaginaPrincipalActivity.this,"Você não possui nenhum agendamento");
                         }else{
-                            atualizaLista(lstAgendamentoModel, idEmp, idPet);
+
+                                atualizaLista(lstAgendamentoModel);
+
                         }
                     }
                     @Override
@@ -124,7 +131,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                 });
     }
 
-    private void atualizaLista(final List<AgendamentoModel> listAgendamentos, final String idEmp, final String idPet) {
+    private void atualizaLista(final List<AgendamentoViewModel> listAgendamentos) {
 
         runOnUiThread(new Runnable() {
 
@@ -132,7 +139,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             public void run() {
 
                 try{
-                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, idEmp, idPet, listAgendamentos, PaginaPrincipalActivity.this);
+                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, listAgendamentos, PaginaPrincipalActivity.this);
                     lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){

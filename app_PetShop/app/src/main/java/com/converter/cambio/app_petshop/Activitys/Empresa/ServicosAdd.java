@@ -107,13 +107,13 @@ public class ServicosAdd extends AppCompatActivity {
         edtNome = findViewById(R.id.ser_emp_nome);
         edtPreco = findViewById(R.id.ser_emp_preco);
         btnCadastrar = findViewById(R.id.btn_add_servico);
-        spnPorte = findViewById(R.id.ser_spn_porte);
+//       spnPorte = findViewById(R.id.ser_spn_porte);
 
 
-        List<String> lstEstados = new ArrayList<>();
-        lstEstados = geraSpinner.getLstPorte();
-        ArrayAdapter<String> estados = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, lstEstados);
-        spnPorte.setAdapter(estados);
+//        List<String> lstEstados = new ArrayList<>();
+//        lstEstados = geraSpinner.getLstPorte();
+//        ArrayAdapter<String> estados = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, lstEstados);
+//        spnPorte.setAdapter(estados);
 
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }

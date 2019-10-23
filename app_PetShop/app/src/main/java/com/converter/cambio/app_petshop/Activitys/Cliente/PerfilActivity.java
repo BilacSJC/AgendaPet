@@ -42,7 +42,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Button btnAlterar;
     private FirebaseAuth auth;
     private FirebaseUser user;
-    private String idUsuario;
+    private String idUsuario, cli_email, cli_senha, idEndereco, idCliente;
     private Context context = PerfilActivity.this;
     private Spinner spnEstado;
     private MetodosPadraoController m = new MetodosPadraoController();
@@ -113,17 +113,20 @@ public class PerfilActivity extends AppCompatActivity {
             return new ClienteModel();
         }
 
-        c.setCli_id(idUsuario);
+        c.setCli_id(idCliente);
         c.setCli_nome(edtNome.getText().toString().trim());
         c.setCli_telefone(edtTelefone.getText().toString().trim());
         c.setCli_cpf(edtCpf.getText().toString().trim());
+        c.setCli_email(cli_email.trim());
+        c.setCli_senha(cli_senha.trim());
+        c.setCli_senha_antiga(cli_senha.trim());
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
         c.setCli_data_ultima_alteracao_senha(dataFormatada);
-        c.setCli_id_endereco(UUID.randomUUID().toString().trim());
+        c.setCli_id_endereco(idEndereco);
 
         return c;
     }
@@ -136,15 +139,15 @@ public class PerfilActivity extends AppCompatActivity {
         boolean booMensagemCidade = v.validacaoBasicaStr(edtCidade.getText().toString());
         boolean booMensagemNumero = v.validacaoBasicaStr(edtNumero.getText().toString());
         boolean booMensagemLogradouro = v.validacaoBasicaStr(edtLogradouro.getText().toString());
-//        int intPositionSelected = spnEstado.getSelectedItemPosition();
+        int intPositionSelected = spnEstado.getSelectedItemPosition();
         boolean strMensagemBairro = v.validacaoBasicaStr(edtBairro.getText().toString());
 
         int contMsg = 0;
         String strMsg = "Preencha este campo";
-//        if (intPositionSelected <= 0) {
-//            m.alertDialog(context, "ATENÇÃO", "Selecione um estado");
-//            contMsg += 1;
-//        }
+        if (intPositionSelected <= 0) {
+            m.alertDialog(context, "ATENÇÃO", "Selecione um estado");
+            contMsg += 1;
+        }
         if (!booMensagemCep) {
             edtCep.setError(strMsg);
             contMsg += 1;
@@ -172,7 +175,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         e.setId_usuario(clienteModel.getCli_id());
         e.setId_endereco(clienteModel.getCli_id_endereco());
-//        e.setEstado(spnEstado.getSelectedItem().toString().trim());
+        e.setEstado(spnEstado.getSelectedItem().toString().trim());
         e.setCidade(edtCidade.getText().toString().trim());
         e.setBairro(edtBairro.getText().toString().trim());
         e.setLogradouro(edtLogradouro.getText().toString().trim());
@@ -196,7 +199,7 @@ public class PerfilActivity extends AppCompatActivity {
         edtNome = findViewById(R.id.per_usu_edt_nome);
         edtCpf = findViewById(R.id.per_usu_edt_cpf);
         edtTelefone = findViewById(R.id.per_usu_edt_telefone);
-        spnEstado = findViewById(R.id.per_emp_spn_estado);
+        spnEstado = findViewById(R.id.per_usu_spn_estado);
         edtCep = findViewById(R.id.per_usu_edt_cep);
         edtLogradouro = findViewById(R.id.per_usu_edt_logradouro);
         edtNumero = findViewById(R.id.per_usu_edt_numero);
@@ -268,6 +271,9 @@ public class PerfilActivity extends AppCompatActivity {
                             edtTelefone.setText(c.getCli_telefone());
                             edtNome.setText(c.getCli_nome());
                             edtCpf.setText(c.getCli_cpf());
+                            cli_email = c.getCli_email();
+                            cli_senha = c.getCli_senha();
+                            idCliente = c.getCli_id();
                             getCliEnd(c.getCli_id_endereco());
                         }
                     }
@@ -283,6 +289,7 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void getCliEnd(String idEndereco) {
+        this.idEndereco = idEndereco;
         databaseReference.child("Endereco").orderByChild("id_endereco").equalTo(idEndereco)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -303,19 +310,20 @@ public class PerfilActivity extends AppCompatActivity {
                 });
     }
     private void preencheSpinnerEstados() {
-//        List<String> lsEstados = geradorListSpinnerController.getLstEstados();
-//        ArrayAdapter<String> estado = new ArrayAdapter<>(PerfilActivity.this, R.layout.support_simple_spinner_dropdown_item, lsEstados);
-//        spnEstado.setAdapter(estado);
+        List<String> lsEstados = geradorListSpinnerController.getLstEstados();
+        ArrayAdapter<String> estado = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, lsEstados);
+        spnEstado.setAdapter(estado);
     }
 
     private void setSpnEstado(String estado) {
-//        List<String> lsEstados = geradorListSpinnerController.getLstEstados();
-//        for(int i = 0; i<lsEstados.size(); i++){
-//            if(lsEstados.get(i) == estado){
-//                spnEstado.setSelection(i);
-//                break;
-//            }
-//        }
+        List<String> lsEstados = geradorListSpinnerController.getLstEstados();
+        for(int i = 0; i < lsEstados.size(); i++){
+
+            if(lsEstados.get(i).trim().equals(estado.trim())){
+                spnEstado.setSelection(i);
+                break;
+            }
+        }
     }
 
     private void inicializarFirebase() {

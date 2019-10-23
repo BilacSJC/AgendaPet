@@ -1,9 +1,12 @@
 package com.converter.cambio.app_petshop.Activitys.Empresa;
 
+import android.content.Intent;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -47,6 +50,34 @@ public class ServicosAdd extends AppCompatActivity {
         inicializaCampos();
         inicializarFirebase();
         eventosClick();
+        getExtraIdUsuario();
+        configuraNavBar();
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
+    }
+
+    private void configuraNavBar() {
+        setTitle("Adicionar Serviço");
+        ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
+        actionBar.setDisplayHomeAsUpEnabled(true); //exibe o icone
+        actionBar.setHomeButtonEnabled(true); //habilita click
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ServicosAdd.this, HomeEmpActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     private void inicializarFirebase() {
@@ -62,8 +93,8 @@ public class ServicosAdd extends AppCompatActivity {
 
                 ServicoEmpresaModel servicoModel = validaCampos();
 
-                if(servicoModel.getSer_id() == null){
-                    m.alertDialog(ServicosAdd.this,"ATENCÃO", "Preencha todos os campos.");
+                if (servicoModel.getSer_id() == null) {
+                    m.alertDialog(ServicosAdd.this, "ATENCÃO", "Preencha todos os campos.");
                     return;
                 }
 
@@ -72,10 +103,10 @@ public class ServicosAdd extends AppCompatActivity {
         });
     }
 
-    private void cadastrarServico(ServicoEmpresaModel servicoModel){
+    private void cadastrarServico(ServicoEmpresaModel servicoModel) {
         fireBaseQuery.InsertObjectDb(servicoModel, "Servicos", servicoModel.getSer_id(), databaseReference);
 
-        if(databaseReference.getDatabase() != null){
+        if (databaseReference.getDatabase() != null) {
             m.alertDialog(ServicosAdd.this, "SUCESSO!", "Serviço cadastrado com sucesso!");
             limparCampos();
         }
@@ -90,7 +121,7 @@ public class ServicosAdd extends AppCompatActivity {
         boolean booPreco = v.validacaoBasicaStr(edtPreco.getText().toString());
         boolean booNome = v.validacaoBasicaStr(edtNome.getText().toString());
 
-        if(booNome && booPreco){
+        if (booNome && booPreco) {
             ServicoEmpresaModel servicoModel = new ServicoEmpresaModel();
 
             servicoModel.setSer_id(UUID.randomUUID().toString().trim());

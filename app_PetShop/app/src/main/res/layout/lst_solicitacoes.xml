@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtQualificadorUsuarioLista"
+            android:id="@+id/lst_sol_txt_titulo_solicitacoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,20 +27,22 @@
 
 
         <TextView
-            android:id="@+id/lst_sol_txtNome"
+            android:id="@+id/lst_sol_txt_cli_nome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Nome:"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:layout_marginStart="2dp"/>
 
         <TextView
-            android:id="@+id/lst_sol_txtTelefone"
+            android:id="@+id/lst_sol_txt_telefone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Telefone:"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/lst_sol_txt_data_age"
@@ -48,7 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Data solicitada:"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/lst_sol_txt_hora_age"
@@ -56,33 +59,38 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Hora solicitada:"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:layout_marginStart="2dp"/>
 
         <TextView
-            android:id="@+id/lst_sol_txtStatus"
+            android:id="@+id/lst_sol_txt_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Status:"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/lst_sol_txt_nome_pet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome Pet:" />
+            android:text="Nome Pet:"
+            android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/lst_sol_txt_porte_pet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Porte Pet:" />
+            android:text="Porte Pet:"
+            android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/lst_sol_txt_raca_pet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Raça do Pet:" />
+            android:text="Raça do Pet:"
+            android:layout_marginStart="2dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,18 +98,19 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_remarcar"
-                android:layout_width="190dp"
+                android:id="@+id/lst_sol_btn_remarcar"
+                android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:text="Remarcar"
+                android:layout_weight="1"
+                android:text="@string/remarcar"
                 card_view:backgroundTint="#F0C908" />
 
             <Button
-                android:id="@+id/btn_Confirmar"
-                android:layout_width="190dp"
+                android:id="@+id/lst_sol_btn_confirmar"
+                android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_weight="1"
-                android:text="Confirmar"
+                android:text="@string/confirmar"
                 card_view:backgroundTint="#40B444" />
 
         </LinearLayout>

@@ -4,25 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.converter.cambio.app_petshop.Activitys.Cliente.LocalizaPetShopActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
-import com.converter.cambio.app_petshop.Model.AgendamentoModel;
-import com.converter.cambio.app_petshop.Model.EmpresaModel;
-import com.converter.cambio.app_petshop.Model.PetModel;
-import com.converter.cambio.app_petshop.Model.ServicoEmpresaModel;
 import com.converter.cambio.app_petshop.R;
 import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -77,12 +67,12 @@ public class ListaAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.lst_agendamento, null);
 
-        txt_age_emp_nome = (TextView) view.findViewById(R.id.txt_age_emp_nome);
-        txt_age_ser_preco = (TextView) view.findViewById(R.id.txt_age_ser_preco);
-        txt_age_ser_nome_pet = (TextView) view.findViewById(R.id.txt_age_ser_nome_pet);
-        txt_age_data = (TextView) view.findViewById(R.id.txt_age_data);
-        txt_age_hora = (TextView) view.findViewById(R.id.txt_age_hora);
-        txt_age_status = (TextView) view.findViewById(R.id.txt_age_status);
+        txt_age_emp_nome = (TextView) view.findViewById(R.id.lst_age_txt_emp_nome);
+        txt_age_ser_preco = (TextView) view.findViewById(R.id.lst_age_txt_ser_preco);
+        txt_age_ser_nome_pet = (TextView) view.findViewById(R.id.lst_age_txt_nome_pet);
+        txt_age_data = (TextView) view.findViewById(R.id.lst_age_txt_data);
+        txt_age_hora = (TextView) view.findViewById(R.id.lst_age_txt_hora);
+        txt_age_status = (TextView) view.findViewById(R.id.lst_age_txt_status);
 
         setaCampos(usuarioModelLista);
 

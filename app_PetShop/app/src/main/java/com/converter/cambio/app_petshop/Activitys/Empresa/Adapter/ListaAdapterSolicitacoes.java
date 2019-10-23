@@ -5,23 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
-import com.converter.cambio.app_petshop.Model.AgendamentoModel;
-import com.converter.cambio.app_petshop.Model.ClienteModel;
-import com.converter.cambio.app_petshop.Model.EmpresaModel;
-import com.converter.cambio.app_petshop.Model.PetModel;
-import com.converter.cambio.app_petshop.Model.ServicoEmpresaModel;
 import com.converter.cambio.app_petshop.R;
 import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -75,14 +66,14 @@ import java.util.List;
             LayoutInflater inflater = LayoutInflater.from(context);
             View view = inflater.inflate(R.layout.lst_solicitacoes, null);
 
-            lst_sol_txtNome = (TextView) view.findViewById(R.id.lst_sol_txtNome);
-            lst_sol_txtTelefone = (TextView) view.findViewById(R.id.lst_sol_txtTelefone);
+            lst_sol_txtNome = (TextView) view.findViewById(R.id.lst_sol_txt_cli_nome);
+            lst_sol_txtTelefone = (TextView) view.findViewById(R.id.lst_sol_txt_telefone);
             lst_sol_txt_nome_pet = (TextView) view.findViewById(R.id.lst_sol_txt_nome_pet);
             lst_sol_txt_porte_pet = (TextView) view.findViewById(R.id.lst_sol_txt_porte_pet);
             lst_sol_txt_raca_pet = (TextView) view.findViewById(R.id.lst_sol_txt_raca_pet);
             lst_sol_txt_data_age = (TextView) view.findViewById(R.id.lst_sol_txt_data_age);
             lst_sol_txt_hora_age = (TextView) view.findViewById(R.id.lst_sol_txt_hora_age);
-            lst_sol_txtStatus = (TextView) view.findViewById(R.id.lst_sol_txtStatus);
+            lst_sol_txtStatus = (TextView) view.findViewById(R.id.lst_sol_txt_status);
 
             setaCampos(usuarioModelLista);
 

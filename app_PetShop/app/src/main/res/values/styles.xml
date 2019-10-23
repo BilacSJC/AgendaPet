@@ -21,7 +21,7 @@
         parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
 
         <!-- Cor -->
-        <item name="android:textColor">#FFF</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

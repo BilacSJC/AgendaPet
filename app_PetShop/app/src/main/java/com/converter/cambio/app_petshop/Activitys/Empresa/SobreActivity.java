@@ -10,12 +10,18 @@ import com.converter.cambio.app_petshop.R;
 
 public class SobreActivity extends AppCompatActivity {
     private String idUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_sobre);
         inicializaCampos();
+        getExtraIdUsuario();
         configuraNavBar();
+    }
+
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 
     private void configuraNavBar() {

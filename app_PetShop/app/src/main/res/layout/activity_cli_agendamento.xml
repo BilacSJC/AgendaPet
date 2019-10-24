@@ -118,6 +118,7 @@
                 android:text="@string/agendar"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:backgroundTint="@color/mediumBlue"
                 style="@style/Widget.MaterialComponents.Button"/>
 
             <android.support.design.button.MaterialButton
@@ -129,6 +130,7 @@
                 android:layout_toStartOf="@id/alt_age_btn_alterar"
                 android:layout_toLeftOf="@id/alt_age_btn_alterar"
                 android:text="@string/limpar"
+                android:textColor="@color/mediumBlue"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
         </RelativeLayout>
 

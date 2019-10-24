@@ -181,7 +181,7 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
                         if(lstEmpresas.size() <= 0){
                             lstEmpresaNome.add("Nenhuma empresa cadastrada");
                         }else{
-                            lstEmpresaNome.add("Selecione uma Empresa");
+                            lstEmpresaNome.add("Selecione um PetShop");
                         }
 
                         for(int i = 0; i < lstEmpresas.size(); i++) {

@@ -25,15 +25,31 @@
             android:textColor="@color/cinzaClaro"
             android:textSize="18sp" />
 
-
-        <TextView
-            android:id="@+id/lst_age_txt_emp_nome"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Empresa: "
-            android:textAlignment="textStart"
-            android:layout_marginStart="2dp"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/lst_age_txt_emp_nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_toEndOf="@id/txtNome"
+                android:layout_toRightOf="@id/txtNome"
+                android:text=""
+                android:textAlignment="textStart"
+                android:layout_marginStart="2dp"/>
+            <TextView
+                android:id="@+id/txtNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Empresa:   "
+                android:textColor="#363636"
+                android:fontFamily="Times New Roman"
+                android:textAlignment="textStart"
+                android:layout_marginStart="2dp"/>
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/lst_age_txt_ser_preco"

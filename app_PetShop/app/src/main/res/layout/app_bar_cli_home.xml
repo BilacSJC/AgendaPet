@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@mipmap/ic_launcher_add"/>
+        app:srcCompat="@mipmap/ic_launcher_add"
+        android:backgroundTint="@color/mediumBlue"/>
 
     <include layout="@layout/content_cli_home"/>
 

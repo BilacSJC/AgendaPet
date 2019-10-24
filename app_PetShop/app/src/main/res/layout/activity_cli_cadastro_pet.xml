@@ -60,17 +60,35 @@
                 android:hint="@string/idade" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Sexo"
+            android:textSize="18dp"
+            android:textColor="#363636" />
         <Spinner
             android:id="@+id/cad_pet_spn_sexo"
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:layout_margin="20dp" />
+            android:layout_marginHorizontal="20dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:text="Porte"
+            android:textSize="18dp"
+            android:textColor="#363636" />
         <Spinner
             android:id="@+id/cad_pet_spn_porte"
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:layout_margin="20dp" />
+            android:layout_marginHorizontal="20dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -83,6 +101,7 @@
                 android:text="@string/cadastrar"
                 android:layout_margin="20dp"
                 android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/mediumBlue"
                 style="@style/Widget.MaterialComponents.Button"/>
 
         </RelativeLayout>

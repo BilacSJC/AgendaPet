@@ -8,8 +8,8 @@
     <string name="action_settings">Settings</string>
 
     // Tela de entrada
-    <string name="btn_cliente">Sou Cliente</string>
-    <string name="btn_empresa">Sou PetShop</string>
+    <string name="btn_cliente">Cliente</string>
+    <string name="btn_empresa">PetShop</string>
     <string name="app_name">Agenda Pet</string>
     <string name="menu_home">Home</string>
     <string name="menu_historico">Histórico</string>

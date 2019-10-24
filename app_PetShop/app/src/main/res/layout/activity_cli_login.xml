@@ -58,7 +58,7 @@
             android:layout_gravity="center"
             android:layout_marginVertical="8dp"
             android:text="Esqueceu / Renovar senha"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/mediumBlue"
             android:textSize="16sp" />
 
         <RelativeLayout
@@ -68,12 +68,15 @@
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/login_btn_login"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="@string/login"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                style="@style/Widget.MaterialComponents.Button"/>
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/mediumBlue"
+                android:text="@string/login" />
 
 
             <android.support.design.button.MaterialButton
@@ -84,7 +87,7 @@
                 android:layout_toStartOf="@id/login_btn_login"
                 android:layout_toLeftOf="@id/login_btn_login"
                 android:background="@color/cardview_light_background"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/mediumBlue"
                 android:text="@string/cadastrar"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
         </RelativeLayout>

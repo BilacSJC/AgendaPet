@@ -216,7 +216,7 @@ public class HomeEmpActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_emp_horario_funcionamento) {
-            Intent intent = new Intent(HomeEmpActivity.this, HomeEmpActivity.class);
+            Intent intent = new Intent(HomeEmpActivity.this, HorarioFuncionamentoActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();

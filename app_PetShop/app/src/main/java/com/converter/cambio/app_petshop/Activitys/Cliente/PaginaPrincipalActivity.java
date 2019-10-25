@@ -214,6 +214,11 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
+        } else if (id == R.id.nav_cli_pet) {
+            Intent intent = new Intent(PaginaPrincipalActivity.this, CadastroPetActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_cli_historico) {
             Intent intent = new Intent(PaginaPrincipalActivity.this, HistoricoAgendamentosActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
@@ -229,12 +234,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        }else if (id == R.id.nav_cli_pet) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, CadastroPetActivity.class);
-            intent.putExtra("ID_USUARIO", idUsuario);
-            startActivity(intent);
-            finish();
-        }else if (id == R.id.nav_cli_sair) {
+        } else if (id == R.id.nav_cli_sair) {
             Intent intent = new Intent(PaginaPrincipalActivity.this, LoginClienteActivity.class);
             startActivity(intent);
             finish();

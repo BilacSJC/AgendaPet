@@ -2,10 +2,14 @@ package com.converter.cambio.app_petshop.Activitys.Empresa;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.button.MaterialButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.R;
@@ -18,6 +22,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class HorarioFuncionamentoActivity extends AppCompatActivity {
 
     private String idUsuario;
+
+    private EditText edtHorarioSemanaInicio, edtHorarioSemanaFim, edtHorarioFdsInicio, edtHorarioFdsFim;
+    private CheckBox chkFdsFechado;
+    private MaterialButton btnConfirmar;
 
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
@@ -45,6 +53,14 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
     }
 
     private void inicializarComponentes() {
+        edtHorarioSemanaInicio = findViewById(R.id.hor_fun_edt_semana_inicio);
+        edtHorarioSemanaFim = findViewById(R.id.hor_fun_edt_semana_fim);
+        edtHorarioFdsInicio = findViewById(R.id.hor_fun_edt_fds_feriados_inicio);
+        edtHorarioFdsFim = findViewById(R.id.hor_fun_edt_fds_feriados_fim);
+
+        chkFdsFechado = findViewById(R.id.hor_fun_chk_fds_feriados_fechado);
+
+        btnConfirmar = findViewById(R.id.hor_fun_btn_confirmar);
     }
 
     private void inicializarFirebase() {
@@ -76,6 +92,12 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
     }
 
     private void eventosClick() {
+        btnConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 }

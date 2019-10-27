@@ -48,6 +48,10 @@
     <string name="remarcar">Remarcar</string>
     <string name="cancelar">Cancelar</string>
     <string name="editar">Editar</string>
+    <string name="horario_func_inicio">Das</string>
+    <string name="horario_func_fim">Às</string>
+    <string name="horario_func_fechado">Fechado</string>
+
 
 
     //Tabelas do Banco de Dados
@@ -63,16 +67,5 @@
 
     <string name="title_activity_home_empresa">HomeEmpresaActivity</string>
     <string name="title_activity_home_emp">HomeEmpActivity</string>
-
-    <string-array name="lista_pet_sexo">
-        <item>Macho</item>
-        <item>Fêmea</item>
-    </string-array>
-    <string-array name="lista_pet_porte">
-        <item>Pequeno</item>
-        <item>Médio</item>
-        <item>Grande</item>
-    </string-array>
-
 
 </resources>

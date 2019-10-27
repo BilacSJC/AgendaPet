@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activitys.Empresa.HorarioFuncionamentoAddActivity"></activity>
-        <activity android:name=".Activitys.Empresa.HorarioFuncionamentoActivity" />
+        <activity android:name=".Activitys.Empresa.HorarioFuncionamentoActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activitys.Empresa.VisualizarSolicitacaoActivity"
             android:screenOrientation="portrait" />

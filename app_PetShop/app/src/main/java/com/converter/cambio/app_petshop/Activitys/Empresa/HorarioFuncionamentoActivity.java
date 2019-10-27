@@ -1,5 +1,6 @@
 package com.converter.cambio.app_petshop.Activitys.Empresa;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.button.MaterialButton;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.R;
@@ -19,6 +21,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class HorarioFuncionamentoActivity extends AppCompatActivity {
 
     private String idUsuario;
@@ -26,6 +30,11 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
     private EditText edtHorarioSemanaInicio, edtHorarioSemanaFim, edtHorarioFdsInicio, edtHorarioFdsFim;
     private CheckBox chkFdsFechado;
     private MaterialButton btnConfirmar;
+
+    private Calendar calendar;
+    private int hora, minuto;
+    String amPm;
+    private TimePickerDialog tpdHorarioSemanaInicio, tpdHorarioSemanaFim, tpdHorarioFdsInicio, tpdHorarioFdsFim;
 
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
@@ -41,6 +50,7 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_horario_funcionamento);
 
+        context = HorarioFuncionamentoActivity.this;
         getExtraIdUsuario();
         inicializarComponentes();
         inicializarFirebase();
@@ -98,6 +108,91 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
 
             }
         });
+
+        edtHorarioSemanaInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        edtHorarioSemanaInicio.setText(hourOfDay + ":" + minutes);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
+
+        edtHorarioSemanaFim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        edtHorarioSemanaFim.setText(hourOfDay + ":" + minutes);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
+
+        edtHorarioFdsInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        edtHorarioFdsInicio.setText(hourOfDay + ":" + minutes);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
+
+        edtHorarioFdsFim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        edtHorarioFdsFim.setText(hourOfDay + ":" + minutes);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
+
     }
+
+    public void horarioAtual() {
+        calendar = Calendar.getInstance();
+        hora = calendar.get(Calendar.HOUR_OF_DAY);
+        minuto = calendar.get(Calendar.MINUTE);
+    }
+
+//    public void selectedTimeFormat() {
+//        if (hora == 0) {
+//            hora += 12;
+//            amPm = "AM";
+//        } else if (hora == 12) {
+//            amPm = "PM";
+//        } else if (hora > 12){
+//            hora -= 12;
+//            amPm = "PM";
+//        } else {
+//            amPm = "AM";
+//        }
+//    }
 
 }

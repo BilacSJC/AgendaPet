@@ -52,7 +52,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/horario_func_inicio"
-                    android:inputType="time" />
+                    android:inputType="time"
+                    android:focusable="false"
+                    android:timePickerMode="clock" />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -82,7 +84,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/horario_func_fim"
-                    android:inputType="time" />
+                    android:inputType="time"
+                    android:focusable="false"
+                    android:timePickerMode="clock" />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -104,6 +108,7 @@
             android:layout_marginBottom="8dp"
             android:textSize="18dp"
             android:textColor="#757575"
+            android:checked="false"
             android:text="@string/horario_func_fechado"></android.support.v7.widget.AppCompatCheckBox>
 
         <LinearLayout
@@ -130,7 +135,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/horario_func_inicio"
-                    android:inputType="time" />
+                    android:inputType="time"
+                    android:focusable="false"
+                    android:timePickerMode="clock"/>
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -160,7 +167,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/horario_func_fim"
-                    android:inputType="time" />
+                    android:inputType="time"
+                    android:focusable="false"
+                    android:timePickerMode="clock"/>
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>

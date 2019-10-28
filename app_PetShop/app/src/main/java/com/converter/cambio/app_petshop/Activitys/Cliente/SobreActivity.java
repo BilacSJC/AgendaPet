@@ -22,12 +22,13 @@ public class SobreActivity extends AppCompatActivity {
         getExtraIdUsuario();
         configuraNavBar();
 
-        btnAgendamento = findViewById(R.id.sob_btn_agendamento);
+        btnAgendamento = findViewById(R.id.sob_cli_btn_agendamento);
 
         btnAgendamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SobreActivity.this, PaginaPrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
             }
         });

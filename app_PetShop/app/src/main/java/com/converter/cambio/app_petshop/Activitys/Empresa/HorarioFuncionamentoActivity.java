@@ -116,7 +116,13 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        edtHorarioSemanaInicio.setText(hourOfDay + ":" + minutes);
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+
+                        edtHorarioSemanaInicio.setText(strTempo);
                     }
                 }, hora, minuto, true);
 
@@ -132,7 +138,12 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        edtHorarioSemanaFim.setText(hourOfDay + ":" + minutes);
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+                        edtHorarioSemanaFim.setText(strTempo);
                     }
                 }, hora, minuto, true);
 
@@ -148,7 +159,12 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        edtHorarioFdsInicio.setText(hourOfDay + ":" + minutes);
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+                        edtHorarioFdsInicio.setText(strTempo);
                     }
                 }, hora, minuto, true);
 
@@ -164,7 +180,12 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        edtHorarioFdsFim.setText(hourOfDay + ":" + minutes);
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+                        edtHorarioFdsFim.setText(strTempo);
                     }
                 }, hora, minuto, true);
 
@@ -173,6 +194,16 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String intTimeToStr(int intTime) {
+        String strTime;
+        if(intTime >= 0 && intTime < 10){
+            strTime = "0"+intTime;
+        }else{
+            strTime = String.valueOf(intTime);
+        }
+        return strTime;
     }
 
     public void horarioAtual() {

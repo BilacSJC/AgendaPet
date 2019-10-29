@@ -21,7 +21,6 @@ import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSp
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
-import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.Model.EnderecoModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_cli_topo"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_cli_home"
             android:icon="@drawable/ic_home"
@@ -20,6 +22,11 @@
             android:id="@+id/nav_cli_historico"
             android:icon="@drawable/ic_historico"
             android:title="@string/menu_historico" />
+    </group>
+
+    <group
+        android:id="@+id/menu_cli_abaixo"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_cli_perfil"
             android:icon="@drawable/ic_perfil"

@@ -110,7 +110,9 @@ public class HomeEmpActivity extends AppCompatActivity
                         for(DataSnapshot objSnp : dSnp.getChildren())
                         {
                             AgendamentoViewModel a = objSnp.getValue(AgendamentoViewModel.class);
-                            lstAgendamentoModel.add(a);
+                            if(a.getAlt_age_status().equals("Aguardando Confirmação")) {
+                                lstAgendamentoModel.add(a);
+                            }
                             idCliente = a.getAge_cli_id();
                         }
 

@@ -5,9 +5,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Activitys.Cliente.LoginClienteActivity;
 import com.converter.cambio.app_petshop.Activitys.Empresa.Adapter.ListaAdapterSolicitacoes;
@@ -33,11 +36,11 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private FireBaseQuery firebaseQuery = new FireBaseQuery();
- 
+
     private EditText txtEmail, txtSenha;
     private TextView txtEsqueceuSenha;
     private Date data = new Date();
-    
+
     private MetodosPadraoController m = new MetodosPadraoController();
     private String idUsuario, idPet,idCliente;
 
@@ -49,8 +52,15 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
         inicializaCampos();
         configuraNavBar();
         inicializarFirebase();
+        lstAgendamentos = findViewById(R.id.hst_lst_sol);
+        getLstAgendamentos();
 
-        registerForContextMenu(lstAgendamentos);
+        lstAgendamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getBaseContext(),"OKOK",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void inicializarFirebase() {
@@ -60,7 +70,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     }
 
     private void inicializaCampos() {
-        lstAgendamentos = (ListView) findViewById(R.id.lstSolicitacoes);
+//        lstAgendamentos = (ListView) findViewById(R.id.lstSolicitacoes);
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 
@@ -71,20 +81,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(HistoricoSolicitacoesActivity.this, HomeEmpActivity.class);
-                intent.putExtra("ID_USUARIO", idUsuario);
-                startActivity(intent);
-                finish();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
+
     private void getExtraIdUsuario() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
@@ -100,13 +97,13 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
         if(lstAgendamentos == null){
 
             lstAgendamentos = new ArrayList<>();
-        }            
+        }
 
         atualizaLista(lstAgendamentos);
     }
 
     private void getLstAgendamentos() {
-        databaseReference.child("Agendamentos").orderByChild("age_id").equalTo(idUsuario)
+        databaseReference.child("Agendamentos").orderByChild("emp_id").equalTo(idUsuario)
                 .addValueEventListener(new ValueEventListener(){
                     @Override
                     public void onDataChange(DataSnapshot dSnp)

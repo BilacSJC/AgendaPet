@@ -98,7 +98,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        
+
     }
 
     private void getLstAgendamentoModel() {
@@ -113,7 +113,9 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                         for(DataSnapshot objSnp : dSnp.getChildren())
                         {
                             AgendamentoViewModel a = objSnp.getValue(AgendamentoViewModel.class);
-                            lstAgendamentoModel.add(a);
+                            if(a.getAlt_age_status().equals("Aguardando Confirmação")) {
+                                lstAgendamentoModel.add(a);
+                            }
 //                            lstIdEmp.add(a.getAge_emp_id());
 //                            lstIdPet.add(a.getAge_pet_id());
                         }

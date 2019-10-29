@@ -7,11 +7,32 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.Adapter.ListaAdapter;
+import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.R;
+import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HistoricoAgendamentosActivity extends AppCompatActivity {
     private String idUsuario;
+    private ListView lstAgendamentos;
+    private List<AgendamentoViewModel> lstAgendamentoModel = new ArrayList<>();
+    private DatabaseReference databaseReference;
+    private MetodosPadraoController m = new MetodosPadraoController();
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +40,68 @@ public class HistoricoAgendamentosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cli_historico_agendamentos);
         configuraNavBar();
         getExtraIdUsuario();
+        inicializarFirebase();
+        lstAgendamentos = findViewById(R.id.hst_lst_age);
+        getLstAgendamentoModel();
+
+        lstAgendamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getBaseContext(),"OKOK",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getLstAgendamentoModel() {
+
+        databaseReference.child("Agendamento").orderByChild("age_cli_id").equalTo(idUsuario)
+                .addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp)
+                    {
+                        List<AgendamentoViewModel> lstVazia = new ArrayList<>();
+                        lstAgendamentoModel = lstVazia;
+                        for(DataSnapshot objSnp : dSnp.getChildren())
+                        {
+                            AgendamentoViewModel a = objSnp.getValue(AgendamentoViewModel.class);
+                            lstAgendamentoModel.add(a);
+                        }
+
+                        if(lstAgendamentoModel.size() <= 0){
+                            m.alertToast(HistoricoAgendamentosActivity.this,"Você não possui nenhum agendamento");
+                        }else{
+
+                            atualizaLista(lstAgendamentoModel);
+
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+    }
+
+    private void atualizaLista(final List<AgendamentoViewModel> listAgendamentos) {
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                try{
+                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, listAgendamentos, HistoricoAgendamentosActivity.this);
+                    lstAgendamentos.setAdapter(filaAdapter);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(HistoricoAgendamentosActivity.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
     private void configuraNavBar() {

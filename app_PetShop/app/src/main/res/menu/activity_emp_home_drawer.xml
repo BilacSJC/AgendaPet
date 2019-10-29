@@ -19,10 +19,6 @@
             android:icon="@drawable/ic_historico"
             android:title="@string/menu_historico" />
         <item
-            android:id="@+id/nav_emp_horario_funcionamento"
-            android:icon="@drawable/ic_horario_funcionamento"
-            android:title="@string/menu_horario_funcionamento" />
-        <item
             android:id="@+id/nav_emp_lst_servicos"
             android:icon="@drawable/ic_lista_servicos"
             android:title="@string/menu_lst_servicos" />
@@ -38,6 +34,10 @@
             android:id="@+id/nav_emp_perfil"
             android:icon="@drawable/ic_perfil"
             android:title="@string/menu_perfil" />
+        <item
+            android:id="@+id/nav_emp_horario_funcionamento"
+            android:icon="@drawable/ic_horario_funcionamento"
+            android:title="@string/menu_horario_funcionamento" />
         <item
             android:id="@+id/nav_emp_sobre"
             android:icon="@drawable/ic_info"

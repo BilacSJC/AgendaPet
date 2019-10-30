@@ -207,12 +207,8 @@ public class HomeEmpActivity extends AppCompatActivity
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_emp_solicitacoes)  {
-            Intent intent = new Intent(HomeEmpActivity.this, VisualizarSolicitacaoActivity.class);
-            intent.putExtra("ID_USUARIO", idUsuario);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_emp_historico) {
+        }
+         else if (id == R.id.nav_emp_historico) {
             Intent intent = new Intent(HomeEmpActivity.this, HistoricoSolicitacoesActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);

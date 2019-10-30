@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_emp_solicitacoes"
-            android:icon="@drawable/ic_agenda"
-            android:title="@string/menu_solicitacoes" />
-        <item
             android:id="@+id/nav_emp_historico"
             android:icon="@drawable/ic_historico"
             android:title="@string/menu_historico" />

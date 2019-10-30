@@ -101,11 +101,11 @@ public class PerfilActivity extends AppCompatActivity {
             contMsg += 1;
         }
         if(!strMensagemCpf.equals("ok")){
-            edtCpf.setError(strMensagemNome);
+            edtCpf.setError(strMensagemCpf);
             contMsg += 1;
         }
         if(!strMensagemTelefone.equals("ok")){
-            edtTelefone.setError(strMensagemNome);
+            edtTelefone.setError(strMensagemTelefone);
             contMsg += 1;
         }
 

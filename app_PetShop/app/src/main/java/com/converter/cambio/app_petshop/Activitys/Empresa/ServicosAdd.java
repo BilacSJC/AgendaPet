@@ -127,7 +127,7 @@ public class ServicosAdd extends AppCompatActivity {
             servicoModel.setSer_id(UUID.randomUUID().toString().trim());
             servicoModel.setSer_emp_id(idUsuario);
             servicoModel.setSer_nome(edtNome.getText().toString().trim());
-            servicoModel.setSer_preco("R$ " + edtPreco.getText().toString().trim() + ",00");
+            servicoModel.setSer_preco(edtPreco.getText().toString().trim());
 
             return servicoModel;
         }

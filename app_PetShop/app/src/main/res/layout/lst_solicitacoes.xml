@@ -103,7 +103,7 @@
                 android:layout_height="38dp"
                 android:layout_weight="1"
                 android:text="@string/remarcar"
-                card_view:backgroundTint="#F0C908" />
+                card_view:backgroundTint="#ffa500" />
 
             <Button
                 android:id="@+id/lst_sol_btn_confirmar"
@@ -111,7 +111,7 @@
                 android:layout_height="38dp"
                 android:layout_weight="1"
                 android:text="@string/confirmar"
-                card_view:backgroundTint="#40B444" />
+                card_view:backgroundTint="#3cb371" />
 
         </LinearLayout>
 

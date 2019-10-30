@@ -112,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:text="@string/confirmar"
+                android:backgroundTint="@color/mediumBlue"
                 android:layout_alignParentEnd="true"
                 style="@style/Widget.MaterialComponents.Button"/>
 
@@ -124,7 +125,7 @@
                 android:layout_toStartOf="@id/vis_sol_emp_btn_confirmar"
                 android:layout_toLeftOf="@id/vis_sol_emp_btn_confirmar"
                 android:background="@color/cardview_light_background"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/mediumBlue"
                 android:text="@string/remarcar"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
         </RelativeLayout>

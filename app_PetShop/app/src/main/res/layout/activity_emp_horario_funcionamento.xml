@@ -26,6 +26,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="Segunda à Sexta:"
+            android:textColor="#363636"
             android:textSize="22dp" />
 
         <LinearLayout
@@ -77,6 +78,7 @@
             android:layout_marginStart="26dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
+            android:textColor="#363636"
             android:text="Fim de semana e Feriados:"
             android:textSize="22dp" />
 
@@ -145,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="20dp"
-                android:text="@string/confirmar" />
+                android:text="@string/confirmar"
+                android:backgroundTint="@color/mediumBlue"/>
         </RelativeLayout>
 
     </LinearLayout>

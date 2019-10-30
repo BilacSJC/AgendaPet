@@ -1,7 +1,9 @@
 package com.converter.cambio.app_petshop.Activitys.Empresa;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,7 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.Adapter.ListaAdapter;
+import com.converter.cambio.app_petshop.Activitys.Cliente.HistoricoAgendamentosActivity;
 import com.converter.cambio.app_petshop.Activitys.Cliente.LoginClienteActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
 import com.converter.cambio.app_petshop.Activitys.Empresa.Adapter.ListaAdapterSolicitacoes;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
@@ -33,6 +38,7 @@ import java.util.List;
 public class HistoricoSolicitacoesActivity extends AppCompatActivity {
 
     private ListView lstAgendamentos;
+    private List<AgendamentoViewModel> lstAgendamentoModel = new ArrayList<>();
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private FireBaseQuery firebaseQuery = new FireBaseQuery();
@@ -49,16 +55,60 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_historico_solicitacoes);
         getExtraIdUsuario();
-        inicializaCampos();
         configuraNavBar();
         inicializarFirebase();
         lstAgendamentos = findViewById(R.id.hst_lst_sol);
-        getLstAgendamentos();
+        getLstAgendamentoModel();
 
         lstAgendamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(),"OKOK",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void getLstAgendamentoModel() {
+
+        databaseReference.child("Agendamento").orderByChild("age_emp_id").equalTo(idUsuario)
+                .addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp)
+                    {
+                        List<AgendamentoViewModel> lstVazia = new ArrayList<>();
+                        lstAgendamentoModel = lstVazia;
+                        for(DataSnapshot objSnp : dSnp.getChildren())
+                        {
+                            AgendamentoViewModel a = objSnp.getValue(AgendamentoViewModel.class);
+                            lstAgendamentoModel.add(a);
+                        }
+
+                        if(lstAgendamentoModel.size() <= 0){
+                            m.alertToast(HistoricoSolicitacoesActivity.this,"Não há nenhuma solicitação no momento");
+                        }else{
+
+                            atualizaLista(lstAgendamentoModel);
+
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+    }
+
+    private void atualizaLista(final List<AgendamentoViewModel> listAgendamentos) {
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                try{
+                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, listAgendamentos, HistoricoSolicitacoesActivity.this);
+                    lstAgendamentos.setAdapter(filaAdapter);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
     }
@@ -69,73 +119,40 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
     }
 
-    private void inicializaCampos() {
-//        lstAgendamentos = (ListView) findViewById(R.id.lstSolicitacoes);
-        idUsuario = getIntent().getStringExtra("ID_USUARIO");
-    }
-
     private void configuraNavBar() {
-        setTitle("Lista de Usuários");
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-    }
-
-
-    private void getExtraIdUsuario() {
-        idUsuario = getIntent().getStringExtra("ID_USUARIO");
+        setTitle("Histórico");
+        ActionBar actionBar = getSupportActionBar(); //instancia objt da BAR
+        actionBar.setDisplayHomeAsUpEnabled(true); //exibe o icone
+        actionBar.setHomeButtonEnabled(true); //habilita click
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        List<AgendamentoViewModel> lstAgendamentos = new ArrayList<>();
-
-        getLstAgendamentos();
-
-        if(lstAgendamentos == null){
-
-            lstAgendamentos = new ArrayList<>();
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(HistoricoSolicitacoesActivity.this, PaginaPrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
         }
-
-        atualizaLista(lstAgendamentos);
+        return true;
     }
 
-    private void getLstAgendamentos() {
-        databaseReference.child("Agendamentos").orderByChild("emp_id").equalTo(idUsuario)
-                .addValueEventListener(new ValueEventListener(){
+    private void  alertDialog(String strTitle, String strMsg){
+        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(strTitle)
+                .setMessage(strMsg)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dSnp)
-                    {
-                        for(DataSnapshot objSnp : dSnp.getChildren())
-                        {
-                            AgendamentoModel a = objSnp.getValue(AgendamentoModel.class);
-                            idPet = a.getAge_pet_id();
-                            idCliente = a.getAge_cli_id();
-                            break;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {}
-                });
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    } }).show();
     }
 
-    private void atualizaLista(final List<AgendamentoViewModel> lstAgendamentos) {
-
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-
-                try{
-                    ListaAdapterSolicitacoes filaAdapter = new ListaAdapterSolicitacoes(idUsuario, lstAgendamentos, HistoricoSolicitacoesActivity.this);
-                    HistoricoSolicitacoesActivity.this.lstAgendamentos.setAdapter(filaAdapter);
-                }
-                catch (Exception ex){
-                    ex.printStackTrace();
-                }
-            }
-        });
+    private void getExtraIdUsuario() {
+        idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
 }

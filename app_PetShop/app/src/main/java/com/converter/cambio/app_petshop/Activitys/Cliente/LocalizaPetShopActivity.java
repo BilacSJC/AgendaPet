@@ -65,6 +65,7 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
                         alertDialog("ATENÇÃO", "Selecione Uma empresa e um serviço.");
                     }
                 }else{
+
                     Intent intent = new Intent(LocalizaPetShopActivity.this, AgendamentoActivity.class);
                     intent.putExtra("ID_USUARIO", idUsuario);
                     intent.putExtra("ID_EMPRESA", empId);

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
@@ -27,6 +28,8 @@ public class ListaAdapter extends BaseAdapter {
     private Context context;
 
     TextView txt_age_emp_nome, txt_age_ser_preco, txt_age_ser_nome_pet, txt_age_data, txt_age_hora, txt_age_status;
+
+    Button age_btn_editar, age_btn_cancelar;
 
     public ListaAdapter(String idUsuario, List<AgendamentoViewModel> lista, Context context)
     {
@@ -74,6 +77,9 @@ public class ListaAdapter extends BaseAdapter {
         txt_age_hora = (TextView) view.findViewById(R.id.lst_age_txt_hora);
         txt_age_status = (TextView) view.findViewById(R.id.lst_age_txt_status);
 
+        age_btn_editar = view.findViewById(R.id.lst_age_btn_editar);
+        age_btn_cancelar = view.findViewById(R.id.lst_age_btn_cancelar);
+
         setaCampos(usuarioModelLista);
 
         return view;
@@ -87,6 +93,7 @@ public class ListaAdapter extends BaseAdapter {
         txt_age_hora.setText("Hora: " + agendamentoModel.getAlt_age_hora().trim());
         txt_age_status.setText("Status: " + agendamentoModel.getAlt_age_status().trim());
         txt_age_emp_nome.setText("Empresa: " + agendamentoModel.getAlt_age_emp_nome());
+
     }
 
 }

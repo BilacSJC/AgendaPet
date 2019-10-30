@@ -107,7 +107,8 @@
                 android:layout_height="38dp"
                 android:layout_weight="1"
                 android:text="@string/cancelar"
-                card_view:backgroundTint="#C90B0B" />
+                card_view:backgroundTint="#C90B0B"
+                android:onClick="bntCancelar"/>
 
             <Button
                 android:id="@+id/lst_age_btn_editar"
@@ -115,7 +116,8 @@
                 android:layout_height="38dp"
                 android:layout_weight="1"
                 android:text="@string/editar"
-                card_view:backgroundTint="@color/design_default_color_primary_dark" />
+                card_view:backgroundTint="@color/design_default_color_primary_dark"
+                android:onClick="btnEditar"/>
 
         </LinearLayout>
 

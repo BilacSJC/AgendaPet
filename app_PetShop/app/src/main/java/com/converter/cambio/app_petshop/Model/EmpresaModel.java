@@ -10,6 +10,10 @@ public class EmpresaModel{
     private String emp_senha;
     private String emp_senha_antiga;
     private String emp_data_ultima_alteracao_senha;
+    private String emp_hor_sem_ini;
+    private String emp_hor_sem_fim;
+    private String emp_hor_fds_ini;
+    private String emp_hor_fds_fim;
 
     public String getEmp_id() {
         return emp_id;
@@ -81,5 +85,37 @@ public class EmpresaModel{
 
     public void setEmp_id_endereco(String emp__id_endereco) {
         this.emp_id_endereco = emp__id_endereco;
+    }
+
+    public String getEmp_hor_sem_ini() {
+        return emp_hor_sem_ini;
+    }
+
+    public void setEmp_hor_sem_ini(String emp_hor_sem_ini) {
+        this.emp_hor_sem_ini = emp_hor_sem_ini;
+    }
+
+    public String getEmp_hor_sem_fim() {
+        return emp_hor_sem_fim;
+    }
+
+    public void setEmp_hor_sem_fim(String emp_hor_sem_fim) {
+        this.emp_hor_sem_fim = emp_hor_sem_fim;
+    }
+
+    public String getEmp_hor_fds_ini() {
+        return emp_hor_fds_ini;
+    }
+
+    public void setEmp_hor_fds_ini(String emp_hor_fds_ini) {
+        this.emp_hor_fds_ini = emp_hor_fds_ini;
+    }
+
+    public String getEmp_hor_fds_fim() {
+        return emp_hor_fds_fim;
+    }
+
+    public void setEmp_hor_fds_fim(String emp_hor_fds_fim) {
+        this.emp_hor_fds_fim = emp_hor_fds_fim;
     }
 }

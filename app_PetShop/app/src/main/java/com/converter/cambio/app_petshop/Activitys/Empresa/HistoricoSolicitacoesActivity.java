@@ -130,7 +130,7 @@ public class HistoricoSolicitacoesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(HistoricoSolicitacoesActivity.this, PaginaPrincipalActivity.class);
+                Intent intent = new Intent(HistoricoSolicitacoesActivity.this, HomeEmpActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();

@@ -1,5 +1,6 @@
 package com.converter.cambio.app_petshop.Activitys.Empresa;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
 import com.converter.cambio.app_petshop.Activitys.Cliente.PerfilActivity;
@@ -37,6 +39,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -45,8 +48,11 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
 
     private EditText edtNome, edtEmail, edtCnpj, edtTelefone, edtSenha;
     private EditText edtCidade, edtBairro, edtLogradouro, edtNumero, edtCep;
+    private EditText edtHorarioSemanaInicio, edtHorarioSemanaFim, edtHorarioFdsInicio, edtHorarioFdsFim;
     private MaterialButton btnCadastrar;
     private Spinner spnEstado;
+    private Calendar calendar;
+    private int hora, minuto;
 
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
@@ -58,6 +64,7 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
     private ValidaCampos v;
     private MetodosPadraoController m = new MetodosPadraoController();
     private GeradorListSpinnerController geradorListSpinnerController = new GeradorListSpinnerController();
+    private TimePickerDialog tpdHorarioSemanaInicio, tpdHorarioSemanaFim, tpdHorarioFdsInicio, tpdHorarioFdsFim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +130,91 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
                 cadastrarUsuario(empresaModel, enderecoModel);
             }
         });
+
+        edtHorarioSemanaInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+
+                        edtHorarioSemanaInicio.setText(strTempo);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
+
+        edtHorarioSemanaFim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+                        edtHorarioSemanaFim.setText(strTempo);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
+
+        edtHorarioFdsInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+                        edtHorarioFdsInicio.setText(strTempo);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
+
+        edtHorarioFdsFim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+                        edtHorarioFdsFim.setText(strTempo);
+                    }
+                }, hora, minuto, true);
+
+                timePickerDialog.show();
+
+            }
+        });
     }
 
     private void cadastrarUsuario(EmpresaModel empresaModel, EnderecoModel enderecoModel) {
@@ -148,6 +240,10 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
 
     private EmpresaModel validacaoInputUsuario() {
         EmpresaModel e = new EmpresaModel();
+        String strMsgHorIni = v.vString(edtHorarioSemanaInicio.getText().toString().trim());
+        String strMsgHorFim = v.vString(edtHorarioSemanaFim.getText().toString().trim());
+        String strMsgFdsIni = v.vString(edtHorarioFdsInicio.getText().toString().trim());
+        String strMsgFdsFim = v.vString(edtHorarioFdsFim.getText().toString().trim());
         String strMsgNome = v.vString(edtNome.getText().toString().trim());
         String strMsgCnpj = v.vStringCnpj(edtCnpj.getText().toString().trim());
         String strMsgTelefone = v.vStringTelefone(edtTelefone.getText().toString().trim());
@@ -161,6 +257,22 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         boolean booCep = v.validacaoBasicaStr(edtCep.getText().toString().trim());
         int contMsg = 0;
 
+        if (!strMsgHorIni.equals("ok")) {
+            edtHorarioSemanaInicio.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!strMsgHorFim.equals("ok")) {
+            edtHorarioSemanaFim.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!strMsgFdsIni.equals("ok")) {
+            edtHorarioFdsInicio.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
+        if (!strMsgFdsFim.equals("ok")) {
+            edtHorarioFdsFim.setError("Campo Obrigatório");
+            contMsg = +1;
+        }
         if (!strMsgEstado.equals("ok")) {
             m.alertDialog(CadastroEmpresaActivity.this, "ATENÇÃO!", "Selecione um Estado.");
         }
@@ -217,6 +329,10 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         e.setEmp_telefone(edtTelefone.getText().toString());
         e.setEmp_senha_antiga(edtSenha.getText().toString().trim());
         e.setEmp_id_endereco(UUID.randomUUID().toString().trim());
+        e.setEmp_hor_sem_ini(edtHorarioSemanaInicio.getText().toString().trim());
+        e.setEmp_hor_sem_fim(edtHorarioSemanaFim.getText().toString().trim());
+        e.setEmp_hor_fds_ini(edtHorarioFdsInicio.getText().toString().trim());
+        e.setEmp_hor_fds_fim(edtHorarioFdsFim.getText().toString().trim());
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         Date data = new Date();
@@ -281,6 +397,21 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         return e;
     }
 
+    private String intTimeToStr(int intTime) {
+        String strTime;
+        if(intTime >= 0 && intTime < 10){
+            strTime = "0"+intTime;
+        }else{
+            strTime = String.valueOf(intTime);
+        }
+        return strTime;
+    }
+
+    public void horarioAtual() {
+        calendar = Calendar.getInstance();
+        hora = calendar.get(Calendar.HOUR_OF_DAY);
+        minuto = calendar.get(Calendar.MINUTE);
+    }
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(CadastroEmpresaActivity.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -310,6 +441,11 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         edtNumero = findViewById(R.id.cad_emp_edt_numero);
         edtCep = findViewById(R.id.cad_emp_edt_cep);
         spnEstado = findViewById(R.id.cad_emp_spn_estado);
+
+        edtHorarioSemanaInicio = findViewById(R.id.cad_hor_fun_edt_semana_inicio);
+        edtHorarioSemanaFim = findViewById(R.id.cad_hor_fun_edt_semana_fim);
+        edtHorarioFdsInicio = findViewById(R.id.cad_hor_fun_edt_fds_feriados_inicio);
+        edtHorarioFdsFim = findViewById(R.id.cad_hor_fun_edt_fds_feriados_fim);
 
         context = CadastroEmpresaActivity.this;
         v = new ValidaCampos();

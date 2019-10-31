@@ -36,6 +36,7 @@ public class SobreActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(SobreActivity.this, HomeEmpActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
                 break;

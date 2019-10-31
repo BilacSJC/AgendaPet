@@ -68,10 +68,10 @@ public class ValidaCampos {
 
             // Verifica se os digitos calculados conferem com os digitos informados.
             if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
-                return "Digite um Cpf válido1";
-            else return "Digite um Cpf válido2";
+                return "ok";
+            else return "Digite um Cpf válido";
         } catch (InputMismatchException erro) {
-            return "Digite um Cpf válido3";
+            return "Digite um Cpf válido";
         }
     }
 

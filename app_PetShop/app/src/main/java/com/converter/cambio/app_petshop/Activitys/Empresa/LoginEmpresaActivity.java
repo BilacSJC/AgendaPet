@@ -178,6 +178,7 @@ public class LoginEmpresaActivity extends AppCompatActivity {
                         }else{ altertToast("E-mail ou senha inválidos!"); }
                     }
                 });
+
     }
 
     private void validaPrazoAlteracaoSenha(EmpresaModel e) {

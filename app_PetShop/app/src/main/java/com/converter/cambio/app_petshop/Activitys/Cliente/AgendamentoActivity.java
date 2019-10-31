@@ -40,10 +40,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class AgendamentoActivity extends AppCompatActivity {
+    private List<PetModel> p = new ArrayList<>();
     private MaterialButton btnSolicitar, btnLimpar;
     private EditText edtData, edtHora;
     private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtNomeCliente, txtTelefoneCliente;
     private Spinner spnNomePet;
+    private List<String> lstPetPorte = new ArrayList<>();
+    private List<String> lstPetRaca = new ArrayList<>();
     private List<String> lstPet = new ArrayList<>();
     private List<String> lstIdPet = new ArrayList<>();
     private String idUsuario, idEmpresa, petNome, petPorte, petRaca, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
@@ -63,9 +66,9 @@ public class AgendamentoActivity extends AppCompatActivity {
         inicializarFirebase();
         getExtraIdUsuario();
         inicializaCampos();
+        preencheSpinnerNomePet();
         configuraNavBar();
         eventosClick();
-        preencheSpinnerNomePet();
     }
 
     private void inicializarFirebase() {
@@ -112,16 +115,11 @@ public class AgendamentoActivity extends AppCompatActivity {
         AgendamentoViewModel a = new AgendamentoViewModel();
         ValidaCampos v = new ValidaCampos();
 
-        String strMensagemData = v.vStringData(edtData.getText().toString().toString());
-        String strMensagemHora = v.vStringHora(edtHora.getText().toString().toString());
-        int intPositionSelected = spnNomePet.getSelectedItemPosition();
+        String strMensagemData = v.vStringData(edtData.getText().toString());
+        String strMensagemHora = v.vStringHora(edtHora.getText().toString());
 
         int contMsg = 0;
 
-//        if(intPositionSelected <= 0){
-//            m.alertDialog(context,"ATENÇÃO!", "Selecione um pet");
-//            contMsg = 1;
-//        }
         if(!strMensagemData.equals("ok")){
             edtData.setError(strMensagemData);
             contMsg += 1;
@@ -137,8 +135,33 @@ public class AgendamentoActivity extends AppCompatActivity {
         a.setAge_cli_id(idUsuario);
         a.setAge_emp_id(idEmpresa);
         a.setAge_id(UUID.randomUUID().toString());
-        getDadosPet(spnNomePet.getSelectedItem().toString());
+
+        String strId = "";
+
+        for (int ia = 0; ia < lstIdPet.size(); ia++){
+            if(ia == spnNomePet.getSelectedItemPosition()){
+                strId = lstIdPet.get(ia);
+                break;
+            }
+        }
+
+        for (int ib = 0; ib < lstPetPorte.size(); ib++){
+            if(ib == spnNomePet.getSelectedItemPosition()){
+                petPorte = lstPetPorte.get(ib);
+                break;
+            }
+        }
+
+        for (int i = 0; i < lstPetRaca.size(); i++){
+            if(i == spnNomePet.getSelectedItemPosition()){
+                petRaca = lstPetRaca.get(i);
+                break;
+            }
+        }
+
         a.setAlt_age_pet_nome(spnNomePet.getSelectedItem().toString());
+        a.setAlt_age_pet_porte(petPorte);
+        a.setAlt_age_pet_raca(petRaca);
         a.setAlt_age_data(edtData.getText().toString().trim());
         a.setAlt_age_hora(edtHora.getText().toString().trim());
         a.setAlt_age_emp_nome(strEmpNome);
@@ -146,23 +169,10 @@ public class AgendamentoActivity extends AppCompatActivity {
         a.setAlt_age_servico(strServico);
         a.setAlt_age_cli_nome(strCliNome);
         a.setAlt_age_cli_telefone(strCliTelefone);
-        a.setAlt_age_status("Aguardando Atendimento");
+        a.setAlt_age_status("Aguardando Confirmação");
 
         return a;
     }
-
-    private void getDadosPet(String toString) {
-
-    }
-
-//    private void getIdPet(int intPetSelectedPosition) {
-//        for (int i = 0; i < lstIdPet.size(); i++){
-//            if(i == intPetSelectedPosition){
-//                idPet = lstIdPet.get(i);
-//                break;
-//            }
-//        }
-//    }
 
     private void configuraNavBar() {
         setTitle("Agendamento");
@@ -210,6 +220,8 @@ public class AgendamentoActivity extends AppCompatActivity {
                     PetModel p = objSnapshot.getValue(PetModel.class);
                     lstPet.add(p.getPet_nome());
                     lstIdPet.add(p.getPet_id());
+                    lstPetPorte.add(p.getPet_porte());
+                    lstPetRaca.add(p.getPet_raca());
                 }
                 ArrayAdapter<String> arrayAdapterPet = new ArrayAdapter<>(AgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
                 spnNomePet.setAdapter(arrayAdapterPet);

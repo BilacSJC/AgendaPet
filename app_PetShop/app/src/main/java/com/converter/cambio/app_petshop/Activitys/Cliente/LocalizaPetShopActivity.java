@@ -1,5 +1,8 @@
 package com.converter.cambio.app_petshop.Activitys.Cliente;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.button.MaterialButton;
@@ -11,8 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
@@ -29,6 +34,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class LocalizaPetShopActivity extends AppCompatActivity {
@@ -53,6 +59,13 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
     private List<String> lstEmpresaNome = new ArrayList<>();
     private List<String> lstServicoNome = new ArrayList<>();
     private List<String> lstEmpresaId = new ArrayList<>();
+
+    Context context = LocalizaPetShopActivity.this;
+
+    private Calendar calendar;
+    private DatePickerDialog dpdData;
+    private TimePickerDialog tpdHora;
+    private int ano, mes, dia, hora, minuto;
 
     private GeradorListSpinnerController geradorListSpinnerController = new GeradorListSpinnerController();
 
@@ -132,6 +145,8 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
 
             }
         });
+
+        eventosClick();
     }
 
     private void configuraNavBar() {
@@ -253,6 +268,61 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
 
     private void getExtraIdUsuario() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
+    }
+
+    private void eventosClick() {
+        edtData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                dpdData = new DatePickerDialog(LocalizaPetShopActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        edtData.setText(day + "/" + month + "/" + year);
+                    }
+                }, ano, mes, dia);
+                dpdData.show();
+            }
+        });
+
+        edtHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog tpd = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora+":"+strMinutes;
+                        edtHora.setText(strTempo);
+                    }
+                }, hora, minuto, true);
+
+                tpd.show();
+            }
+        });
+    }
+
+    public void horarioAtual() {
+        calendar = Calendar.getInstance();
+        ano = calendar.get(Calendar.YEAR);
+        mes = calendar.get(Calendar.MONTH);
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        hora = calendar.get(Calendar.HOUR_OF_DAY);
+        minuto = calendar.get(Calendar.MINUTE);
+    }
+
+    private String intTimeToStr(int intTime) {
+        String strTime;
+        if(intTime >= 0 && intTime < 10){
+            strTime = "0"+intTime;
+        }else{
+            strTime = String.valueOf(intTime);
+        }
+        return strTime;
     }
 
 }

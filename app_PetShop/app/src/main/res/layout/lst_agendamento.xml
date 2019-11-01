@@ -117,7 +117,6 @@
                 android:layout_height="38dp"
                 android:layout_weight="1"
                 android:text="@string/editar"
-                android:onClick="btnEditar"
                 card_view:backgroundTint="#6a5acd"/>
         </LinearLayout>
     </LinearLayout>

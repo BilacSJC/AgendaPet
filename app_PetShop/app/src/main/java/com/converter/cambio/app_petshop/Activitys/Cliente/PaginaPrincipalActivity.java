@@ -51,8 +51,6 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     private List<String> lstIdPet = new ArrayList<>();
     private ListView lstAgendamentos;
 
-    Button age_btn_editar, age_btn_cancelar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,14 +173,36 @@ public class PaginaPrincipalActivity extends AppCompatActivity
 //        });
 //    }
 
-    public void btnEditar(View view){
-        m.alertToast(PaginaPrincipalActivity.this, "Botão EDITAR clicado! Teste bem sucedido (até o momento kk)");
-    }
+//    public void btnEditar(View view){
+//        m.alertToast(PaginaPrincipalActivity.this, "Botão EDITAR clicado! Teste bem sucedido (até o momento kk)");
+//    }
+//
+//    public void bntCancelar(View view){
+//        //int pos = view.getTag();
+//        alertDialogButtonLst("Tem certeza que deseja EXCLUIR agendamento?","Ao excluir o agendamento, não será possível desfazer ação.");
+//    }
 
-    public void bntCancelar(View view){
-        //int pos = view.getTag();
-        alertDialogButtonLst("Tem certeza que deseja EXCLUIR agendamento?","Ao excluir o agendamento, não será possível desfazer ação.");
-    }
+    //    private void  alertDialogButtonLst(String strTitle, String strMsg){
+//        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
+//                .setTitle(strTitle)
+//                .setMessage(strMsg)
+//                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                        m.alertToast(PaginaPrincipalActivity.this,"Botão CANCELAR selecionado!");
+//
+//                    }
+//                })
+//                .setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                        // databaseReference.child("Agendamento").orderByChild()
+//                        m.alertToast(PaginaPrincipalActivity.this,"Botão EXCLUIR selecionado!");
+//
+//                    } }).show();
+//    }
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(PaginaPrincipalActivity.this);
@@ -201,28 +221,6 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
-                    } }).show();
-    }
-
-    private void  alertDialogButtonLst(String strTitle, String strMsg){
-        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
-                .setTitle(strTitle)
-                .setMessage(strMsg)
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        m.alertToast(PaginaPrincipalActivity.this,"Botão CANCELAR selecionado!");
-
-                    }
-                })
-                .setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        // databaseReference.child("Agendamento").orderByChild()
-                        m.alertToast(PaginaPrincipalActivity.this,"Botão EXCLUIR selecionado!");
 
                     } }).show();
     }

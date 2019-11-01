@@ -70,6 +70,6 @@
 
     // Tela Sobre
     <string name="sobre_app">O propósito do aplicativo agenda pet desenvolvido pelo grupo de Faculdade, é facilitar, melhorar e ajudar na procura de pet shops mais proximos, com o intuito de ser uma plataforma simples e fácil de se navegar.</string>
-    <string name="versao_app">Versão 1.0</string>
+    <string name="versao_app">Versão 2.0</string>
 
 </resources>

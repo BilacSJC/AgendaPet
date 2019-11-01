@@ -42,15 +42,13 @@ import java.util.UUID;
 public class AgendamentoActivity extends AppCompatActivity {
     private List<PetModel> p = new ArrayList<>();
     private MaterialButton btnSolicitar, btnLimpar;
-    private EditText edtData, edtHora;
     private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtNomeCliente, txtTelefoneCliente;
-    private Spinner spnNomePet;
     private List<String> lstPetPorte = new ArrayList<>();
     private List<String> lstPetRaca = new ArrayList<>();
     private List<String> lstPet = new ArrayList<>();
     private List<String> lstIdPet = new ArrayList<>();
-    private String idUsuario, idEmpresa, petNome, petPorte, petRaca, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
-
+    private String idUsuario, idEmpresa, strPetNome, strPetRaca, strPorte, petRaca, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone,strData, strHora;
+    private int intNomePet;
     private Context context;
 
     private FirebaseDatabase firebaseDatabase;
@@ -66,7 +64,6 @@ public class AgendamentoActivity extends AppCompatActivity {
         inicializarFirebase();
         getExtraIdUsuario();
         inicializaCampos();
-        preencheSpinnerNomePet();
         configuraNavBar();
         eventosClick();
     }
@@ -78,15 +75,6 @@ public class AgendamentoActivity extends AppCompatActivity {
     }
 
     private void eventosClick() {
-        btnLimpar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edtData.setText("");
-                edtHora.setText("");
-                spnNomePet.setSelection(0);
-            }
-        });
-
         btnSolicitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,19 +103,7 @@ public class AgendamentoActivity extends AppCompatActivity {
         AgendamentoViewModel a = new AgendamentoViewModel();
         ValidaCampos v = new ValidaCampos();
 
-        String strMensagemData = v.vStringData(edtData.getText().toString());
-        String strMensagemHora = v.vStringHora(edtHora.getText().toString());
-
         int contMsg = 0;
-
-        if(!strMensagemData.equals("ok")){
-            edtData.setError(strMensagemData);
-            contMsg += 1;
-        }
-        if(!strMensagemHora.equals("ok")){
-            edtHora.setError(strMensagemHora);
-            contMsg += 1;
-        }
 
         if(contMsg > 0){
             return new AgendamentoViewModel();
@@ -138,32 +114,11 @@ public class AgendamentoActivity extends AppCompatActivity {
 
         String strId = "";
 
-        for (int ia = 0; ia < lstIdPet.size(); ia++){
-            if(ia == spnNomePet.getSelectedItemPosition()){
-                strId = lstIdPet.get(ia);
-                break;
-            }
-        }
-
-        for (int ib = 0; ib < lstPetPorte.size(); ib++){
-            if(ib == spnNomePet.getSelectedItemPosition()){
-                petPorte = lstPetPorte.get(ib);
-                break;
-            }
-        }
-
-        for (int i = 0; i < lstPetRaca.size(); i++){
-            if(i == spnNomePet.getSelectedItemPosition()){
-                petRaca = lstPetRaca.get(i);
-                break;
-            }
-        }
-
-        a.setAlt_age_pet_nome(spnNomePet.getSelectedItem().toString());
-        a.setAlt_age_pet_porte(petPorte);
-        a.setAlt_age_pet_raca(petRaca);
-        a.setAlt_age_data(edtData.getText().toString().trim());
-        a.setAlt_age_hora(edtHora.getText().toString().trim());
+        a.setAlt_age_pet_nome(strPetNome);
+        a.setAlt_age_pet_porte(strPorte);
+        a.setAlt_age_pet_raca(strPetRaca);
+        a.setAlt_age_data(strData);
+        a.setAlt_age_hora(strHora);
         a.setAlt_age_emp_nome(strEmpNome);
         a.setAlt_age_emp_endereco(strEmpEnd);
         a.setAlt_age_servico(strServico);
@@ -207,42 +162,9 @@ public class AgendamentoActivity extends AppCompatActivity {
                     } }).show();
     }
 
-    private void preencheSpinnerNomePet() {
-        Query query;
-        query = databaseReference.child("Pet").orderByChild("pet_cli_id").equalTo(idUsuario);
-
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                lstPet.clear();
-
-                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    PetModel p = objSnapshot.getValue(PetModel.class);
-                    lstPet.add(p.getPet_nome());
-                    lstIdPet.add(p.getPet_id());
-                    lstPetPorte.add(p.getPet_porte());
-                    lstPetRaca.add(p.getPet_raca());
-                }
-                ArrayAdapter<String> arrayAdapterPet = new ArrayAdapter<>(AgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
-                spnNomePet.setAdapter(arrayAdapterPet);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
     private void inicializaCampos() {
         btnSolicitar = findViewById(R.id.alt_age_btn_alterar);
         btnLimpar = findViewById(R.id.alt_age_btn_limpar);
-
-        spnNomePet = findViewById(R.id.alt_age_cli_spn_pet);
-
-        edtData = findViewById(R.id.alt_age_cli_edt_data);
-        edtHora = findViewById(R.id.alt_age_cli_edt_hora);
-
         txtNomeEmpresa = findViewById(R.id.alt_age_cli_txt_nome_empresa);
         txtEnderecoEmpresa = findViewById(R.id.alt_age_cli_txt_endereco_empresa);
         txtServico = findViewById(R.id.alt_age_cli_txt_servico);
@@ -260,6 +182,11 @@ public class AgendamentoActivity extends AppCompatActivity {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
         idEmpresa = getIntent().getStringExtra("ID_EMPRESA");
         strServico = getIntent().getStringExtra("SERVICO");
+        strData = getIntent().getStringExtra("DATA");
+        strHora = getIntent().getStringExtra("HORA");
+        strPorte = getIntent().getStringExtra("PORTE");
+        strPetNome = getIntent().getStringExtra("NOME");
+        strPetRaca = getIntent().getStringExtra("RACA");
 
     }
 
@@ -315,4 +242,29 @@ public class AgendamentoActivity extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {}
                 });
     }
+
+//    private void getLstPetDados() {
+//        Query query;
+//        query = databaseReference.child("Pet").orderByChild("pet_cli_id").equalTo(idUsuario);
+//
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                lstPet.clear();
+//
+//                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+//                    PetModel p = objSnapshot.getValue(PetModel.class);
+//                    lstPet.add(p.getPet_nome());
+//                    lstIdPet.add(p.getPet_id());
+//                    lstPetPorte.add(p.getPet_porte());
+//                    lstPetRaca.add(p.getPet_raca());
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }

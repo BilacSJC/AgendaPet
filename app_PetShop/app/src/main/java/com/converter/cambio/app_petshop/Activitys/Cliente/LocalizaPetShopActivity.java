@@ -11,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
 import com.converter.cambio.app_petshop.Model.EmpresaModel;
+import com.converter.cambio.app_petshop.Model.PetModel;
 import com.converter.cambio.app_petshop.Model.ServicoEmpresaModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -36,11 +39,17 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
 
     private Spinner spnServicos;
     private Spinner spnEmpresas;
+    private Spinner spnNomePet;
+    private EditText edtData, edtHora;
     private MaterialButton btnAgendar;
-    private String empId;
+    private String empId, strData, strHora, strPorte, strPetRaca, strNomePorte;
     private String idUsuario;
     private List<EmpresaModel> lstEmpresas = new ArrayList<>();
     private List<ServicoEmpresaModel> lstServicos = new ArrayList<>();
+    private List<String> lstPetPorte = new ArrayList<>();
+    private List<String> lstPetRaca = new ArrayList<>();
+    private List<String> lstPet = new ArrayList<>();
+    private List<String> lstIdPet = new ArrayList<>();
     private List<String> lstEmpresaNome = new ArrayList<>();
     private List<String> lstServicoNome = new ArrayList<>();
     private List<String> lstEmpresaId = new ArrayList<>();
@@ -54,6 +63,7 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         getExtraIdUsuario();
         inicializarFirebase();
         inicializaComponentes();
+        preencheSpinnerNomePet();
         configuraNavBar();
         preencheSpinnerEmpresas();
 
@@ -65,11 +75,15 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
                         alertDialog("ATENÇÃO", "Selecione Uma empresa e um serviço.");
                     }
                 }else{
-
                     Intent intent = new Intent(LocalizaPetShopActivity.this, AgendamentoActivity.class);
                     intent.putExtra("ID_USUARIO", idUsuario);
                     intent.putExtra("ID_EMPRESA", empId);
+                    intent.putExtra("DATA", edtData.getText().toString().trim());
+                    intent.putExtra("HORA",  edtHora.getText().toString().trim());
+                    intent.putExtra("PORTE", strPorte);
+                    intent.putExtra("RACA", strPetRaca);
                     intent.putExtra("SERVICO", spnServicos.getSelectedItem().toString());
+                    intent.putExtra("NOME", spnNomePet.getSelectedItem().toString().trim());
                     startActivity(intent);
                     finish();
                 }
@@ -154,9 +168,12 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
+        edtData = findViewById(R.id.alt_age_cli_edt_data);
+        edtHora = findViewById(R.id.alt_age_cli_edt_hora);
         btnAgendar = findViewById(R.id.map_btn_agendar);
         spnEmpresas = findViewById(R.id.map_spnEmpresas);
         spnServicos = findViewById(R.id.map_spnServicos);
+        spnNomePet = findViewById(R.id.alt_age_cli_spn_pet);
     }
 
     private void inicializarFirebase() {
@@ -194,6 +211,33 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {}
                 });
+    }
+
+    private void preencheSpinnerNomePet() {
+        Query query;
+        query = databaseReference.child("Pet").orderByChild("pet_cli_id").equalTo(idUsuario);
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lstPet.clear();
+
+                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    PetModel p = objSnapshot.getValue(PetModel.class);
+                    lstPet.add(p.getPet_nome());
+                    lstIdPet.add(p.getPet_id());
+                    strPorte = p.getPet_porte();
+                    strPetRaca = p.getPet_raca();
+                }
+                ArrayAdapter<String> arrayAdapterPet = new ArrayAdapter<>(LocalizaPetShopActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
+                spnNomePet.setAdapter(arrayAdapterPet);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void  alertDialog(String strTitle, String strMsg){

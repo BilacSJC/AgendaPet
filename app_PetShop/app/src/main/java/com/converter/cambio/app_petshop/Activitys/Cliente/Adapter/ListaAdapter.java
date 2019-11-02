@@ -105,6 +105,7 @@ public class ListaAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context, AlterarAgendamentoActivity.class);
                 intent.putExtra("ID_AGENDAMENTO", lstAgendamentos.get(position).getAge_id());
+                context.startActivity(intent);
             }
         });
 

@@ -225,7 +225,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         btnAlterar = findViewById(R.id.alt_age_btn_alterar);
         btnLimpar = findViewById(R.id.alt_age_btn_limpar);
 
-        spnPet = findViewById(R.id.alt_age_cli_spn_pet);
+        spnNomePet = findViewById(R.id.alt_age_cli_spn_pet);
 
         edtData = findViewById(R.id.alt_age_cli_edt_data);
         edtHora = findViewById(R.id.alt_age_cli_edt_hora);

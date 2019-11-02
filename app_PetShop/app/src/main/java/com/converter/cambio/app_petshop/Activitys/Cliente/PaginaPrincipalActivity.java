@@ -115,9 +115,13 @@ public class PaginaPrincipalActivity extends AppCompatActivity
                         for(DataSnapshot objSnp : dSnp.getChildren())
                         {
                             AgendamentoViewModel a = objSnp.getValue(AgendamentoViewModel.class);
-                            if(a.getAlt_age_status().equals("Aguardando Confirmação")) {
+                            if(a.getAlt_age_status().equals("Cancelado")) {
+                                a.setAlt_age_status("Aguardando Confirmação");
                                 lstAgendamentoModel.add(a);
                             }
+//                            if(a.getAlt_age_status().equals("Aguardando Confirmação")) {
+//                                lstAgendamentoModel.add(a);
+//                            }
 //                            lstIdEmp.add(a.getAge_emp_id());
 //                            lstIdPet.add(a.getAge_pet_id());
                         }

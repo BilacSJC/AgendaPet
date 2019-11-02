@@ -2,6 +2,7 @@ package com.converter.cambio.app_petshop.Activitys.Cliente.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.AlterarAgendamentoActivity;
 import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
@@ -73,12 +75,12 @@ public class ListaAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         AgendamentoViewModel usuarioModelLista = (AgendamentoViewModel) getItem(position);
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.lst_agendamento, null);
+        View view = inflater.inflate(R.layout.lst_agendamento, parent, false);
 
         txt_age_emp_nome = (TextView) view.findViewById(R.id.lst_age_txt_emp_nome);
         txt_age_ser_preco = (TextView) view.findViewById(R.id.lst_age_txt_ser_preco);
@@ -93,14 +95,16 @@ public class ListaAdapter extends BaseAdapter {
         age_btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialogButtonLst("Tem certeza que deseja CANCELAR agendamento?", "Ao cancelar o agendamento, não será possível desfazer ação.");
+                m.alertToast(context,String.valueOf(position));
+                alertDialogButtonLst("ATENÇÃO!", "Tem certeza que deseja cancelar o agendamento?", position);
             }
         });
 
         age_btn_editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m.alertToast(context, "Botão EDITAR clicado! Teste bem sucedido (até o momento kk)");
+                Intent intent = new Intent(context, AlterarAgendamentoActivity.class);
+                intent.putExtra("ID_AGENDAMENTO", lstAgendamentos.get(position).getAge_id());
             }
         });
 
@@ -121,25 +125,23 @@ public class ListaAdapter extends BaseAdapter {
         idAgendamento = agendamentoModel.getAge_id();
     }
 
-    private void alertDialogButtonLst(String strTitle, String strMsg) {
+    private void alertDialogButtonLst(String strTitle, String strMsg, final int position) {
         new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert)
                 .setTitle(strTitle)
                 .setMessage(strMsg)
-                .setNegativeButton("Sair", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
-                        m.alertToast(context, "Botão SAIR selecionado!");
-
+                        m.alertToast(context, "Nenhuma ação foi realizada.");
                     }
                 })
-                .setPositiveButton("Cancelar Agenda", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        m.alertToast(context, "Botão CANCELAR AGENDA selecionado!");
+                        String strIdAge = lstAgendamentos.get(position).getAge_id();
 
-                        databaseReference.child("Agendamento").orderByChild("age_id").equalTo(idAgendamento)
+                        databaseReference.child("Agendamento").orderByChild("age_id").equalTo(strIdAge)
                                 .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dSnp) {
@@ -162,6 +164,7 @@ public class ListaAdapter extends BaseAdapter {
 
     private void atualizarAgendamento(AgendamentoViewModel a) {
         fireBaseQuery.UpdateObjetcDb(a,"Agendamento", a.getAge_id(), databaseReference);
+        m.alertToast(context, "Agendameto cancelado com sucesso!.");
     }
 
 }

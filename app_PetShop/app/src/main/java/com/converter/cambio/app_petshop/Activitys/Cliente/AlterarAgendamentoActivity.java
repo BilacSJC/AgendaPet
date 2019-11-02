@@ -247,6 +247,8 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
         idEmpresa = getIntent().getStringExtra("ID_EMPRESA");
         strServico = getIntent().getStringExtra("SERVICO");
+        String idAgendamento = getIntent().getStringExtra("ID_AGENDAMENTO");
+        m.alertDialog(AlterarAgendamentoActivity.this, "ATENÇÃO", "Este é o id do agndamento selecionado : "+idAgendamento);
 
     }
 

@@ -12,15 +12,7 @@
     <list default="true" id="0fae9ec4-6006-4b9b-98b5-6149a475b103" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/Adapter/ListaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/Adapter/ListaAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/AlterarAgendamentoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/AlterarAgendamentoActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/PaginaPrincipalActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/PaginaPrincipalActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Empresa/Adapter/ListaAdapterSolicitacoes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Empresa/Adapter/ListaAdapterSolicitacoes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/img_bkg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_cli_cadastro_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_cli_cadastro_pet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_cli_map_servicos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_cli_map_servicos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_emp_add_servico.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_emp_add_servico.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,33 +32,14 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/Adapter/ListaAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="164" column="5" lean-forward="true" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Empresa/Adapter/ListaAdapterSolicitacoes.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/PaginaPrincipalActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="103" column="50" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
+            <state relative-caret-position="212">
+              <caret line="123" column="28" selection-start-line="123" selection-start-column="28" selection-end-line="124" selection-end-column="62" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/lst_solicitacoes.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="108" column="54" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="54" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -102,17 +75,17 @@
         <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Empresa/HorarioFuncionamentoActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Controller/ValidaCampos.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/CadastroClienteActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/PaginaPrincipalActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/AlterarAgendamentoActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_cli_cadastro_pet.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_cli_map_servicos.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_emp_add_servico.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/Adapter/ListaAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Empresa/Adapter/ListaAdapterSolicitacoes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/PaginaPrincipalActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="170" />
     <option name="y" value="91" />
     <option name="width" value="1026" />
@@ -124,6 +97,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -141,7 +115,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -331,10 +304,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.28668684" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2912254" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -349,9 +323,9 @@
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32993197" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50226927" side_tool="true" weight="0.32993197" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32993197" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4977307" visible="true" weight="0.21768707" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4977307" weight="0.21768707" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.32993197" />
-      <window_info anchor="bottom" id="Android Profiler" order="9" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -446,12 +420,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/AgendamentoActivity.java" />
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -519,18 +493,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
           <caret line="233" lean-forward="true" selection-start-line="233" selection-end-line="233" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/PaginaPrincipalActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="74" column="57" lean-forward="true" selection-start-line="74" selection-start-column="57" selection-end-line="74" selection-end-column="57" />
-          <folding>
-            <element signature="e#3352#3383#0" expanded="true" />
-            <element signature="e#8695#8696#0" expanded="true" />
-            <element signature="e#8763#8764#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -650,6 +612,20 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/Adapter/ListaAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2227">
+          <caret line="164" column="5" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Empresa/Adapter/ListaAdapterSolicitacoes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="103" column="50" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/lst_solicitacoes.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -658,17 +634,10 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/Adapter/ListaAdapter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Cliente/PaginaPrincipalActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="164" column="5" lean-forward="true" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/converter/cambio/app_petshop/Activitys/Empresa/Adapter/ListaAdapterSolicitacoes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="103" column="50" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
+        <state relative-caret-position="212">
+          <caret line="123" column="28" selection-start-line="123" selection-start-column="28" selection-end-line="124" selection-end-column="62" />
         </state>
       </provider>
     </entry>

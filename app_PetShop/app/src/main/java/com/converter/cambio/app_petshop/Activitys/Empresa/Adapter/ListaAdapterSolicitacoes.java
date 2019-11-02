@@ -85,8 +85,8 @@ import java.util.List;
             lst_sol_txt_data_age = (TextView) view.findViewById(R.id.lst_sol_txt_data_age);
             lst_sol_txt_hora_age = (TextView) view.findViewById(R.id.lst_sol_txt_hora_age);
             lst_sol_txtStatus = (TextView) view.findViewById(R.id.lst_sol_txt_status);
-            btn_confirmar = view.findViewById(R.id.lst_sol_btn_remarcar);
-            btn_remarcar = view.findViewById(R.id.lst_sol_btn_confirmar);
+            btn_remarcar = view.findViewById(R.id.lst_sol_btn_remarcar);
+            btn_confirmar = view.findViewById(R.id.lst_sol_btn_confirmar);
 
             btn_confirmar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -121,6 +121,7 @@ import java.util.List;
                                 AgendamentoViewModel a = objSnp.getValue(AgendamentoViewModel.class);
 
                                 a.setAlt_age_status(strStatus);
+                                atualizarAgendamento(a);
                             }
                         }
 
@@ -131,6 +132,18 @@ import java.util.List;
 
         }
 
+        private void atualizarAgendamento(AgendamentoViewModel a) {
+            fireBaseQuery.UpdateObjetcDb(a,"Agendamento", a.getAge_id(), databaseReference);
+
+            if(a.getAlt_age_status().equals("Confirmado")){
+                m.alertToast(context, "Agendameto confirmado!");
+            }else if(a.getAlt_age_status().equals("Remarcar")){
+                m.alertToast(context, "Aguardando oretorno do cliente.");
+            }else{
+                m.alertToast(context, "Falha, tente novamente.");
+            }
+
+        }
 
         private void setaCampos(AgendamentoViewModel agendamentoModel){
 

@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nome Serviço"
-                android:inputType="text" />
+                android:inputType="textCapWords" />
         </android.support.design.widget.TextInputLayout>
 
 <!--        <Spinner-->

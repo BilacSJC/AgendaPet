@@ -95,7 +95,7 @@ public class ListaAdapter extends BaseAdapter {
         age_btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m.alertToast(context,String.valueOf(position));
+//                m.alertToast(context,String.valueOf(position));
                 alertDialogButtonLst("ATENÇÃO!", "Tem certeza que deseja cancelar o agendamento?", position);
             }
         });
@@ -104,6 +104,7 @@ public class ListaAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, AlterarAgendamentoActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
                 intent.putExtra("ID_AGENDAMENTO", lstAgendamentos.get(position).getAge_id());
                 context.startActivity(intent);
             }

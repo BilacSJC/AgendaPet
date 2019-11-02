@@ -24,6 +24,7 @@ import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.Model.EnderecoModel;
 import com.converter.cambio.app_petshop.Model.PetModel;
 import com.converter.cambio.app_petshop.R;
+import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,7 +47,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
     private Spinner spnNomePet, spnPet;
     private List<String> lstPet = new ArrayList<>();
     private ArrayAdapter<String> arrayAdapterPet;
-    private String idUsuario, idEmpresa, idPet, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
+    private String idUsuario, idAgendamento, idEmpresa, idPet, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
 
     private Context context;
 
@@ -65,7 +66,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         inicializaCampos();
         configuraNavBar();
         eventosClick();
-        preencheSpinnerNomePet();
+        setCampos();
 
     }
 
@@ -119,10 +120,6 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
 
         int contMsg = 0;
 
-//        if(intPositionSelected <= 0){
-//            m.alertDialog(context,"ATENÇÃO!", "Selecione um pet");
-//            contMsg = 1;
-//        }
         if (!strMensagemData.equals("ok")) {
             edtData.setError(strMensagemData);
             contMsg += 1;
@@ -174,7 +171,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(AlterarAgendamentoActivity.this, LocalizaPetShopActivity.class);
+                Intent intent = new Intent(AlterarAgendamentoActivity.this, PaginaPrincipalActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
@@ -197,7 +194,8 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
                 }).show();
     }
 
-    private void preencheSpinnerNomePet() {
+    private void setCampos() {
+
         Query query;
         query = databaseReference.child("Pet").orderByChild("pet_cli_id").equalTo(idUsuario);
 
@@ -212,6 +210,36 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
                 }
                 arrayAdapterPet = new ArrayAdapter<>(AlterarAgendamentoActivity.this, R.layout.support_simple_spinner_dropdown_item, lstPet);
                 spnNomePet.setAdapter(arrayAdapterPet);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.child("Agendamento").orderByChild("age_id").equalTo(idAgendamento)
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    AgendamentoViewModel age = objSnapshot.getValue(AgendamentoViewModel.class);
+                    txtNomeCliente.setText("Nome: "+ age.getAlt_age_cli_nome());
+                    txtTelefoneCliente.setText("Telefone: "+age.getAlt_age_cli_telefone());
+                    txtEnderecoEmpresa.setText("Endereço: "+age.getAlt_age_emp_endereco());
+                    txtNomeEmpresa.setText("Empresa: "+age.getAlt_age_emp_nome());
+                    txtServico.setText("Serviço: "+age.getAlt_age_servico()+"\n"+"Status: "+age.getAlt_age_status());
+                    edtData.setText(age.getAlt_age_data());
+                    edtHora.setText(age.getAlt_age_hora());
+
+                    for (int i = 0; i < lstPet.size(); i++){
+                        if(lstPet.get(i).equals(age.getAlt_age_pet_nome())){
+                            spnNomePet.setSelection(i);
+                        }
+                    }
+
+                }
+
             }
 
             @Override
@@ -247,9 +275,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
         idEmpresa = getIntent().getStringExtra("ID_EMPRESA");
         strServico = getIntent().getStringExtra("SERVICO");
-        String idAgendamento = getIntent().getStringExtra("ID_AGENDAMENTO");
-        m.alertDialog(AlterarAgendamentoActivity.this, "ATENÇÃO", "Este é o id do agndamento selecionado : "+idAgendamento);
-
+        idAgendamento = getIntent().getStringExtra("ID_AGENDAMENTO");
     }
 
     private void getCliDados() {

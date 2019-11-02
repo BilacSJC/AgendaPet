@@ -84,7 +84,6 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        getExtraIdUsuario();
         inicializarFirebase();
 
         List<AgendamentoModel> lstAgendamento = new ArrayList<>();
@@ -156,57 +155,6 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             }
         });
     }
-
-//    private void eventosClickButton(){
-//
-//        lstAgendamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                age_btn_editar = view.findViewById(R.id.lst_age_btn_editar);
-//                age_btn_cancelar = view.findViewById(R.id.lst_age_btn_cancelar);
-//
-//                age_btn_cancelar.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        alertDialogButtonLst("Tem certeza que deseja EXCLUIR agendamento?","Ao excluir o agendamento, não será possível desfazer ação.");
-//                    }
-//                });
-//
-//            }
-//        });
-//    }
-
-//    public void btnEditar(View view){
-//        m.alertToast(PaginaPrincipalActivity.this, "Botão EDITAR clicado! Teste bem sucedido (até o momento kk)");
-//    }
-//
-//    public void bntCancelar(View view){
-//        //int pos = view.getTag();
-//        alertDialogButtonLst("Tem certeza que deseja EXCLUIR agendamento?","Ao excluir o agendamento, não será possível desfazer ação.");
-//    }
-
-    //    private void  alertDialogButtonLst(String strTitle, String strMsg){
-//        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
-//                .setTitle(strTitle)
-//                .setMessage(strMsg)
-//                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                        m.alertToast(PaginaPrincipalActivity.this,"Botão CANCELAR selecionado!");
-//
-//                    }
-//                })
-//                .setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                        // databaseReference.child("Agendamento").orderByChild()
-//                        m.alertToast(PaginaPrincipalActivity.this,"Botão EXCLUIR selecionado!");
-//
-//                    } }).show();
-//    }
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(PaginaPrincipalActivity.this);

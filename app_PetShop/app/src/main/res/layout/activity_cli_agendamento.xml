@@ -12,17 +12,28 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="178dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/banho" />
+            android:background="@color/cinzaClaro"
+            android:src="@drawable/dogshower" />
+
+        <TextView
+            android:paddingTop="80dp"
+            android:id="@+id/alt_age_cli_lbl_nome_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Nome do Cliente: "
+            android:textColor="#363636"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/alt_age_cli_txt_nome_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"
             android:hint="Nome Cliente"
             android:textSize="18dp" />
@@ -65,6 +76,14 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:hint="Serviço"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vazio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="4dp"
             android:textSize="18dp" />
 
         <RelativeLayout

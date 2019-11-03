@@ -8,6 +8,7 @@
 
     <ListView
         android:id="@+id/hst_lst_sol"
+        android:paddingTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>

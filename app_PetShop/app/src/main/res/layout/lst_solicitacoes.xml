@@ -22,7 +22,7 @@
             android:textAlignment="center"
             android:text="Solicitações"
             android:textSize="18sp"
-            android:background="@color/colorPrimary"
+            android:background="@color/mediumBlue"
             android:textColor="@color/cinzaClaro"/>
 
 

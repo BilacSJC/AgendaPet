@@ -117,12 +117,12 @@ public class ListaAdapter extends BaseAdapter {
 
     private void setaCampos(AgendamentoViewModel agendamentoModel) {
 
-        txt_age_ser_preco.setText("Serviço: " + agendamentoModel.getAlt_age_servico());
-        txt_age_ser_nome_pet.setText("Pet: " + agendamentoModel.getAlt_age_pet_nome());
-        txt_age_data.setText("Data: " + agendamentoModel.getAlt_age_data().trim());
-        txt_age_hora.setText("Hora: " + agendamentoModel.getAlt_age_hora().trim());
-        txt_age_status.setText("Status: " + agendamentoModel.getAlt_age_status().trim());
-        txt_age_emp_nome.setText("Empresa: " + agendamentoModel.getAlt_age_emp_nome());
+        txt_age_ser_preco.setText(agendamentoModel.getAlt_age_servico());
+        txt_age_ser_nome_pet.setText(agendamentoModel.getAlt_age_pet_nome());
+        txt_age_data.setText(agendamentoModel.getAlt_age_data().trim());
+        txt_age_hora.setText(agendamentoModel.getAlt_age_hora().trim());
+        txt_age_status.setText(agendamentoModel.getAlt_age_status().trim());
+        txt_age_emp_nome.setText(agendamentoModel.getAlt_age_emp_nome());
 
         idAgendamento = agendamentoModel.getAge_id();
     }

@@ -1,5 +1,7 @@
 package com.converter.cambio.app_petshop.Activitys.Cliente;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,9 +13,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
@@ -35,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -56,6 +61,9 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
     private FireBaseQuery fireBaseQuery = new FireBaseQuery();
 
     private MetodosPadraoController m = new MetodosPadraoController();
+
+    private Calendar calendar;
+    private int ano, mes, dia, hora, minuto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +112,70 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        edtData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                DatePickerDialog dpdData = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        String strDia = "";
+                        int intMes = month + 1;
+                        String strMes = "";
+                        String strAno = String.valueOf(year);
+                        strDia = intTimeToStr(day);
+                        strMes = intTimeToStr(intMes);
+                        String strData = strDia + "/" + strMes + "/" + strAno;
+                        edtData.setText(strData);
+                    }
+                }, ano, mes, dia);
+                dpdData.show();
+            }
+        });
+
+        edtHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                horarioAtual();
+                TimePickerDialog tpdHora = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String strHora = "";
+                        String strMinutes = "";
+                        strHora = intTimeToStr(hourOfDay);
+                        strMinutes = intTimeToStr(minutes);
+                        String strTempo = strHora + ":" + strMinutes;
+                        edtHora.setText(strTempo);
+                    }
+                }, hora, minuto, true);
+
+                tpdHora.show();
+            }
+        });
+    }
+
+    public void horarioAtual() {
+        calendar = Calendar.getInstance();
+        ano = calendar.get(Calendar.YEAR);
+        mes = calendar.get(Calendar.MONTH);
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        hora = calendar.get(Calendar.HOUR_OF_DAY);
+        minuto = calendar.get(Calendar.MINUTE);
+    }
+
+    public void dataAgendada () {
+
+    }
+
+    private String intTimeToStr(int intTime) {
+        String strTime;
+        if(intTime >= 0 && intTime < 10){
+            strTime = "0"+intTime;
+        }else{
+            strTime = String.valueOf(intTime);
+        }
+        return strTime;
     }
 
     private void cadastrarAgendamento(AgendamentoModel agendamentoModel) {
@@ -220,33 +292,33 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
 
         databaseReference.child("Agendamento").orderByChild("age_id").equalTo(idAgendamento)
                 .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    AgendamentoViewModel age = objSnapshot.getValue(AgendamentoViewModel.class);
-                    txtNomeCliente.setText("Nome: "+ age.getAlt_age_cli_nome());
-                    txtTelefoneCliente.setText("Telefone: "+age.getAlt_age_cli_telefone());
-                    txtEnderecoEmpresa.setText("Endereço: "+age.getAlt_age_emp_endereco());
-                    txtNomeEmpresa.setText("Empresa: "+age.getAlt_age_emp_nome());
-                    txtServico.setText("Serviço: "+age.getAlt_age_servico()+"\n"+"Status: "+age.getAlt_age_status());
-                    edtData.setText(age.getAlt_age_data());
-                    edtHora.setText(age.getAlt_age_hora());
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                            AgendamentoViewModel age = objSnapshot.getValue(AgendamentoViewModel.class);
+                            txtNomeCliente.setText("Nome: " + age.getAlt_age_cli_nome());
+                            txtTelefoneCliente.setText("Telefone: " + age.getAlt_age_cli_telefone());
+                            txtEnderecoEmpresa.setText("Endereço: " + age.getAlt_age_emp_endereco());
+                            txtNomeEmpresa.setText("Empresa: " + age.getAlt_age_emp_nome());
+                            txtServico.setText("Serviço: " + age.getAlt_age_servico() + "\n" + "Status: " + age.getAlt_age_status());
+                            edtData.setText(age.getAlt_age_data());
+                            edtHora.setText(age.getAlt_age_hora());
 
-                    for (int i = 0; i < lstPet.size(); i++){
-                        if(lstPet.get(i).equals(age.getAlt_age_pet_nome())){
-                            spnNomePet.setSelection(i);
+                            for (int i = 0; i < lstPet.size(); i++) {
+                                if (lstPet.get(i).equals(age.getAlt_age_pet_nome())) {
+                                    spnNomePet.setSelection(i);
+                                }
+                            }
+
                         }
+
                     }
 
-                }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                    }
+                });
     }
 
     private void inicializaCampos() {

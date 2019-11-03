@@ -63,8 +63,6 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
     Context context = LocalizaPetShopActivity.this;
 
     private Calendar calendar;
-    private DatePickerDialog dpdData;
-    private TimePickerDialog tpdHora;
     private int ano, mes, dia, hora, minuto;
 
     private GeradorListSpinnerController geradorListSpinnerController = new GeradorListSpinnerController();
@@ -83,16 +81,16 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         btnAgendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(spnEmpresas.getSelectedItemPosition() <= 0 && spnServicos.getSelectedItemPosition() <= 0){
-                    if(spnServicos.getSelectedItemPosition() == 0){
+                if (spnEmpresas.getSelectedItemPosition() <= 0 && spnServicos.getSelectedItemPosition() <= 0) {
+                    if (spnServicos.getSelectedItemPosition() == 0) {
                         alertDialog("ATENÇÃO", "Selecione Uma empresa e um serviço.");
                     }
-                }else{
+                } else {
                     Intent intent = new Intent(LocalizaPetShopActivity.this, AgendamentoActivity.class);
                     intent.putExtra("ID_USUARIO", idUsuario);
                     intent.putExtra("ID_EMPRESA", empId);
                     intent.putExtra("DATA", edtData.getText().toString().trim());
-                    intent.putExtra("HORA",  edtHora.getText().toString().trim());
+                    intent.putExtra("HORA", edtHora.getText().toString().trim());
                     intent.putExtra("PORTE", strPorte);
                     intent.putExtra("RACA", strPetRaca);
                     intent.putExtra("SERVICO", spnServicos.getSelectedItem().toString());
@@ -106,37 +104,37 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         spnEmpresas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position > 0)
-                empId = getEmpId(position);
+                if (position > 0)
+                    empId = getEmpId(position);
                 databaseReference.child("Servicos").orderByChild("ser_emp_id").equalTo(empId)
-                        .addValueEventListener(new ValueEventListener(){
+                        .addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onDataChange(DataSnapshot dSnp)
-                            {
+                            public void onDataChange(DataSnapshot dSnp) {
                                 List<String> lstVazia = new ArrayList<>();
                                 lstServicoNome = lstVazia;
                                 List<ServicoEmpresaModel> lstVaziaServicos = new ArrayList<>();
                                 lstServicos = lstVaziaServicos;
-                                for(DataSnapshot objSnp : dSnp.getChildren())
-                                {
+                                for (DataSnapshot objSnp : dSnp.getChildren()) {
                                     ServicoEmpresaModel s = objSnp.getValue(ServicoEmpresaModel.class);
                                     lstServicos.add(s);
                                 }
 
-                                if(lstServicos.size() <= 0){
+                                if (lstServicos.size() <= 0) {
                                     lstServicoNome.add("Nenhum serviço cadastrado");
-                                }else{
+                                } else {
                                     lstServicoNome.add("Selecione um serviço");
                                 }
 
-                                for(int i = 0; i < lstServicos.size(); i++) {
+                                for (int i = 0; i < lstServicos.size(); i++) {
                                     lstServicoNome.add(lstServicos.get(i).getSer_nome() + " - " + lstServicos.get(i).getSer_preco());
                                 }
                                 ArrayAdapter<String> servicos = new ArrayAdapter<>(LocalizaPetShopActivity.this, R.layout.support_simple_spinner_dropdown_item, lstServicoNome);
                                 spnServicos.setAdapter(servicos);
                             }
+
                             @Override
-                            public void onCancelled(DatabaseError databaseError) {}
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
                         });
             }
 
@@ -174,9 +172,9 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
     }
 
     private String getEmpId(int position) {
-        for(int i = 0; i < lstEmpresaNome.size(); i++){
-            if(position == i && position > 0){
-                return lstEmpresaId.get(i-1);
+        for (int i = 0; i < lstEmpresaNome.size(); i++) {
+            if (position == i && position > 0) {
+                return lstEmpresaId.get(i - 1);
             }
         }
         return "";
@@ -200,31 +198,31 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
     private void preencheSpinnerEmpresas() {
 
         databaseReference.child("Empresa").orderByChild("emp_id")
-                .addValueEventListener(new ValueEventListener(){
+                .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dSnp)
-                    {
-                        for(DataSnapshot objSnp : dSnp.getChildren())
-                        {
+                    public void onDataChange(DataSnapshot dSnp) {
+                        for (DataSnapshot objSnp : dSnp.getChildren()) {
                             EmpresaModel e = objSnp.getValue(EmpresaModel.class);
                             lstEmpresas.add(e);
                             lstEmpresaId.add(e.getEmp_id());
                         }
 
-                        if(lstEmpresas.size() <= 0){
+                        if (lstEmpresas.size() <= 0) {
                             lstEmpresaNome.add("Nenhuma empresa cadastrada");
-                        }else{
+                        } else {
                             lstEmpresaNome.add("Selecione um PetShop");
                         }
 
-                        for(int i = 0; i < lstEmpresas.size(); i++) {
+                        for (int i = 0; i < lstEmpresas.size(); i++) {
                             lstEmpresaNome.add(lstEmpresas.get(i).getEmp_nome());
                         }
                         ArrayAdapter<String> empresas = new ArrayAdapter<>(LocalizaPetShopActivity.this, R.layout.support_simple_spinner_dropdown_item, lstEmpresaNome);
                         spnEmpresas.setAdapter(empresas);
                     }
+
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {}
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
                 });
     }
 
@@ -237,7 +235,7 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 lstPet.clear();
 
-                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     PetModel p = objSnapshot.getValue(PetModel.class);
                     lstPet.add(p.getPet_nome());
                     lstIdPet.add(p.getPet_id());
@@ -255,7 +253,7 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         });
     }
 
-    private void  alertDialog(String strTitle, String strMsg){
+    private void alertDialog(String strTitle, String strMsg) {
         new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
                 .setTitle(strTitle)
                 .setMessage(strMsg)
@@ -263,7 +261,8 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                    } }).show();
+                    }
+                }).show();
     }
 
     private void getExtraIdUsuario() {
@@ -275,10 +274,17 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 horarioAtual();
-                dpdData = new DatePickerDialog(LocalizaPetShopActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dpdData = new DatePickerDialog(LocalizaPetShopActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        edtData.setText(day + "/" + month + "/" + year);
+                        String strDia = "";
+                        int intMes = month + 1;
+                        String strMes = "";
+                        String strAno = String.valueOf(year);
+                        strDia = intTimeToStr(day);
+                        strMes = intTimeToStr(intMes);
+                        String strData = strDia + "/" + strMes + "/" + strAno;
+                        edtData.setText(strData);
                     }
                 }, ano, mes, dia);
                 dpdData.show();
@@ -289,19 +295,19 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 horarioAtual();
-                TimePickerDialog tpd = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog tpdHora = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
                         String strHora = "";
                         String strMinutes = "";
                         strHora = intTimeToStr(hourOfDay);
                         strMinutes = intTimeToStr(minutes);
-                        String strTempo = strHora+":"+strMinutes;
+                        String strTempo = strHora + ":" + strMinutes;
                         edtHora.setText(strTempo);
                     }
                 }, hora, minuto, true);
 
-                tpd.show();
+                tpdHora.show();
             }
         });
     }
@@ -317,9 +323,9 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
 
     private String intTimeToStr(int intTime) {
         String strTime;
-        if(intTime >= 0 && intTime < 10){
-            strTime = "0"+intTime;
-        }else{
+        if (intTime >= 0 && intTime < 10) {
+            strTime = "0" + intTime;
+        } else {
             strTime = String.valueOf(intTime);
         }
         return strTime;

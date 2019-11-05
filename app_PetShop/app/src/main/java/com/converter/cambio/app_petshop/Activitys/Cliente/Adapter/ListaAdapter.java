@@ -106,6 +106,8 @@ public class ListaAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, AlterarAgendamentoActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 intent.putExtra("ID_AGENDAMENTO", lstAgendamentos.get(position).getAge_id());
+                intent.putExtra("ID_EMPRESA", lstAgendamentos.get(position).getAge_emp_id());
+                intent.putExtra("SERVICO", lstAgendamentos.get(position).getAlt_age_servico());
                 context.startActivity(intent);
             }
         });
@@ -166,7 +168,7 @@ public class ListaAdapter extends BaseAdapter {
 
     private void atualizarAgendamento(AgendamentoViewModel a) {
         fireBaseQuery.UpdateObjetcDb(a,"Agendamento", a.getAge_id(), databaseReference);
-        m.alertToast(context, "Agendameto cancelado com sucesso!.");
+        m.alertToast(context, "Agendameto cancelado com sucesso!");
     }
 
 }

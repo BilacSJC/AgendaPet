@@ -72,12 +72,23 @@
             android:hint="Serviço"
             android:textSize="18dp" />
 
+        <TextView
+            android:id="@+id/alt_age_cli_txt_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Status"
+            android:textSize="18dp" />
+
         <Spinner
             android:id="@+id/alt_age_cli_spn_pet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="6dp"
             android:hint="@string/pet"
             android:inputType="text"></Spinner>
 
@@ -104,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="10dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/alt_age_cli_edt_hora"

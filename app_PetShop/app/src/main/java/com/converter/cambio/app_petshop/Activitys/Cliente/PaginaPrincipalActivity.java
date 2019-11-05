@@ -17,15 +17,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Activitys.Cliente.Adapter.ListaAdapter;
-import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
-import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.R;
 import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
@@ -87,7 +82,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
 
         inicializarFirebase();
 
-        List<AgendamentoModel> lstAgendamento = new ArrayList<>();
+        List<AgendamentoViewModel> lstAgendamento = new ArrayList<>();
         getLstAgendamentoModel();
 
     }

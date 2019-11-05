@@ -18,10 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.converter.cambio.app_petshop.Activitys.Cliente.Adapter.ListaAdapter;
-import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
 import com.converter.cambio.app_petshop.Activitys.Empresa.Adapter.ListaAdapterSolicitacoes;
-import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.R;
 import com.converter.cambio.app_petshop.ViewModel.AgendamentoViewModel;
 import com.google.firebase.FirebaseApp;
@@ -81,7 +78,7 @@ public class HomeEmpActivity extends AppCompatActivity
         getExtraIdUsuario();
         inicializarFirebase();
 
-        List<AgendamentoModel> lstAgendamento = new ArrayList<>();
+        List<AgendamentoViewModel> lstAgendamento = new ArrayList<>();
         getLstAgendamentoModel();
 
 

@@ -5,11 +5,11 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,7 +22,6 @@ import android.widget.TimePicker;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
-import com.converter.cambio.app_petshop.Model.AgendamentoModel;
 import com.converter.cambio.app_petshop.Model.ClienteModel;
 import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.Model.EnderecoModel;
@@ -48,11 +47,11 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
 
     private MaterialButton btnAlterar, btnLimpar;
     private EditText edtData, edtHora;
-    private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtNomeCliente, txtTelefoneCliente;
+    private TextView txtNomeEmpresa, txtEnderecoEmpresa, txtServico, txtStatus, txtNomeCliente, txtTelefoneCliente;
     private Spinner spnNomePet, spnPet;
     private List<String> lstPet = new ArrayList<>();
     private ArrayAdapter<String> arrayAdapterPet;
-    private String idUsuario, idAgendamento, idEmpresa, idPet, strServico, strEmpNome, strEmpEnd, strCliNome, strCliTelefone;
+    private String idAgendamento, idUsuario, idEmpresa, strPetNome, strPetRaca, strPetPorte, strEmpNome, strEmpEnd, strCliNome, strCliTelefone, strServico, strData, strHora, strStatus;
 
     private Context context;
 
@@ -90,7 +89,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 edtData.setText("");
                 edtHora.setText("");
-                spnPet.setSelection(0);
+                spnNomePet.setSelection(0);
             }
         });
 
@@ -98,7 +97,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AgendamentoModel agendamentoModel = validaCampos();
+                AgendamentoViewModel agendamentoModel = validaCampos();
 
                 if (agendamentoModel.getAge_id() == null) {
                     m.alertDialog(context, "ATENCÃO", "Preencha todos os campos.");
@@ -164,10 +163,6 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         minuto = calendar.get(Calendar.MINUTE);
     }
 
-    public void dataAgendada () {
-
-    }
-
     private String intTimeToStr(int intTime) {
         String strTime;
         if(intTime >= 0 && intTime < 10){
@@ -178,17 +173,16 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         return strTime;
     }
 
-    private void cadastrarAgendamento(AgendamentoModel agendamentoModel) {
-        fireBaseQuery.InsertObjectDb(agendamentoModel, "Agendamento", agendamentoModel.getAge_id(), databaseReference);
+    private void cadastrarAgendamento(AgendamentoViewModel agendamentoModel) {
+        fireBaseQuery.UpdateObjetcDb(agendamentoModel, "Agendamento", agendamentoModel.getAge_id(), databaseReference);
     }
 
-    private AgendamentoModel validaCampos() {
-        AgendamentoModel a = new AgendamentoModel();
+    private AgendamentoViewModel validaCampos() {
+        AgendamentoViewModel a = new AgendamentoViewModel();
         ValidaCampos v = new ValidaCampos();
 
-        String strMensagemData = v.vStringData(edtData.getText().toString().toString());
-        String strMensagemHora = v.vStringHora(edtHora.getText().toString().toString());
-        int intPositionSelected = spnPet.getSelectedItemPosition();
+        String strMensagemData = v.vStringData(edtData.getText().toString().trim());
+        String strMensagemHora = v.vStringHora(edtHora.getText().toString().trim());
 
         int contMsg = 0;
 
@@ -202,34 +196,51 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         }
 
         if (contMsg > 0) {
-            return new AgendamentoModel();
+            return new AgendamentoViewModel();
         }
 
-        a.setAge_id(UUID.randomUUID().toString());
+        strPetNome = spnNomePet.getSelectedItem().toString().trim();
+        getPetPorte();
+
+        a.setAge_id(idAgendamento);
         a.setAge_cli_id(idUsuario);
-        a.setAge_data_solicitada(edtData.getText().toString().trim());
-        a.setAge_hora_solicitada(edtHora.getText().toString().trim());
         a.setAge_emp_id(idEmpresa);
-        a.setAge_pet_id(idPet);
-        a.setAge_status("Aguardando Atendimento");
-
-        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
-
-        a.setAge_data_cad(dataFormatada);
-        a.setAge_hora_cad("20:42");
-
+        a.setAlt_age_cli_nome(strCliNome);
+        a.setAlt_age_cli_telefone(strCliTelefone);
+        a.setAlt_age_pet_nome(strPetNome);
+        a.setAlt_age_pet_raca(strPetRaca);
+        a.setAlt_age_pet_porte(strPetPorte);
+        a.setAlt_age_emp_nome(strEmpNome);
+        a.setAlt_age_emp_endereco(strEmpEnd);
+        a.setAlt_age_data(edtData.getText().toString().trim());
+        a.setAlt_age_hora(edtHora.getText().toString().trim());
+        a.setAlt_age_servico(strServico);
+        a.setAlt_age_status("Aguardando Confirmação");
 
         return a;
     }
 
-    private String getPetId() {
-        String idPet = "";
+    private String getPetPorte() {
+        Query query;
+        query = databaseReference.child("Pet").orderByChild("pet_cli_nome").equalTo(strPetNome);
 
-        //Fazer Select e preencher os pets do usuario...para pegar o ID
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        return idPet;
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    PetModel p = objSnapshot.getValue(PetModel.class);
+                    strPetPorte = p.getPet_porte();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return strPetPorte;
     }
 
     private void configuraNavBar() {
@@ -300,7 +311,8 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
                             txtTelefoneCliente.setText("Telefone: " + age.getAlt_age_cli_telefone());
                             txtEnderecoEmpresa.setText("Endereço: " + age.getAlt_age_emp_endereco());
                             txtNomeEmpresa.setText("Empresa: " + age.getAlt_age_emp_nome());
-                            txtServico.setText("Serviço: " + age.getAlt_age_servico() + "\n" + "Status: " + age.getAlt_age_status());
+                            txtServico.setText("Serviço: " + age.getAlt_age_servico());
+                            txtStatus.setText("Status: " + age.getAlt_age_status());
                             edtData.setText(age.getAlt_age_data());
                             edtHora.setText(age.getAlt_age_hora());
 
@@ -333,6 +345,7 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         txtNomeEmpresa = findViewById(R.id.alt_age_cli_txt_nome_empresa);
         txtEnderecoEmpresa = findViewById(R.id.alt_age_cli_txt_endereco_empresa);
         txtServico = findViewById(R.id.alt_age_cli_txt_servico);
+        txtStatus = findViewById(R.id.alt_age_cli_txt_status);
         txtNomeCliente = findViewById(R.id.alt_age_cli_txt_nome_cliente);
         txtTelefoneCliente = findViewById(R.id.alt_age_cli_txt_telefone_cliente);
 

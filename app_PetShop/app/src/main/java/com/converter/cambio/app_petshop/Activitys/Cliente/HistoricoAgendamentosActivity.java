@@ -88,7 +88,7 @@ public class HistoricoAgendamentosActivity extends AppCompatActivity {
             public void run() {
 
                 try{
-                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, listAgendamentos, HistoricoAgendamentosActivity.this);
+                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, listAgendamentos, HistoricoAgendamentosActivity.this, true);
                     lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){

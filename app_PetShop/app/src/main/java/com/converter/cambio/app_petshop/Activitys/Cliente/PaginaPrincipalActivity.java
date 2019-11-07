@@ -136,7 +136,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             public void run() {
 
                 try{
-                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, listAgendamentos, PaginaPrincipalActivity.this);
+                    ListaAdapter filaAdapter = new ListaAdapter(idUsuario, listAgendamentos, PaginaPrincipalActivity.this, false);
                     lstAgendamentos.setAdapter(filaAdapter);
                 }
                 catch (Exception ex){

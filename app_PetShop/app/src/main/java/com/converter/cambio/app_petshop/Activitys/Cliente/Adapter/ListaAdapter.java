@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Activitys.Cliente.AlterarAgendamentoActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.HistoricoAgendamentosActivity;
 import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
@@ -36,6 +37,7 @@ public class ListaAdapter extends BaseAdapter {
     private List<AgendamentoViewModel> lstAgendamentos;
     private String idUsuario;
     private Context context;
+    private Boolean isHistorico;
 
     private MetodosPadraoController m = new MetodosPadraoController();
     String idAgendamento;
@@ -44,10 +46,11 @@ public class ListaAdapter extends BaseAdapter {
 
     Button age_btn_editar, age_btn_cancelar;
 
-    public ListaAdapter(String idUsuario, List<AgendamentoViewModel> lista, Context context) {
+    public ListaAdapter(String idUsuario, List<AgendamentoViewModel> lista, Context context, Boolean isHistorico) {
         this.idUsuario = idUsuario;
         this.lstAgendamentos = lista;
         this.context = context;
+        this.isHistorico = isHistorico;
 
         FirebaseApp.initializeApp(context);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -91,6 +94,11 @@ public class ListaAdapter extends BaseAdapter {
 
         age_btn_editar = view.findViewById(R.id.lst_age_btn_editar);
         age_btn_cancelar = view.findViewById(R.id.lst_age_btn_cancelar);
+
+        if(isHistorico){
+            age_btn_cancelar.setVisibility(View.GONE);
+            age_btn_editar.setVisibility(View.GONE);
+        }
 
         age_btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,8 +14,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/add_friend" />
+            android:src="@drawable/img_cliente"
+            android:scaleType="centerCrop"/>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

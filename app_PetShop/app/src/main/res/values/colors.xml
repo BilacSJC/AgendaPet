@@ -3,7 +3,12 @@
     <color name="colorPrimary">	#1E90FF</color>
     <color name="colorPrimaryDark">#4169E1</color>
     <color name="colorAccent">#1E90FF</color>
-    <color name="mediumBlue">#0000CD</color>
     <color name="fundoBranco">#FFFFFF</color>
     <color name="cinzaClaro">#DCDCDC</color>
+
+    <!-- Cor background botões e status agendamento/solicitações -->
+    <color name="bkgRemarcar">#FFA500</color>
+    <color name="bkgCancelar">#C90B0B</color>
+    <color name="bkgConfirmar">#3CB371</color>
+    <color name="mediumBlue">#0000CD</color>
 </resources>

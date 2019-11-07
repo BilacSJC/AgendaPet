@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="178dp"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/logo_app" />
+            android:src="@drawable/img_escritorioempresa"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:layout_width="wrap_content"

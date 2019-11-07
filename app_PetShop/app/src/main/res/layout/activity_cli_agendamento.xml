@@ -12,17 +12,17 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="178dp"
-            android:background="@color/cinzaClaro"
-            android:src="@drawable/dogshower" />
+            android:src="@drawable/img_dogshower"
+            android:scaleType="centerCrop"/>
 
         <TextView
-            android:paddingTop="80dp"
+            android:paddingTop="12dp"
             android:id="@+id/alt_age_cli_lbl_nome_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"
             android:text="Nome do Cliente: "
@@ -33,7 +33,7 @@
             android:id="@+id/alt_age_cli_txt_nome_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="4dp"
             android:hint="Nome Cliente"
             android:textSize="18dp" />
@@ -42,7 +42,7 @@
             android:id="@+id/alt_age_cli_txt_telefone_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
             android:hint="Telefone Cliente"
@@ -52,7 +52,7 @@
             android:id="@+id/alt_age_cli_txt_nome_empresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"
             android:hint="Nome Empresa"
@@ -62,7 +62,7 @@
             android:id="@+id/alt_age_cli_txt_endereco_empresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:hint="Endereço Empresa"
@@ -72,7 +72,7 @@
             android:id="@+id/alt_age_cli_txt_servico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:hint="Serviço"
@@ -82,7 +82,7 @@
             android:id="@+id/vazio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="130dp"
             android:layout_marginBottom="4dp"
             android:textSize="18dp" />
 

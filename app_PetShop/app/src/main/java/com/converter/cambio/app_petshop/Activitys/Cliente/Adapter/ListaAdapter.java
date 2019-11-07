@@ -3,6 +3,8 @@ package com.converter.cambio.app_petshop.Activitys.Cliente.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +44,7 @@ public class ListaAdapter extends BaseAdapter {
     private MetodosPadraoController m = new MetodosPadraoController();
     String idAgendamento;
 
-    TextView txt_age_emp_nome, txt_age_ser_preco, txt_age_ser_nome_pet, txt_age_data, txt_age_hora, txt_age_status;
+    TextView txt_age_emp_nome, txt_age_ser_preco, txt_age_ser_nome_pet, txt_age_data, txt_age_hora, txt_age_status, txt_age_bkg_titulo;
 
     Button age_btn_editar, age_btn_cancelar;
 
@@ -91,11 +93,12 @@ public class ListaAdapter extends BaseAdapter {
         txt_age_data = (TextView) view.findViewById(R.id.lst_age_txt_data);
         txt_age_hora = (TextView) view.findViewById(R.id.lst_age_txt_hora);
         txt_age_status = (TextView) view.findViewById(R.id.lst_age_txt_status);
+        txt_age_bkg_titulo = view.findViewById(R.id.lst_age_txt_titulo_agendamento);
 
         age_btn_editar = view.findViewById(R.id.lst_age_btn_editar);
         age_btn_cancelar = view.findViewById(R.id.lst_age_btn_cancelar);
 
-        if(isHistorico){
+        if (isHistorico) {
             age_btn_cancelar.setVisibility(View.GONE);
             age_btn_editar.setVisibility(View.GONE);
         }
@@ -135,6 +138,20 @@ public class ListaAdapter extends BaseAdapter {
         txt_age_emp_nome.setText(agendamentoModel.getAlt_age_emp_nome());
 
         idAgendamento = agendamentoModel.getAge_id();
+
+//        if (txt_age_status.equals("Confirmado")) {
+//            // int intCor = Color.parseColor("#FFA500");
+//            txt_age_bkg_titulo.setBackgroundResource(R.color.bkgConfirmar);
+//        } else if (txt_age_status.equals("Cancelado")) {
+//            txt_age_bkg_titulo.setBackgroundResource(R.color.bkgCancelar);
+//        } else if (txt_age_status.equals("Remarcar")) {
+//            txt_age_bkg_titulo.setBackgroundColor(0xFFA500);
+//        } else if (txt_age_status.equals("Aguardando Confirmação")){
+//            txt_age_bkg_titulo.setBackgroundColor(0x0000CD);
+//        }
+
+//        txt_age_bkg_titulo.setBackgroundColor(0x00ffffff);
+
     }
 
     private void alertDialogButtonLst(String strTitle, String strMsg, final int position) {
@@ -175,7 +192,7 @@ public class ListaAdapter extends BaseAdapter {
     }
 
     private void atualizarAgendamento(AgendamentoViewModel a) {
-        fireBaseQuery.UpdateObjetcDb(a,"Agendamento", a.getAge_id(), databaseReference);
+        fireBaseQuery.UpdateObjetcDb(a, "Agendamento", a.getAge_id(), databaseReference);
         m.alertToast(context, "Agendameto cancelado com sucesso!");
     }
 

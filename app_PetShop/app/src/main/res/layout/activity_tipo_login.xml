@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -8,38 +8,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/cinzaClaro">
 
         <ImageView
             android:id="@+id/imgCliente"
-            android:layout_width="181dp"
+            android:layout_width="match_parent"
             android:layout_height="157dp"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/family" />
+            app:srcCompat="@drawable/img_cliente"
+            android:scaleType="centerCrop"/>
 
         <Button
             android:id="@+id/btnCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:backgroundTint="@color/mediumBlue"
             android:gravity="center"
             android:text="@string/btn_cliente"
             tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="137dp"
-            android:backgroundTint="@color/mediumBlue"/>
+            tools:layout_editor_absoluteY="137dp" />
 
         <ImageView
             android:id="@+id/imgEmpresa"
-            android:layout_width="154dp"
-            android:layout_height="233dp"
+            android:layout_width="match_parent"
+            android:layout_height="157dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            app:srcCompat="@drawable/pet_shop_2"
+            android:layout_marginTop="40dp"
+            app:srcCompat="@drawable/img_petshop"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="298dp" />
+            tools:layout_editor_absoluteY="298dp"
+            android:scaleType="centerCrop"/>
 
         <Button
             android:id="@+id/btnEmpresa"
@@ -49,6 +52,7 @@
             android:text="@string/btn_empresa"
             tools:layout_editor_absoluteX="266dp"
             tools:layout_editor_absoluteY="324dp"
-            android:backgroundTint="@color/mediumBlue"/>
+            android:backgroundTint="@color/mediumBlue"
+            android:layout_marginTop="6dp"/>
     </LinearLayout>
 </ScrollView>

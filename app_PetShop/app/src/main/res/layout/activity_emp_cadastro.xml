@@ -14,11 +14,11 @@
 
         <ImageView
             android:id="@+id/imgEmpresa"
-            android:layout_width="234dp"
+            android:layout_width="match_parent"
             android:layout_height="191dp"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
-            app:srcCompat="@drawable/pet_shop" />
+            app:srcCompat="@drawable/img_petshop"
+            android:scaleType="centerCrop"/>
 
         <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

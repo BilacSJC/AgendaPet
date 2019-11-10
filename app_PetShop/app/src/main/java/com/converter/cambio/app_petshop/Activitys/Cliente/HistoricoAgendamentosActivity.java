@@ -47,7 +47,7 @@ public class HistoricoAgendamentosActivity extends AppCompatActivity {
         lstAgendamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(),"OKOK",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"OK",Toast.LENGTH_SHORT).show();
             }
         });
     }

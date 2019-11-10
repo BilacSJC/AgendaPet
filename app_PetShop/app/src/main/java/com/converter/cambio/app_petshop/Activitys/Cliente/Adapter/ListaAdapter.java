@@ -139,18 +139,7 @@ public class ListaAdapter extends BaseAdapter {
 
         idAgendamento = agendamentoModel.getAge_id();
 
-//        if (txt_age_status.equals("Confirmado")) {
-//            // int intCor = Color.parseColor("#FFA500");
-//            txt_age_bkg_titulo.setBackgroundResource(R.color.bkgConfirmar);
-//        } else if (txt_age_status.equals("Cancelado")) {
-//            txt_age_bkg_titulo.setBackgroundResource(R.color.bkgCancelar);
-//        } else if (txt_age_status.equals("Remarcar")) {
-//            txt_age_bkg_titulo.setBackgroundColor(0xFFA500);
-//        } else if (txt_age_status.equals("Aguardando Confirmação")){
-//            txt_age_bkg_titulo.setBackgroundColor(0x0000CD);
-//        }
-
-//        txt_age_bkg_titulo.setBackgroundColor(0x00ffffff);
+        setaCorBkgTitulo();
 
     }
 
@@ -194,6 +183,25 @@ public class ListaAdapter extends BaseAdapter {
     private void atualizarAgendamento(AgendamentoViewModel a) {
         fireBaseQuery.UpdateObjetcDb(a, "Agendamento", a.getAge_id(), databaseReference);
         m.alertToast(context, "Agendameto cancelado com sucesso!");
+    }
+
+    private void setaCorBkgTitulo() {
+
+        String status = txt_age_status.getText().toString();
+
+        if (status.equals("Confirmado")) {
+            int intCor = Color.rgb(60, 179, 113);
+            txt_age_bkg_titulo.setBackgroundColor(intCor);
+        } else if (status.equals("Cancelado")) {
+            int intCor = Color.rgb(201, 11, 11);
+            txt_age_bkg_titulo.setBackgroundColor(intCor);
+        } else if (status.equals("Remarcar")) {
+            int intCor = Color.rgb(255, 165, 0);
+            txt_age_bkg_titulo.setBackgroundColor(intCor);
+        } else if (status.equals("Aguardando Confirmação")){
+            int intCor = Color.rgb(0, 0, 205);
+            txt_age_bkg_titulo.setBackgroundColor(intCor);
+        }
     }
 
 }

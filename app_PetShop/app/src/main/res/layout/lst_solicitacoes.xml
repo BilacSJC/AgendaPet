@@ -73,21 +73,21 @@
 
         <TextView
             android:id="@+id/lst_sol_txt_nome_pet"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome Pet:"
             android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/lst_sol_txt_porte_pet"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Porte Pet:"
             android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/lst_sol_txt_raca_pet"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Raça do Pet:"
             android:layout_marginStart="2dp"/>

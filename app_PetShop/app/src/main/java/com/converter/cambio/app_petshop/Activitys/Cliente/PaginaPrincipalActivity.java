@@ -212,7 +212,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_cli_pet) {
-            Intent intent = new Intent(PaginaPrincipalActivity.this, CadastroPetActivity.class);
+            Intent intent = new Intent(PaginaPrincipalActivity.this, PetActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             finish();

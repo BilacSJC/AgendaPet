@@ -43,7 +43,7 @@ public class GeradorListSpinnerController {
     public List<String> getLstSexo() {
         List<String> lstSexo = new ArrayList<>();
 
-        lstSexo.add("Selecione o sexo");
+        lstSexo.add("Selecione o sexo do pet");
         lstSexo.add("Macho");
         lstSexo.add("Fêmea");
 
@@ -54,10 +54,12 @@ public class GeradorListSpinnerController {
     public List<String> getLstPorte() {
         List<String> lstPorte = new ArrayList<>();
 
-        lstPorte.add("Selecione um porte");
+        lstPorte.add("Selecione o porte do pet");
+        lstPorte.add("Filhote");
         lstPorte.add("Pequeno");
         lstPorte.add("Médio");
         lstPorte.add("Grande");
+        lstPorte.add("Muito Grande");
 
         return lstPorte;
     }

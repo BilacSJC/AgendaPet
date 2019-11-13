@@ -60,7 +60,11 @@ public class CadastroPetActivity extends AppCompatActivity {
                 cadastrarPet(pet);
 
                 alertDialog("Pet Adicionado!", "Pet cadastrado com Sucesso!");
-                limparCampos();
+
+                Intent intent = new Intent(CadastroPetActivity.this, PetActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -83,8 +87,8 @@ public class CadastroPetActivity extends AppCompatActivity {
         ValidaCampos v = new ValidaCampos();
 
         String strMensagemNome = v.vString(edtNome.getText().toString().trim());
-        String strMensagemIdade = v.vInt(edtIdade.getText().toString().trim());
         String strMensagemRaca = v.vString(edtRaca.getText().toString().trim());
+        String strMensagemIdade = v.vInt(edtIdade.getText().toString().trim());
         String strMensagemSexo = v.vStringSpn(spnSexo.getSelectedItem().toString().trim());
         String strMensagemPorte = v.vStringSpn(spnPorte.getSelectedItem().toString().trim());
         int contMsg = 0;
@@ -173,7 +177,7 @@ public class CadastroPetActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(CadastroPetActivity.this, PaginaPrincipalActivity.class);
+                Intent intent = new Intent(CadastroPetActivity.this, PetActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();

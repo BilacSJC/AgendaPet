@@ -15,12 +15,12 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/lst_age_txt_titulo_agendamento"
+            android:id="@+id/lst_pet_txt_titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/mediumBlue"
-            android:text="Agendamento"
+            android:text="@string/pet"
             android:textAlignment="center"
             android:textColor="@color/cinzaClaro"
             android:textSize="18sp" />
@@ -29,21 +29,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/lst_age_txt_emp_nome"
+                android:id="@+id/lst_pet_txt_nome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_toEndOf="@id/lbl_age_emp_nome"
-                android:layout_toRightOf="@id/lbl_age_emp_nome"
+                android:layout_toEndOf="@id/lbl_pet_nome"
+                android:layout_toRightOf="@id/lbl_pet_nome"
                 android:text=""
                 android:textAlignment="textStart"
                 android:layout_marginStart="2dp"/>
             <TextView
-                android:id="@+id/lbl_age_emp_nome"
+                android:id="@+id/lbl_pet_nome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Empresa: "
+                android:text="Nome: "
                 android:textColor="#363636"
                 android:fontFamily="Times New Roman"
                 android:textAlignment="textStart"
@@ -54,21 +54,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/lst_age_txt_ser_preco"
+                android:id="@+id/lst_pet_txt_raca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_toEndOf="@id/lbl_age_pet_raca"
-                android:layout_toRightOf="@id/lbl_age_pet_raca"
+                android:layout_toEndOf="@id/lbl_pet_raca"
+                android:layout_toRightOf="@id/lbl_pet_raca"
                 android:text=""
                 android:textAlignment="textStart"
                 android:layout_marginStart="2dp"/>
             <TextView
-                android:id="@+id/lbl_age_pet_raca"
+                android:id="@+id/lbl_pet_raca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Serviço: "
+                android:text="Raça: "
                 android:textColor="#363636"
                 android:fontFamily="Times New Roman"
                 android:textAlignment="textStart"
@@ -79,21 +79,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/lst_age_txt_nome_pet"
+                android:id="@+id/lst_pet_txt_idade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_toEndOf="@id/lbl_age_nome_pet"
-                android:layout_toRightOf="@id/lbl_age_nome_pet"
+                android:layout_toEndOf="@id/lbl_pet_idade"
+                android:layout_toRightOf="@id/lbl_pet_idade"
                 android:text=""
                 android:textAlignment="textStart"
                 android:layout_marginStart="2dp"/>
             <TextView
-                android:id="@+id/lbl_age_nome_pet"
+                android:id="@+id/lbl_pet_idade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Pet: "
+                android:text="Idade: "
                 android:textColor="#363636"
                 android:fontFamily="Times New Roman"
                 android:textAlignment="textStart"
@@ -104,21 +104,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/lst_age_txt_data"
+                android:id="@+id/lst_pet_txt_sexo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_toEndOf="@id/lbl_age_data"
-                android:layout_toRightOf="@id/lbl_age_data"
+                android:layout_toEndOf="@id/lbl_pet_sexo"
+                android:layout_toRightOf="@id/lbl_pet_sexo"
                 android:text=""
                 android:textAlignment="textStart"
                 android:layout_marginStart="2dp"/>
             <TextView
-                android:id="@+id/lbl_age_data"
+                android:id="@+id/lbl_pet_sexo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Data: "
+                android:text="Sexo: "
                 android:textColor="#363636"
                 android:fontFamily="Times New Roman"
                 android:textAlignment="textStart"
@@ -129,46 +129,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/lst_age_txt_hora"
+                android:id="@+id/lst_pet_txt_porte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_toEndOf="@id/lbl_age_hora"
-                android:layout_toRightOf="@id/lbl_age_hora"
+                android:layout_toEndOf="@id/lbl_pet_porte"
+                android:layout_toRightOf="@id/lbl_pet_porte"
                 android:text=""
                 android:textAlignment="textStart"
                 android:layout_marginStart="2dp"/>
             <TextView
-                android:id="@+id/lbl_age_hora"
+                android:id="@+id/lbl_pet_porte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Hora: "
-                android:textColor="#363636"
-                android:fontFamily="Times New Roman"
-                android:textAlignment="textStart"
-                android:layout_marginStart="2dp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/lst_age_txt_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_toEndOf="@id/lbl_age_status"
-                android:layout_toRightOf="@id/lbl_age_status"
-                android:text=""
-                android:textAlignment="textStart"
-                android:layout_marginStart="2dp"/>
-            <TextView
-                android:id="@+id/lbl_age_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Status: "
+                android:text="Porte: "
                 android:textColor="#363636"
                 android:fontFamily="Times New Roman"
                 android:textAlignment="textStart"
@@ -181,17 +156,17 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/lst_age_btn_cancelar"
+                android:id="@+id/lst_pet_btn_excluir"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_weight="1"
-                android:text="@string/cancelar"
+                android:text="@string/excluir"
                 card_view:backgroundTint="#C90B0B"
                 android:onClick="bntCancelar"/>
 
 
             <Button
-                android:id="@+id/lst_age_btn_editar"
+                android:id="@+id/lst_pet_btn_editar"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_weight="1"

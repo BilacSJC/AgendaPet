@@ -12,7 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activitys.Cliente.PerfilPetActivity"></activity>
+        <activity
+            android:name=".Activitys.Empresa.AlterarServicoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activitys.Cliente.PerfilPetActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activitys.Cliente.PetActivity"
             android:screenOrientation="portrait" />

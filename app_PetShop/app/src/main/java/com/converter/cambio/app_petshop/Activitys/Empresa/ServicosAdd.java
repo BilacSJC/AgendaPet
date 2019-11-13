@@ -12,7 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.converter.cambio.app_petshop.Activitys.Cliente.AgendamentoActivity;
 import com.converter.cambio.app_petshop.Activitys.Cliente.CadastroClienteActivity;
+import com.converter.cambio.app_petshop.Activitys.Cliente.PaginaPrincipalActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.GerenciaSpinner.GeradorListSpinnerController;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
@@ -99,6 +101,11 @@ public class ServicosAdd extends AppCompatActivity {
                 }
 
                 cadastrarServico(servicoModel);
+
+                Intent intent = new Intent(ServicosAdd.this, ServicosActivity.class);
+                intent.putExtra("ID_USUARIO", idUsuario);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -108,7 +115,7 @@ public class ServicosAdd extends AppCompatActivity {
 
         if (databaseReference.getDatabase() != null) {
             m.alertDialog(ServicosAdd.this, "SUCESSO!", "Serviço cadastrado com sucesso!");
-            limparCampos();
+            // limparCampos();
         }
     }
 

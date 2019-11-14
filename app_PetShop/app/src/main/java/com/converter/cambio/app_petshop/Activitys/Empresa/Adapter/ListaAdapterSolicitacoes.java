@@ -1,9 +1,7 @@
 package com.converter.cambio.app_petshop.Activitys.Empresa.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.converter.cambio.app_petshop.Activitys.Cliente.AlterarAgendamentoActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.MetodosPadraoController;
 import com.converter.cambio.app_petshop.R;
@@ -37,7 +34,8 @@ import java.util.List;
         private Button btn_confirmar, btn_remarcar;
         private MetodosPadraoController m = new MetodosPadraoController();
         private TextView lst_sol_txtNome, lst_sol_txtTelefone ,lst_sol_txt_nome_pet ,lst_sol_txt_porte_pet;
-        private TextView lst_sol_txt_raca_pet, lst_sol_txt_data_age, lst_sol_txt_hora_age,  lst_sol_txtStatus;
+        private TextView lst_sol_txt_raca_pet, lst_sol_txt_data_age, lst_sol_txt_hora_age,  lst_sol_txtStatus, lst_sol_bkg_titulo;
+
         public ListaAdapterSolicitacoes(String idUsuario, List<AgendamentoViewModel> lista, Context context)
         {
             this.idUsuario = idUsuario;
@@ -85,6 +83,8 @@ import java.util.List;
             lst_sol_txt_data_age = (TextView) view.findViewById(R.id.lst_sol_txt_data_age);
             lst_sol_txt_hora_age = (TextView) view.findViewById(R.id.lst_sol_txt_hora_age);
             lst_sol_txtStatus = (TextView) view.findViewById(R.id.lst_sol_txt_status);
+            lst_sol_bkg_titulo = view.findViewById(R.id.lst_sol_txt_titulo_solicitacoes);
+
             btn_remarcar = view.findViewById(R.id.lst_sol_btn_remarcar);
             btn_confirmar = view.findViewById(R.id.lst_sol_btn_confirmar);
 
@@ -155,5 +155,26 @@ import java.util.List;
              lst_sol_txt_data_age.setText("Data: " + agendamentoModel.getAlt_age_data());
              lst_sol_txt_hora_age.setText("Hora: " + agendamentoModel.getAlt_age_hora());
                 lst_sol_txtStatus.setText("Status: " + agendamentoModel.getAlt_age_status());
+
+            setaCorBkgTitulo();
+        }
+
+        private void setaCorBkgTitulo() {
+
+            String status = lst_sol_txtStatus.getText().toString();
+
+            if (status.equals("Status: Confirmado")) {
+                int intCor = Color.rgb(60, 179, 113);
+                lst_sol_bkg_titulo.setBackgroundColor(intCor);
+            } else if (status.equals("Status: Cancelado")) {
+                int intCor = Color.rgb(201, 11, 11);
+                lst_sol_bkg_titulo.setBackgroundColor(intCor);
+            } else if (status.equals("Status: Remarcar")) {
+                int intCor = Color.rgb(255, 165, 0);
+                lst_sol_bkg_titulo.setBackgroundColor(intCor);
+            } else if (status.equals("Status: Aguardando Confirmação")){
+                int intCor = Color.rgb(0, 0, 205);
+                lst_sol_bkg_titulo.setBackgroundColor(intCor);
+            }
         }
     }

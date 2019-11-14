@@ -90,13 +90,14 @@
             android:layout_marginBottom="8dp"
             android:textSize="18dp"
             android:textColor="#757575"
-            android:checked="false"
+            android:checked="true"
             android:text="@string/horario_func_fechado"></android.support.v7.widget.AppCompatCheckBox>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/hor_fun_lin_fds_feriados">
 
             <android.support.design.widget.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

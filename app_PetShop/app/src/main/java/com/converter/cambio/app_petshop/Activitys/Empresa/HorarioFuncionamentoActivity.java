@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
@@ -45,6 +47,8 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private Context context;
 
+    private LinearLayout linHorarioFdsFeriados;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,8 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
         inicializarFirebase();
         configuraNavBar();
         eventosClick();
+
+        linHorarioFdsFeriados.setVisibility(View.GONE);
     }
 
     private void getExtraIdUsuario() {
@@ -69,6 +75,7 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
         edtHorarioFdsFim = findViewById(R.id.hor_fun_edt_fds_feriados_fim);
 
         chkFdsFechado = findViewById(R.id.hor_fun_chk_fds_feriados_fechado);
+        linHorarioFdsFeriados = findViewById(R.id.hor_fun_lin_fds_feriados);
 
         btnConfirmar = findViewById(R.id.hor_fun_btn_confirmar);
     }
@@ -191,6 +198,17 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
 
                 timePickerDialog.show();
 
+            }
+        });
+
+        chkFdsFechado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(compoundButton.isChecked()){
+                    linHorarioFdsFeriados.setVisibility(View.GONE);
+                } else {
+                    linHorarioFdsFeriados.setVisibility(View.VISIBLE);
+                }
             }
         });
 

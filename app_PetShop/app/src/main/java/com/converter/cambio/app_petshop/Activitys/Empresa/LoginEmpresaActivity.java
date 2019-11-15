@@ -21,7 +21,9 @@ import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
 import com.converter.cambio.app_petshop.Controller.ValidaCampos;
 import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.R;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
@@ -145,7 +147,20 @@ public class LoginEmpresaActivity extends AppCompatActivity {
     private void loginFirebase(final String strEmail, final String strSenha) {
 
         auth.signInWithEmailAndPassword(strEmail, strSenha)
+                .addOnFailureListener(LoginEmpresaActivity.this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        altertToast("E-mail ou senha inválidos!");
+                    }
+                })
+                .addOnCanceledListener(LoginEmpresaActivity.this, new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        altertToast("E-mail ou senha inválidos!");
+                    }
+                })
                 .addOnCompleteListener(LoginEmpresaActivity.this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -156,6 +171,9 @@ public class LoginEmpresaActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(DataSnapshot dSnp)
                                         {
+                                            if(!dSnp.hasChildren()){
+                                                altertToast("E-mail ou senha inválidos!");
+                                            }
                                             for(DataSnapshot objSnp : dSnp.getChildren())
                                             {
                                                 EmpresaModel c = objSnp.getValue(EmpresaModel.class);
@@ -189,10 +207,13 @@ public class LoginEmpresaActivity extends AppCompatActivity {
             return;
         }
 
-        if(idUsuario != null && booSenhaIsValida){//Loga e inicia Sessão
-            usuarioLogadoStartSession();
-        }
-        else {
+        if(e.getEmp_usu_tipo().equals("Empresa")){
+            if(idUsuario != null && booSenhaIsValida){//Loga e inicia Sessão
+                usuarioLogadoStartSession();
+            }else {
+                alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
+            }
+        }else {
             alertDialog("ATENÇÃO", "E-mail ou senha inválidos!");
         }
     }

@@ -33,8 +33,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class LocalizaPetShopActivity extends AppCompatActivity {
@@ -203,8 +206,36 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dSnp) {
                         for (DataSnapshot objSnp : dSnp.getChildren()) {
                             EmpresaModel e = objSnp.getValue(EmpresaModel.class);
-                            lstEmpresas.add(e);
-                            lstEmpresaId.add(e.getEmp_id());
+
+
+//                            Calendar cal = Calendar.getInstance();
+//                            try {
+//                                cal.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(edtData.getText().toString()));
+//                            } catch (ParseException ex) {
+//
+//                            }
+//                            if(cal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY && cal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY){
+//                                e.getEmp_hor_sem_ini();
+//                                e.getEmp_hor_sem_fim();
+//
+//                                int hSemIni = Integer.valueOf(e.getEmp_hor_sem_ini().replace(":",""));
+//                                int hSemFim = Integer.valueOf(e.getEmp_hor_sem_fim().replace(":",""));
+//                                int hDigitado = Integer.valueOf(edtHora.getText().toString());
+//                                if( hDigitado >= hSemIni || hDigitado <= hSemFim) {
+//                                    lstEmpresas.add(e);
+//                                    lstEmpresaId.add(e.getEmp_id());
+//                                }
+//                            }else{
+//                                if(!e.getEmp_hor_fds_ini().equals("")){
+//                                    int hSemIni = Integer.valueOf(e.getEmp_hor_fds_ini().replace(":",""));
+//                                    int hSemFim = Integer.valueOf(e.getEmp_hor_fds_fim().replace(":",""));
+//                                    int hDigitado = Integer.valueOf(edtHora.getText().toString());
+//                                    if( hDigitado >= hSemIni || hDigitado <= hSemFim) {
+                                        lstEmpresas.add(e);
+                                        lstEmpresaId.add(e.getEmp_id());
+
+
+
                         }
 
                         if (lstEmpresas.size() <= 0) {

@@ -14,14 +14,19 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.converter.cambio.app_petshop.Controller.FireBaseQuery;
+import com.converter.cambio.app_petshop.Model.EmpresaModel;
 import com.converter.cambio.app_petshop.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -41,7 +46,7 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private FirebaseApp firebaseApp;
-    private FireBaseQuery fireBaseQuery;
+    private FireBaseQuery fireBaseQuery = new FireBaseQuery();
     private FirebaseAuth auth;
     private FirebaseUser user;
     private DatabaseReference databaseReference;
@@ -59,9 +64,35 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
         inicializarComponentes();
         inicializarFirebase();
         configuraNavBar();
+        setaCampos();
         eventosClick();
 
         linHorarioFdsFeriados.setVisibility(View.GONE);
+    }
+
+    private void setaCampos() {
+        databaseReference.child("Empresa").orderByChild("emp_id").equalTo(idUsuario)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dSnp) {
+                        for (DataSnapshot objSnp : dSnp.getChildren()) {
+                            EmpresaModel e = objSnp.getValue(EmpresaModel.class);
+                            assert e != null;
+                            edtHorarioSemanaInicio.setText(e.getEmp_hor_sem_ini());
+                            edtHorarioSemanaFim.setText(e.getEmp_hor_sem_fim());
+                            if(e.getEmp_hor_fds_ini() != null) {
+                                chkFdsFechado.setChecked(false);
+                                edtHorarioFdsInicio.setText(e.getEmp_hor_fds_ini());
+                                edtHorarioFdsFim.setText(e.getEmp_hor_fds_fim());
+                            }else {
+                                chkFdsFechado.setChecked(true);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
     }
 
     private void getExtraIdUsuario() {
@@ -81,7 +112,7 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
     }
 
     private void inicializarFirebase() {
-        FirebaseApp.initializeApp(context);
+        FirebaseApp.initializeApp(HorarioFuncionamentoActivity.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
@@ -112,7 +143,40 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                databaseReference.child("Empresa").orderByChild("emp_id").equalTo(idUsuario)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dSnp) {
+                                for (DataSnapshot objSnp : dSnp.getChildren()) {
+                                    EmpresaModel e = objSnp.getValue(EmpresaModel.class);
 
+                                    String strHini = edtHorarioSemanaInicio.getText().toString().trim();
+                                    String strHfim = edtHorarioSemanaFim.getText().toString().trim();
+                                    if(!strHini.equals("") && !strHfim.equals("")) {
+                                        assert e != null;
+                                        e.setEmp_hor_sem_ini(strHini);
+                                        e.setEmp_hor_sem_fim(strHfim);
+                                    }else{
+                                        Toast.makeText(HorarioFuncionamentoActivity.this, "Preenche o horário de início e fim.", Toast.LENGTH_LONG).show();
+                                    }
+                                    if(!chkFdsFechado.isChecked()) {
+                                        String strHfdsI = edtHorarioFdsInicio.getText().toString();
+                                        String strHfdsF = edtHorarioFdsFim.getText().toString();
+                                        if (!strHfdsI.equals("") && !strHfdsF.equals("")) {
+                                            assert e != null;
+                                            e.setEmp_hor_fds_ini(strHini);
+                                            e.setEmp_hor_fds_fim(strHfdsF);
+                                        } else {
+                                            Toast.makeText(HorarioFuncionamentoActivity.this, "Preenche o horário de início e fim.", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                    fireBaseQuery.UpdateObjetcDb(e, "Empresa", idUsuario, databaseReference);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {}
+                        });
             }
         });
 

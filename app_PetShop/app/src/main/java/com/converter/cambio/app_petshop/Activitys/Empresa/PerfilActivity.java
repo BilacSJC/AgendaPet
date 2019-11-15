@@ -117,6 +117,7 @@ public class PerfilActivity extends AppCompatActivity {
         e.setEmp_cnpj(edtCnpj.getText().toString().trim());
         e.setEmp_email(emp_email.trim());
         e.setEmp_senha(emp_senha.trim());
+        e.setEmp_usu_tipo("Empresa");
         e.setEmp_senha_antiga(emp_senha.trim());
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");

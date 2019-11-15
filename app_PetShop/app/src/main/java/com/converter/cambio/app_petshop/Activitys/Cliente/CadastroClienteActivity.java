@@ -137,6 +137,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         c.setCli_nome(edtNome.getText().toString().trim());
         c.setCli_telefone(edtTelefone.getText().toString().trim());
         c.setCli_cpf(edtCpf.getText().toString().trim());
+        c.setCli_usu_tipo("Cliente");
         c.setCli_email(edtEmail.getText().toString().trim());
         c.setCli_senha(edtSenha.getText().toString().trim());
         c.setCli_senha_antiga(edtSenha.getText().toString().trim());

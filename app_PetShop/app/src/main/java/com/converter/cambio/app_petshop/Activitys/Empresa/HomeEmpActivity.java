@@ -114,7 +114,7 @@ public class HomeEmpActivity extends AppCompatActivity
                         }
 
                         if(lstAgendamentoModel.size() <= 0){
-                            alertDialog("Atenção", "Você não possui nenhum agendamento");
+
                         }else{
                             atualizaLista(lstAgendamentoModel,idCliente);
                         }

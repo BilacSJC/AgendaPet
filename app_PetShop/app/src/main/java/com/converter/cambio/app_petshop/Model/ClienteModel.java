@@ -6,6 +6,7 @@ public class ClienteModel{
     private String cli_nome;
     private String cli_telefone;
     private String cli_id_endereco;
+    private String cli_usu_tipo;
     private String cli_email;
     private String cli_senha;
     private String cli_senha_antiga;
@@ -81,5 +82,13 @@ public class ClienteModel{
 
     public void setCli_id_endereco(String cli_id_endereco) {
         this.cli_id_endereco = cli_id_endereco;
+    }
+
+    public String getCli_usu_tipo() {
+        return cli_usu_tipo;
+    }
+
+    public void setCli_usu_tipo(String cli_usu_tipo) {
+        this.cli_usu_tipo = cli_usu_tipo;
     }
 }

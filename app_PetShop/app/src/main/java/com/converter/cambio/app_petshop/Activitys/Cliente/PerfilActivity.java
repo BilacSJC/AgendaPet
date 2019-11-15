@@ -119,6 +119,7 @@ public class PerfilActivity extends AppCompatActivity {
         c.setCli_cpf(edtCpf.getText().toString().trim());
         c.setCli_email(cli_email.trim());
         c.setCli_senha(cli_senha.trim());
+        c.setCli_usu_tipo("Cliente");
         c.setCli_senha_antiga(cli_senha.trim());
 
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");

@@ -10,11 +10,15 @@ import android.support.design.button.MaterialButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -59,6 +63,8 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
     private FirebaseApp firebaseApp;
     private FireBaseQuery fireBaseQuery;
     private FirebaseAuth auth;
+    private CheckBox checkBox;
+    private LinearLayout linHorarioFdsFeriados;
     private DatabaseReference databaseReference;
     private Context context;
     private ValidaCampos v;
@@ -215,6 +221,17 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
 
             }
         });
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(compoundButton.isChecked()){
+                    linHorarioFdsFeriados.setVisibility(View.GONE);
+                } else {
+                    linHorarioFdsFeriados.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void cadastrarUsuario(EmpresaModel empresaModel, EnderecoModel enderecoModel) {
@@ -265,13 +282,15 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
             edtHorarioSemanaFim.setError("Campo Obrigatório");
             contMsg = +1;
         }
-        if (!strMsgFdsIni.equals("ok")) {
-            edtHorarioFdsInicio.setError("Campo Obrigatório");
-            contMsg = +1;
-        }
-        if (!strMsgFdsFim.equals("ok")) {
-            edtHorarioFdsFim.setError("Campo Obrigatório");
-            contMsg = +1;
+        if(!checkBox.isChecked()) {
+            if (!strMsgFdsIni.equals("ok")) {
+                edtHorarioFdsInicio.setError("Campo Obrigatório");
+                contMsg = +1;
+            }
+            if (!strMsgFdsFim.equals("ok")) {
+                edtHorarioFdsFim.setError("Campo Obrigatório");
+                contMsg = +1;
+            }
         }
         if (!strMsgEstado.equals("ok")) {
             m.alertDialog(CadastroEmpresaActivity.this, "ATENÇÃO!", "Selecione um Estado.");
@@ -326,14 +345,17 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         e.setEmp_cnpj(edtCnpj.getText().toString());
         e.setEmp_email(edtEmail.getText().toString());
         e.setEmp_senha(edtSenha.getText().toString());
+        e.setEmp_usu_tipo("Empresa");
         e.setEmp_telefone(edtTelefone.getText().toString());
         e.setEmp_senha_antiga(edtSenha.getText().toString().trim());
         e.setEmp_id_endereco(UUID.randomUUID().toString().trim());
         e.setEmp_hor_sem_ini(edtHorarioSemanaInicio.getText().toString().trim());
         e.setEmp_hor_sem_fim(edtHorarioSemanaFim.getText().toString().trim());
-        e.setEmp_hor_fds_ini(edtHorarioFdsInicio.getText().toString().trim());
-        e.setEmp_hor_fds_fim(edtHorarioFdsFim.getText().toString().trim());
 
+        if(!checkBox.isChecked()) {
+            e.setEmp_hor_fds_ini(edtHorarioFdsInicio.getText().toString().trim());
+            e.setEmp_hor_fds_fim(edtHorarioFdsFim.getText().toString().trim());
+        }
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
@@ -446,7 +468,8 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         edtHorarioSemanaFim = findViewById(R.id.cad_hor_fun_edt_semana_fim);
         edtHorarioFdsInicio = findViewById(R.id.cad_hor_fun_edt_fds_feriados_inicio);
         edtHorarioFdsFim = findViewById(R.id.cad_hor_fun_edt_fds_feriados_fim);
-
+        linHorarioFdsFeriados = findViewById(R.id.emp_cad_lin_lay);
+        checkBox = findViewById(R.id.cad_hor_fun_chk_fds_feriados_fechado);
         context = CadastroEmpresaActivity.this;
         v = new ValidaCampos();
         fireBaseQuery = new FireBaseQuery();

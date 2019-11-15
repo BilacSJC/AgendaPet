@@ -9,6 +9,7 @@ public class EmpresaModel{
     private String emp_email;
     private String emp_senha;
     private String emp_senha_antiga;
+    private String emp_usu_tipo;
     private String emp_data_ultima_alteracao_senha;
     private String emp_hor_sem_ini;
     private String emp_hor_sem_fim;
@@ -117,5 +118,13 @@ public class EmpresaModel{
 
     public void setEmp_hor_fds_fim(String emp_hor_fds_fim) {
         this.emp_hor_fds_fim = emp_hor_fds_fim;
+    }
+
+    public String getEmp_usu_tipo() {
+        return emp_usu_tipo;
+    }
+
+    public void setEmp_usu_tipo(String emp_usu_tipo) {
+        this.emp_usu_tipo = emp_usu_tipo;
     }
 }

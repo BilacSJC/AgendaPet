@@ -1,56 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/cinzaClaro">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imgCliente"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/btnCliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_cliente" />
+
+    <Button
+        android:id="@+id/btnCliente"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/cinzaClaro">
+        android:layout_height="61dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/btn_cliente"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        tools:layout_editor_absoluteX="267dp" />
 
-        <ImageView
-            android:id="@+id/imgCliente"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/img_cliente"
-            android:scaleType="centerCrop"/>
+    <ImageView
+        android:id="@+id/imgEmpresa"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/btnEmpresa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:srcCompat="@drawable/img_petshop" />
 
-        <Button
-            android:id="@+id/btnCliente"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/colorPrimary"
-            android:gravity="center"
-            android:text="@string/btn_cliente"
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="137dp" />
+    <Button
+        android:id="@+id/btnEmpresa"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/btn_empresa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-16dp" />
 
-        <ImageView
-            android:id="@+id/imgEmpresa"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/img_petshop"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="298dp"
-            android:scaleType="centerCrop"/>
-
-        <Button
-            android:id="@+id/btnEmpresa"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/btn_empresa"
-            tools:layout_editor_absoluteX="266dp"
-            tools:layout_editor_absoluteY="324dp" />
-    </LinearLayout>
-</ScrollView>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+</android.support.constraint.ConstraintLayout>

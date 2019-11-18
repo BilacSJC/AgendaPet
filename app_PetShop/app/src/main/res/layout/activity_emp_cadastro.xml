@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/imgEmpresa"
             android:layout_width="match_parent"
-            android:layout_height="191dp"
+            android:layout_height="178dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/img_petshop"
             android:scaleType="centerCrop"/>

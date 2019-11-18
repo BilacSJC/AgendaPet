@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAlignment="center"
-            android:text="Solicitações"
+            android:text="Solicitação"
             android:textSize="18sp"
             android:background="@color/mediumBlue"
             android:textColor="@color/cinzaClaro"/>

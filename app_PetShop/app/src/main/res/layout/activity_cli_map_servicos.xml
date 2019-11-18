@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            android:src="@drawable/img_walk_pet"
+            android:scaleType="centerCrop"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,13 +84,6 @@
             android:hint="@string/pet"
             android:inputType="text"></Spinner>
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="match_parent"
-            android:layout_height="322dp"
-            app:civ_border_color="#363636"
-            android:src="@drawable/mapa_estatico"/>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -93,7 +92,7 @@
                 android:id="@+id/map_btn_agendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Agendar"
+                android:text="Avançar"
                 android:layout_margin="20dp"
                 android:layout_alignParentEnd="true"
                 android:backgroundTint="@color/mediumBlue"

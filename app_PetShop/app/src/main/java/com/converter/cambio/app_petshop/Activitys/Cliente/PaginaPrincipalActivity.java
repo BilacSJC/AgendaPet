@@ -1,5 +1,6 @@
 package com.converter.cambio.app_petshop.Activitys.Cliente;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class PaginaPrincipalActivity extends AppCompatActivity
     private List<String> lstIdEmp = new ArrayList<>();
     private List<String> lstIdPet = new ArrayList<>();
     private ListView lstAgendamentos;
+
+    private Context context = PaginaPrincipalActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,8 +176,28 @@ public class PaginaPrincipalActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            alertDialogOnBackPressed("Sair?", "Deseja sair da sua conta?");
         }
+    }
+
+    private void alertDialogOnBackPressed(String strTitle, String strMsg) {
+        new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(strTitle)
+                .setMessage(strMsg)
+                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // m.alertToast(context, "Nenhuma ação foi realizada.");
+                    }
+                })
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(PaginaPrincipalActivity.this, LoginClienteActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).show();
     }
 
     @Override

@@ -133,7 +133,7 @@ public class AgendamentoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(AgendamentoActivity.this, LocalizaPetShopActivity.class);
+                Intent intent = new Intent(AgendamentoActivity.this, PaginaPrincipalActivity.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
@@ -142,6 +142,15 @@ public class AgendamentoActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AgendamentoActivity.this, PaginaPrincipalActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
     }
 
     private void  alertDialog(String strTitle, String strMsg){

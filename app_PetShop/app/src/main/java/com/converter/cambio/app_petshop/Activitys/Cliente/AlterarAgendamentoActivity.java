@@ -265,6 +265,15 @@ public class AlterarAgendamentoActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AlterarAgendamentoActivity.this, PaginaPrincipalActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void alertDialog(String strTitle, String strMsg) {
         new AlertDialog.Builder(this, R.style.Theme_AppCompat_Dialog_Alert)
                 .setTitle(strTitle)

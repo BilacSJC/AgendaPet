@@ -276,6 +276,14 @@ public class CadastroClienteActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CadastroClienteActivity.this, LoginClienteActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void inicializaComponentes() {
         btnCadastrar = findViewById(R.id.cad_btn_cadastrar);
         edtEmail = findViewById(R.id.cad_usu_ed_email);

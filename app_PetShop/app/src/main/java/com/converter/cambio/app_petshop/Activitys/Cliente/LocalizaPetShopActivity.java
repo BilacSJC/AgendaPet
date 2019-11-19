@@ -174,6 +174,15 @@ public class LocalizaPetShopActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LocalizaPetShopActivity.this, PaginaPrincipalActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private String getEmpId(int position) {
         for (int i = 0; i < lstEmpresaNome.size(); i++) {
             if (position == i && position > 0) {

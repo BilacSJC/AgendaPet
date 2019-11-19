@@ -59,4 +59,13 @@ public class SobreActivity extends AppCompatActivity {
     private void getExtraIdUsuario() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SobreActivity.this, PaginaPrincipalActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
 }

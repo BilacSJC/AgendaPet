@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.converter.cambio.app_petshop.Activitys.TipoLoginActivity;
 import com.converter.cambio.app_petshop.Controller.FireBaseConexao;
 import com.converter.cambio.app_petshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,7 +48,7 @@ public class ResetSenhaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(ResetSenhaActivity.this, LoginClienteActivity.class);
+                Intent intent = new Intent(ResetSenhaActivity.this, TipoLoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -99,7 +100,10 @@ public class ResetSenhaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(ResetSenhaActivity.this, TipoLoginActivity.class);
+        startActivity(intent);
         super.onBackPressed();
+        finish();
     }
 
     private void alert(String s) {

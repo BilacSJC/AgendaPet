@@ -262,6 +262,15 @@ public class PerfilActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PerfilActivity.this, PaginaPrincipalActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void getCliDados() {
         databaseReference.child("Cliente").orderByChild("cli_id").equalTo(idUsuario)
                 .addValueEventListener(new ValueEventListener() {

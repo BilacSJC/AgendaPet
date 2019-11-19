@@ -139,6 +139,15 @@ public class HorarioFuncionamentoActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(HorarioFuncionamentoActivity.this, HomeEmpActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void eventosClick() {
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override

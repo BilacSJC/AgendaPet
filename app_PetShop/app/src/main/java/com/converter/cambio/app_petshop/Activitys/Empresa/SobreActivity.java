@@ -46,6 +46,15 @@ public class SobreActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SobreActivity.this, HomeEmpActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void inicializaCampos() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }

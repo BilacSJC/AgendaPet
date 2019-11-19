@@ -156,4 +156,13 @@ public class AlterarServicoActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AlterarServicoActivity.this, ServicosActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
 }

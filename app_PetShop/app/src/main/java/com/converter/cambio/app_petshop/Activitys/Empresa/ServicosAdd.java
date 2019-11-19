@@ -43,6 +43,7 @@ public class ServicosAdd extends AppCompatActivity {
     private EditText edtNome, edtPreco;
     private MaterialButton btnCadastrar;
     private String idUsuario;
+//    private String intentOrigem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class ServicosAdd extends AppCompatActivity {
 
     private void getExtraIdUsuario() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
+//        intentOrigem = getIntent().getStringExtra("INTENT_ORIGEM");
     }
 
     private void configuraNavBar() {
@@ -75,12 +77,39 @@ public class ServicosAdd extends AppCompatActivity {
                 intent.putExtra("ID_USUARIO", idUsuario);
                 startActivity(intent);
                 finish();
+//                intentOrigemFunction(intentOrigem);
                 break;
             default:
                 break;
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+//        intentOrigemFunction(intentOrigem);
+            Intent intent = new Intent(ServicosAdd.this, HomeEmpActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario);
+            startActivity(intent);
+            super.onBackPressed();
+            finish();
+    }
+
+//    private void intentOrigemFunction(String intOrigem) {
+//        if (intOrigem == "HomeEmpActivity") {
+//            Intent intent = new Intent(ServicosAdd.this, HomeEmpActivity.class);
+//            intent.putExtra("ID_USUARIO", idUsuario);
+//            startActivity(intent);
+//            finish();
+//        } else if (intOrigem == "ServicosActivity") {
+//            Intent intent = new Intent(ServicosAdd.this, ServicosActivity.class);
+//            intent.putExtra("ID_USUARIO", idUsuario);
+//            startActivity(intent);
+//            finish();
+//        } else {
+//            m.alertDialog(ServicosAdd.this, "OPS!", "Ocorreu um erro ao retornar.");
+//        }
+//    }
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(ServicosAdd.this);

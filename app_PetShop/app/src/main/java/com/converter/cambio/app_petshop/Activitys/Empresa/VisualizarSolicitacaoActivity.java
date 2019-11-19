@@ -41,6 +41,15 @@ public class VisualizarSolicitacaoActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(VisualizarSolicitacaoActivity.this, HomeEmpActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void getExtraIdUsuario() {
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
     }

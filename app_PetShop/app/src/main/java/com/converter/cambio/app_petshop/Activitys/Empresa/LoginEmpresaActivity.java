@@ -83,6 +83,14 @@ public class LoginEmpresaActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LoginEmpresaActivity.this, TipoLoginActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         auth = FireBaseConexao.getFirebaseAuth();

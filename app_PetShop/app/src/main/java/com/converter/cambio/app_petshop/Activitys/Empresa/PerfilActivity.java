@@ -260,6 +260,15 @@ public class PerfilActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PerfilActivity.this, HomeEmpActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void getEmpDados() {
         databaseReference.child("Empresa").orderByChild("emp_id").equalTo(idUsuario)
                 .addValueEventListener(new ValueEventListener() {

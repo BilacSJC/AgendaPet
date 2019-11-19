@@ -35,6 +35,8 @@ public class ServicosActivity extends AppCompatActivity {
     private MetodosPadraoController m = new MetodosPadraoController();
     private FirebaseDatabase firebaseDatabase;
 
+//    private String intentOrigem = "ServicosActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,7 @@ public class ServicosActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ServicosActivity.this, ServicosAdd.class);
                 intent.putExtra("ID_USUARIO", idUsuario);
+//                intent.putExtra("INTENT_ORIGEM", intentOrigem);
                 startActivity(intent);
                 finish();
             }
@@ -143,5 +146,14 @@ public class ServicosActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ServicosActivity.this, HomeEmpActivity.class);
+        intent.putExtra("ID_USUARIO", idUsuario);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
     }
 }

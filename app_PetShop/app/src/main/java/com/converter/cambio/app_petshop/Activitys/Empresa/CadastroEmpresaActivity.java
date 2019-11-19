@@ -105,6 +105,14 @@ public class CadastroEmpresaActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CadastroEmpresaActivity.this, LoginEmpresaActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
+
     private void preencheSpinnerEstados() {
         List<String> lsEstados = geradorListSpinnerController.getLstEstados();
         ArrayAdapter<String> estado = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, lsEstados);

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activitys.Cliente.LoginClienteActivity"
+    android:background="@color/cinzaClaro">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/banho" />
+
+        <TextView
+            android:id="@+id/age_txt_nome_empresa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:hint="Empresa: PetShop Brasil"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/age_txt_custo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:hint="Custo do Serviço: R$35,00"
+            android:layout_margin="8dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/age_txt_nome_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nome" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/age_txt_telefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/telefone" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/age_nome_pet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome do Pet" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/age_raca_pet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Raça do Pet" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/age_porte_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:inputType="text"
+            android:hint="Porte"
+            android:layout_margin="20dp">
+        </Spinner>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/age_btn_solicitar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="@string/agendar"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                style="@style/Widget.MaterialComponents.Button"/>
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/age_btn_limpar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_toStartOf="@id/age_btn_solicitar"
+                android:layout_toLeftOf="@id/age_btn_solicitar"
+                android:text="@string/limpar"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>
